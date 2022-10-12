@@ -6,7 +6,7 @@
 #    By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/27 15:13:41 by kipark            #+#    #+#              #
-#    Updated: 2022/10/12 16:00:29 by kipark           ###   ########seoul.kr   #
+#    Updated: 2022/10/12 16:22:30 by kipark           ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,8 +21,9 @@ LIBFT_FLAGS 				=	-L$(DIR_LIBFT) -lft
 INCS_FLAGS					=	-I $(DIR_LIBFT) -I $(DIR_INCS)
 LIBFT						=	$(DIR_LIBFT)/libft.a
 
-MLXLIB = libmlx.dylib
-MLX_DIR = ./mlx
+MLXLIB 						= $(DIR_MLX)/libmlx.a
+DIR_MLX 					= ./minilibx_opengl_20191021
+MLX_FLAGS 					= -L$(DIR_MLX) -lmlx -framework OpenGL -framework AppKit
 
 DIR_SRCS					:=	./srcs
 DIR_INCS 					:=	./includes
@@ -67,11 +68,14 @@ endif
 
 all: $(NAME)
 
-$(NAME)		: $(LIBFT) $(OBJS)
-	$(CC) $(CFLAGS) $(MLXLIB) $(LIBFT_FLAGS) $(OBJS) -o $@
+$(NAME)		: $(LIBFT) $(MLXLIB) $(OBJS) 
+	$(CC) $(CFLAGS) $(LIBFT_FLAGS) $(MLX_FLAGS) $(OBJS) -o $@
 
 %.o			: %.c
 	$(CC) $(CFLAGS)  $(INCS_FLAGS)  -c $< -o $@
+
+$(MLXLIB)	:
+	make -C $(DIR_MLX) all
 
 $(LIBFT)	:
 	make -C $(DIR_LIBFT) all
@@ -85,15 +89,18 @@ leaks:
 clean:
 	rm -rf $(OBJS) $(NAME).dSYM
 	make clean -C $(DIR_LIBFT)
+	make clean -C $(DIR_MLX)
 
-fclean: clean
+fclean:
+	make clean
 	make fclean -C $(DIR_LIBFT)
+	make fclean -C $(DIR_MLX)
 	rm -f $(NAME) $(BONUS_NAME)
 
 re: 
 	make fclean
 	make all
 
-.PHONY: all clean fclean re debug
+.PHONY: all clean fclean re debug leaks
 
  
