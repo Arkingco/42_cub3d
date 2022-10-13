@@ -6,11 +6,11 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 15:08:39 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/12 11:41:47 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/13 16:01:20 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "cub3d.h"
 
 void	key_event_meet_floor_item(t_param *param, int x, int y)
 {

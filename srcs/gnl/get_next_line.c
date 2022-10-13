@@ -6,11 +6,11 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 15:14:40 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/12 15:55:18 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/13 16:06:13 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"so_long.h"
+#include"cub3d.h"
 
 char	*gnl_strjoin(char *static_line, char *buffer, int buffer_length)
 {
@@ -127,14 +127,3 @@ char	*get_next_line(int fd)
 	static_line = gnl_set_static_line(static_line);
 	return (return_line);
 }
-
-R 1920 1080
-NO ./path_to_the_north_texture
-SO ./path_to_the_south_texture
-WE ./path_to_the_west_texture
-EA ./path_to_the_east_texture
-
-S ./path_to_the_sprite_texture
-F 220,100,0
-C 225,30,0
-
