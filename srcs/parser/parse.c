@@ -6,11 +6,14 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 14:57:05 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/13 16:06:02 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/13 17:44:54 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "unistd.h"
+#include "stdlib.h"
+#include "fcntl.h"
 
 static char	**set_head_to_char(t_list *list_head)
 {
@@ -23,7 +26,8 @@ static char	**set_head_to_char(t_list *list_head)
 	idx = 0;
 	while (list_head != NULL)
 	{
-		map[idx] = malloc(sizeof(char) * get_list_head_colum(list_head->str));
+		map[idx] = malloc(sizeof(char) * \
+									get_list_head_colum(list_head->str) + 1);
 		if (map == NULL)
 			print_error(1);
 		set_parsed_str(map[idx], list_head->str);
@@ -39,7 +43,7 @@ static void	head_append_node(t_list **list_head, char *gnl_return_str)
 	t_list	*new_node;
 	t_list	*list;
 
-	new_node = malloc(sizeof(t_list *) * 1);
+	new_node = malloc(sizeof(t_list) * 1);
 	if (new_node == NULL)
 		print_error(1);
 	new_node->str = so_long_strjoin(gnl_return_str);

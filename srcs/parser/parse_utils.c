@@ -6,11 +6,13 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 19:27:11 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/13 16:01:20 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/13 17:38:52 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "unistd.h"
+#include "stdlib.h"
 
 void	set_parsed_str(char *parsed_str, char *head_str)
 {

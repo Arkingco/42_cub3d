@@ -6,17 +6,12 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 14:57:19 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/13 16:01:49 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/13 17:30:38 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
-
-# include <unistd.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include <mlx.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
@@ -43,42 +38,17 @@ typedef struct s_data
 	int		endian;
 }				t_data;
 
-typedef struct s_map
-{
-	void	*w;
-	void	*f;
-	void	*i;
-	void	*e;
-	void	*p;
-	int		y;
-	int		x;
-}				t_map;
-
-typedef struct s_param
-{
-	int		x;
-	int		y;
-	char	**map;
-	void	*mlx;
-	void	*mlx_win;
-	t_map	map_info;
-}				t_param;
-
 typedef struct s_list
 {
 	struct s_list	*next;
 	char			*str;
 }				t_list;
 
-typedef struct s_object
+typedef struct s_player
 {
-	int	space;
-	int	player;
-	int	wall;
-	int	item;
-	int	exit;
-	int	error;
-}				t_object;
+	int y;
+	int x;
+}	t_player;
 
 int		gnl_strchr(char *s, char word);
 int		gnl_strlen(char *s);
@@ -97,18 +67,11 @@ void	set_parsed_str(char *parsed_str, char *head_str);
 int		parsed_str_error_check(char **parsed_str);
 int		get_column_length(char *str);
 int		get_row_length(char **str);
-void	set_object(t_object *t_object);
-void	check_object_parsed(char **map, t_object *object, int row, int column);
 char	*so_long_strjoin(char *buffer);
 
 char	**parse(t_list **str_head, char **argv);
-void	show_image(void *mlx, void *mlx_win, char **pared_map, t_map map_info);
 void	set_background(void *mlx, void *mlx_win);
-void	map_init(void *mlx, t_map *map);
 
-int		key_press(int keycode, t_param *param);
-void	key_event_meet_floor_item(t_param *param, int x, int y);
-void	key_event_meet_exit(t_param *param, int x, int y);
 int		exit_window(void *not_use);
 
 #endif
