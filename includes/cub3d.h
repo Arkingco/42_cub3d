@@ -6,49 +6,34 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 14:57:19 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/13 17:30:38 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/14 17:29:08 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
-# endif
-
-# define EVENT_KEY_PRESS		2
-# define X_EVENT_EXIT			17
-# define KEY_ESC				53
-# define KEY_W					13
-# define KEY_A					0
-# define KEY_S					1
-# define KEY_D					2
-# define WRITE_ERROR_FD			2
-# define PX						64
+#include "struct.h"
+#include "minimap.h"
 
 # define EXIT_ERROR_PLAG		1
+# define WRITE_ERROR_FD			2
 
-typedef struct s_data
+typedef struct s_param
 {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}				t_data;
+	char		**map;
+	void		*mlx;
+	void		*mlx_win;
+	t_mini_map	*mini_map;
+}				t_param;
 
-typedef struct s_list
+
+typedef struct s_list_so_long
 {
-	struct s_list	*next;
 	char			*str;
-}				t_list;
+	struct s_list_so_long	*next;
+}				t_list_so_long;
 
-typedef struct s_player
-{
-	int y;
-	int x;
-}	t_player;
 
 int		gnl_strchr(char *s, char word);
 int		gnl_strlen(char *s);
@@ -58,7 +43,7 @@ void	gnl_free_char_pointer(char **pointer);
 char	*get_next_line(int fd);
 
 int		get_list_head_colum(char *head_str);
-int		get_list_head_row(t_list *list_head);
+int		get_list_head_row(t_list_so_long *list_head);
 
 void	print_error(int exit_flag);
 void	print_error_str(int exit_flag, char *str);
@@ -69,7 +54,7 @@ int		get_column_length(char *str);
 int		get_row_length(char **str);
 char	*so_long_strjoin(char *buffer);
 
-char	**parse(t_list **str_head, char **argv);
+char	**parse(t_list_so_long **str_head, char **argv);
 void	set_background(void *mlx, void *mlx_win);
 
 int		exit_window(void *not_use);

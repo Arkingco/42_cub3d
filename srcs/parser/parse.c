@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 14:57:05 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/13 17:44:54 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/14 17:00:48 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "stdlib.h"
 #include "fcntl.h"
 
-static char	**set_head_to_char(t_list *list_head)
+static char	**set_head_to_char(t_list_so_long *list_head)
 {
 	char	**map;
 	int		idx;
@@ -38,12 +38,12 @@ static char	**set_head_to_char(t_list *list_head)
 	return (map);
 }
 
-static void	head_append_node(t_list **list_head, char *gnl_return_str)
+static void	head_append_node(t_list_so_long **list_head, char *gnl_return_str)
 {
-	t_list	*new_node;
-	t_list	*list;
+	t_list_so_long	*new_node;
+	t_list_so_long	*list;
 
-	new_node = malloc(sizeof(t_list) * 1);
+	new_node = malloc(sizeof(t_list_so_long) * 1);
 	if (new_node == NULL)
 		print_error(1);
 	new_node->str = so_long_strjoin(gnl_return_str);
@@ -59,7 +59,7 @@ static void	head_append_node(t_list **list_head, char *gnl_return_str)
 	}
 }
 
-static void	set_parsing_head(t_list **list_head, char **argv)
+static void	set_parsing_head(t_list_so_long **list_head, char **argv)
 {
 	int		fd;
 	char	*gnl_return_str;
@@ -98,7 +98,7 @@ static void	check_ber_file(char *file_name)
 	}
 }
 
-char	**parse(t_list **list_head, char **argv)
+char	**parse(t_list_so_long **list_head, char **argv)
 {
 	char	**map;
 

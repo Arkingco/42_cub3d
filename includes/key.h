@@ -1,31 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minimap.h                                          :+:      :+:    :+:   */
+/*   key.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/13 16:41:09 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/14 17:29:07 by kipark           ###   ########seoul.kr  */
+/*   Created: 2022/10/14 14:53:28 by kipark            #+#    #+#             */
+/*   Updated: 2022/10/14 16:11:00 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIMAP_H
-# define MINIMAP_H
+#ifndef KEY_H
+# define KEY_H
 
-# define PI 3.141592
+#include "cub3d.h"
 
-# include "struct.h"
-typedef struct s_mini_map
-{
-	t_data	map;
-	t_data	player;
-	float	player_y;
-	float	player_x;
-	float	player_ray_line;
-}	t_mini_map;
+# define EVENT_KEY_PRESS		2
+# define EVENT_KEY_RELEASE		3
+# define X_EVENT_EXIT			17
+# define KEY_ESC				53
+# define KEY_W					13
+# define KEY_A					0
+# define KEY_S					1
+# define KEY_D					2
+# define PX						64
 
-void	set_mini_map(t_mini_map *mini_map, char **map);
-void	set_mini_map_player(t_mini_map *player);
+int	key_press(int keycode, t_param *param);
 
 #endif

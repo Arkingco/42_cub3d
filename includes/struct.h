@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minimap.h                                          :+:      :+:    :+:   */
+/*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/13 16:41:09 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/14 17:29:07 by kipark           ###   ########seoul.kr  */
+/*   Created: 2022/10/14 17:23:00 by kipark            #+#    #+#             */
+/*   Updated: 2022/10/14 17:28:24 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIMAP_H
-# define MINIMAP_H
+#ifndef STRUCT_H
+# define STRUCT_H
 
-# define PI 3.141592
-
-# include "struct.h"
-typedef struct s_mini_map
+typedef struct s_data
 {
-	t_data	map;
-	t_data	player;
-	float	player_y;
-	float	player_x;
-	float	player_ray_line;
-}	t_mini_map;
-
-void	set_mini_map(t_mini_map *mini_map, char **map);
-void	set_mini_map_player(t_mini_map *player);
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}				t_data;
 
 #endif

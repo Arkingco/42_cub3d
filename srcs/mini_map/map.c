@@ -21,48 +21,19 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-
-void	get_player_point(t_player *player, char **map)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (map[i])
-	{
-		j = 0;
-		while (map[i][j])
-		{
-			if (map[i][j] == 'P')
-			{
-				player->y = i;
-				player->x = j;
-			}
-			++j;
-		}
-		++i;
-	}
-}
-
 #include<stdio.h>
 void draw_minimap_pixel(t_data *mini_map, int y_pixel, \
 												int x_pixel, int color)
 {
 	int i;
 	int j;
-	int count;
 
-	count = 0;
 	i = y_pixel;
-	j = x_pixel;
-	y_pixel = y_pixel + 40;
-	x_pixel = x_pixel + 40;
-	while (i < y_pixel)
+	while (i < y_pixel + 40)
 	{
-		while (j < x_pixel)
+		j = x_pixel;
+		while (j < x_pixel + 40)
 		{
-			printf("in here %d %d %d %d %d\n", i, j, count, y_pixel, x_pixel);
-			count++;
 			my_mlx_pixel_put(mini_map, i, j, color);
 			++j;
 		}
@@ -77,8 +48,6 @@ void draw_minimap(t_data *mini_map, char **map)
 	int	y_pixel;
 	int	x_pixel;
 
-	for (int j=0; map[j] != NULL; ++j)
-		printf("%s\n", map[j]);
 	i = 0;
 	while (map[i] != NULL)
 	{
@@ -87,11 +56,8 @@ void draw_minimap(t_data *mini_map, char **map)
 		{
 			y_pixel = i * 40;
 			x_pixel = j * 40;
-			printf("%d %d %c\n", i, j, map[i][j]);
-			if (map[i][j] == 'P')
-				draw_minimap_pixel(mini_map, y_pixel, x_pixel, 0x00FF0000);
-			else if (map[i][j] == '0')
-				draw_minimap_pixel(mini_map, y_pixel, x_pixel, 0x00FFFF00);
+			if (map[i][j] == '0')
+				draw_minimap_pixel(mini_map, y_pixel, x_pixel, 0x00000000);
 			else if (map[i][j] == '1')
 				draw_minimap_pixel(mini_map, y_pixel, x_pixel, 0x000FF0FF);
 			++j;
@@ -102,10 +68,10 @@ void draw_minimap(t_data *mini_map, char **map)
 	printf("%d %d \n", i, j);
 }
 
-void set_mini_map(t_data *mini_map, char **map)
+void set_mini_map(t_mini_map *mini_map, char **map)
 {
 	// t_player	player;
 
 	// get_player_point(&player, map);
-	draw_minimap(mini_map, map);
+	draw_minimap(&mini_map->map, map);
 }
