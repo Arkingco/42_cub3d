@@ -35,7 +35,7 @@ void draw_minimap_pixel(t_data *mini_map, int y_pixel, \
 		while (j < x_pixel + 40)
 		{
 			my_mlx_pixel_put(mini_map, i, j, color);
-			++j;
+			++j; 
 		}
 		++i;
 	}
@@ -65,13 +65,9 @@ void draw_minimap(t_data *mini_map, char **map)
 		++i;
 	}
 	j = 0;
-	printf("%d %d \n", i, j);
 }
 
 void set_mini_map(t_mini_map *mini_map, char **map)
 {
-	// t_player	player;
-
-	// get_player_point(&player, map);
 	draw_minimap(&mini_map->map, map);
 }
