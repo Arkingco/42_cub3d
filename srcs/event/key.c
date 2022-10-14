@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 14:53:10 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/14 16:02:20 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/14 19:35:58 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ static void move_key(float *player_y_point, float *player_x_point, \
 
 static void draw_mini_map(t_param *param)
 {
-	printf("in here2 %f %f\n", param->mini_map->player_y, param->mini_map->player_x);
-
 	mlx_put_image_to_window(param->mlx, param->mlx_win, \
 									param->mini_map->map.img, 0, 0);
 	mlx_put_image_to_window(param->mlx, param->mlx_win, \
@@ -42,7 +40,7 @@ int	key_press(int keycode, t_param *param)
 
 	this_mini_map = param->mini_map;
 	if (keycode == KEY_W)
-		move_key(&this_mini_map->player_y, &this_mini_map->player_x, -10.0, 0);
+		move_key(&this_mini_map->player_y, &this_mini_map->player_x, - 10.0, 0);
 	else if (keycode == KEY_S)
 		move_key(&this_mini_map->player_y, &this_mini_map->player_x, 10.0, 0);
 	else if (keycode == KEY_A)
@@ -53,7 +51,6 @@ int	key_press(int keycode, t_param *param)
 		exit(0);
 	else
 		return (0);
-	printf("in here %f %f\n", this_mini_map->player_y, this_mini_map->player_x);
 	draw_mini_map(param);
 	return (0);
 }
