@@ -6,11 +6,11 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 15:27:48 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/12 11:41:45 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/13 16:01:20 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"so_long.h"
+#include"cub3d.h"
 
 int	gnl_strchr(char *line, char word)
 {

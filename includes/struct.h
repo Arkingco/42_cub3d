@@ -1,33 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/12 11:27:47 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/13 16:51:53 by kipark           ###   ########seoul.kr  */
+/*   Created: 2022/10/14 17:23:00 by kipark            #+#    #+#             */
+/*   Updated: 2022/10/14 17:28:24 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
-#include <unistd.h>
-#include <stdlib.h>
+#ifndef STRUCT_H
+# define STRUCT_H
 
-int	exit_window(void *not_use)
+typedef struct s_data
 {
-	(void)not_use;
-	exit(0);
-}
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}				t_data;
 
-void	print_error(int exit_flag)
-{
-	write(WRITE_ERROR_FD, "Error\n", 6);
-	exit(exit_flag);
-}
-
-void	print_error_str(int exit_flag, char *str)
-{
-	write(WRITE_ERROR_FD, str, get_column_length(str));
-	exit(exit_flag);
-}
+#endif

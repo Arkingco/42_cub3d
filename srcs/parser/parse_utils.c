@@ -6,11 +6,13 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 19:27:11 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/12 11:41:45 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/14 17:02:02 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "cub3d.h"
+#include "unistd.h"
+#include "stdlib.h"
 
 void	set_parsed_str(char *parsed_str, char *head_str)
 {
@@ -39,7 +41,7 @@ int	get_list_head_colum(char *head_str)
 	return (length);
 }
 
-int	get_list_head_row(t_list *list_head)
+int	get_list_head_row(t_list_so_long *list_head)
 {
 	int	length;
 

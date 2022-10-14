@@ -1,33 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   key.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/12 11:27:47 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/13 16:51:53 by kipark           ###   ########seoul.kr  */
+/*   Created: 2022/10/14 14:53:28 by kipark            #+#    #+#             */
+/*   Updated: 2022/10/14 16:11:00 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef KEY_H
+# define KEY_H
+
 #include "cub3d.h"
-#include <unistd.h>
-#include <stdlib.h>
 
-int	exit_window(void *not_use)
-{
-	(void)not_use;
-	exit(0);
-}
+# define EVENT_KEY_PRESS		2
+# define EVENT_KEY_RELEASE		3
+# define X_EVENT_EXIT			17
+# define KEY_ESC				53
+# define KEY_W					13
+# define KEY_A					0
+# define KEY_S					1
+# define KEY_D					2
+# define PX						64
 
-void	print_error(int exit_flag)
-{
-	write(WRITE_ERROR_FD, "Error\n", 6);
-	exit(exit_flag);
-}
+int	key_press(int keycode, t_param *param);
 
-void	print_error_str(int exit_flag, char *str)
-{
-	write(WRITE_ERROR_FD, str, get_column_length(str));
-	exit(exit_flag);
-}
+#endif

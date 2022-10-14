@@ -6,11 +6,12 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 19:54:19 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/12 11:41:45 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/13 16:44:33 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "cub3d.h"
+#include "unistd.h"
 
 int	get_column_length(char *str)
 {
@@ -32,39 +33,4 @@ int	get_row_length(char **str)
 	while (str[idx] != NULL)
 		idx++;
 	return (idx);
-}
-
-void	set_object(t_object *object)
-{
-	object->exit = 0;
-	object->item = 0;
-	object->player = 0;
-	object->space = 0;
-	object->wall = 0;
-	object->error = 0;
-}
-
-void	check_object_parsed(char **map, t_object *object, int row, int column)
-{
-	while (map[row] != NULL)
-	{
-		column = 0;
-		while (map[row][column] != '\0')
-		{
-			if (map[row][column] == '0')
-			object->space += 1;
-			else if (map[row][column] == '1')
-				object->wall += 1;
-			else if (map[row][column] == 'C')
-				object->item += 1;
-			else if (map[row][column] == 'E')
-				object->exit += 1;
-			else if (map[row][column] == 'P')
-				object->player += 1;
-			else
-				object->error = 1;
-			column++;
-		}
-		row++;
-	}
 }

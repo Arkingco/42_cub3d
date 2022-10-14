@@ -1,33 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   minimap.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/12 11:27:47 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/13 16:51:53 by kipark           ###   ########seoul.kr  */
+/*   Created: 2022/10/13 16:41:09 by kipark            #+#    #+#             */
+/*   Updated: 2022/10/14 17:29:07 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
-#include <unistd.h>
-#include <stdlib.h>
+#ifndef MINIMAP_H
+# define MINIMAP_H
 
-int	exit_window(void *not_use)
-{
-	(void)not_use;
-	exit(0);
-}
+# define PI 3.141592
 
-void	print_error(int exit_flag)
+# include "struct.h"
+typedef struct s_mini_map
 {
-	write(WRITE_ERROR_FD, "Error\n", 6);
-	exit(exit_flag);
-}
+	t_data	map;
+	t_data	player;
+	float	player_y;
+	float	player_x;
+	float	player_ray_line;
+}	t_mini_map;
 
-void	print_error_str(int exit_flag, char *str)
-{
-	write(WRITE_ERROR_FD, str, get_column_length(str));
-	exit(exit_flag);
-}
+void	set_mini_map(t_mini_map *mini_map, char **map);
+void	set_mini_map_player(t_mini_map *player);
+
+#endif
