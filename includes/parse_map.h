@@ -1,28 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   parse_map.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/12 11:27:47 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/14 16:18:02 by jayoon           ###   ########.fr       */
+/*   Created: 2022/10/14 11:44:06 by jayoon            #+#    #+#             */
+/*   Updated: 2022/10/14 16:18:12 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "so_long.h"
+#ifndef PARSE_MAP_H
+# define PARSE_MAP_H
 
-int	exit_window(void *not_use)
+enum e_direction
 {
-	(void)not_use;
-	exit(0);
-}
+	EA = 0,
+	WE,
+	SO,
+	NO
+};
 
-void	print_error_str(char *str)
+enum e_rgb
 {
-	write(WRITE_ERROR_FD, "Error\n", ft_strlen("Error\n"));
-	if (str != NULL)
-		write(WRITE_ERROR_FD, str, ft_strlen(str));
-	exit(1);
-}
+	R = 0,
+	G,
+	B
+};
+
+typedef struct s_map_info
+{
+	char	*texture[4];
+	int		rgb_floor[3];
+	int		rgb_ceilling[3];
+	char	**map;
+}   t_map_info;
+
+#endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kipark <kipark@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 14:57:19 by kipark            #+#    #+#             */
-/*   Updated: 2022/05/02 17:18:16 by kipark           ###   ########.fr       */
+/*   Updated: 2022/10/14 16:07:45 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,11 @@ typedef struct s_param
 	t_map	map_info;
 }				t_param;
 
-typedef struct s_list
-{
-	struct s_list	*next;
-	char			*str;
-}				t_list;
+// typedef struct s_list
+// {
+// 	struct s_list	*next;
+// 	char			*str;
+// }				t_list;
 
 typedef struct s_object
 {
@@ -90,8 +90,7 @@ char	*get_next_line(int fd);
 int		get_list_head_colum(char *head_str);
 int		get_list_head_row(t_list *list_head);
 
-void	print_error(int exit_flag);
-void	print_error_str(int exit_flag, char *str);
+void	print_error_str(char *str);
 void	set_parsed_str(char *parsed_str, char *head_str);
 
 int		parsed_str_error_check(char **parsed_str);

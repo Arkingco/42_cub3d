@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 14:57:05 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/12 11:41:45 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/14 16:00:31 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ static char	**set_head_to_char(t_list *list_head)
 
 	map = malloc(sizeof(char *) * get_list_head_row(list_head) + 1);
 	if (map == NULL)
-		print_error(1);
+		print_error_str(NULL);
 	idx = 0;
 	while (list_head != NULL)
 	{
 		map[idx] = malloc(sizeof(char) * get_list_head_colum(list_head->str));
 		if (map == NULL)
-			print_error(1);
+			print_error_str(NULL);
 		set_parsed_str(map[idx], list_head->str);
 		list_head = list_head->next;
 		idx++;
@@ -41,7 +41,7 @@ static void	head_append_node(t_list **list_head, char *gnl_return_str)
 
 	new_node = malloc(sizeof(t_list *) * 1);
 	if (new_node == NULL)
-		print_error(1);
+		print_error_str(NULL);
 	new_node->str = so_long_strjoin(gnl_return_str);
 	new_node->next = NULL;
 	if (*list_head == NULL)
@@ -103,6 +103,6 @@ char	**parse(t_list **list_head, char **argv)
 	set_parsing_head(list_head, argv);
 	map = set_head_to_char(*list_head);
 	if (parsed_str_error_check(map))
-		print_error(1);
+		print_error_str(NULL);
 	return (map);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 17:31:52 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/12 11:41:45 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/14 16:07:17 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,19 +79,19 @@ static int	check_need_object(char **parse_str)
 	if (object.exit < 1 || object.item < 1 || object.player < 1)
 		return (1);
 	if (object.player >= 2)
-		print_error_str(EXIT_ERROR_PLAG, "Error\ntoo_many_player\n");
+		print_error_str("too_many_player\n");
 	return (0);
 }
 
 int	parsed_str_error_check(char **parsed_str)
 {
 	if (check_str_row_length(parsed_str))
-		print_error_str(EXIT_ERROR_PLAG, "Error\nrow_under_3\n");
+		print_error_str("row_under_3\n");
 	if (check_str_rectangle(parsed_str))
-		print_error_str(EXIT_ERROR_PLAG, "Error\nnot_rectangle\n");
+		print_error_str("not_rectangle\n");
 	if (check_wall_surrounded(parsed_str, get_column_length(parsed_str[0])))
-		print_error_str(EXIT_ERROR_PLAG, "Error\nnot_wal_surrounded\n");
+		print_error_str("not_wal_surrounded\n");
 	if (check_need_object(parsed_str))
-		print_error_str(EXIT_ERROR_PLAG, "Error\nnot_much_object\n");
+		print_error_str("not_much_object\n");
 	return (0);
 }

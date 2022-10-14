@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+         #
+#    By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/27 15:13:41 by kipark            #+#    #+#              #
-#    Updated: 2022/10/12 16:22:30 by kipark           ###   ########seoul.kr   #
+#    Updated: 2022/10/14 16:18:14 by jayoon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,17 +30,14 @@ DIR_INCS 					:=	./includes
 DIR_LIBFT					:=	./libft
 
 DIR_EVENT					:=	$(DIR_SRCS)/event
-DIR_PARSER					:=	$(DIR_SRCS)/parser
 DIR_ERROR					:=	$(DIR_SRCS)/error
+DIR_PARSE_MAP				:=	$(DIR_SRCS)/parse_map
 
 SRCS_MAIN					:=	main.c
 SRCS_MAIN					:=	$(addprefix $(DIR_SRCS)/, $(SRCS_MAIN))
 
-SRCS_PARSER					:=	error_utils.c					\
-								parse_error.c					\
-								parse_utils.c					\
-								parse.c
-SRCS_PARSER					:=	$(addprefix $(DIR_PARSER)/, $(SRCS_PARSER))
+SRCS_PARSE_MAP				:=	
+SRCS_PARSE_MAP				:=	$(addprefix $(DIR_SRCS)/, $(SRCS_PARSE_MAP))
 
 SRCS_EVENT					:=	key_event.c	\
 								key.c		\
@@ -51,7 +48,7 @@ SRCS_ERROR					:=	error.c
 SRCS_ERROR					:=	$(addprefix $(DIR_ERROR)/, $(SRCS_ERROR))
 
 SRCS						:=	$(SRCS_MAIN)			\
-								$(SRCS_PARSER)			\
+								$(SRCS_PARSE_MAP)		\
 								$(SRCS_EVENT)			\
 								$(SRCS_ERROR)
 
