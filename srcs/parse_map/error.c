@@ -6,14 +6,14 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:27:47 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/17 14:08:02 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/17 15:50:55 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include "cub3d.h"
 #include <errno.h>
-#include "../../includes/error.h"
-#include "../../libft/libft.h"
+#include "error.h"
+#include "libft.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>

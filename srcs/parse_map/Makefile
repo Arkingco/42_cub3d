@@ -6,7 +6,7 @@
 #    By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/27 15:13:41 by kipark            #+#    #+#              #
-#    Updated: 2022/10/17 15:47:19 by jayoon           ###   ########.fr        #
+#    Updated: 2022/10/17 15:53:19 by jayoon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,11 +21,10 @@ LIBFT_FLAGS 				=	-L$(DIR_LIBFT) -lft
 INCS_FLAGS					=	-I $(DIR_LIBFT) -I $(DIR_INCS)
 LIBFT						=	$(DIR_LIBFT)/libft.a
 
-MLXLIB 						= $(DIR_MLX)/libmlx.a
-DIR_MLX 					= ../../minilibx_opengl_20191021
-MLX_FLAGS 					= -L$(DIR_MLX) -lmlx -framework OpenGL -framework AppKit
+# MLXLIB 						= $(DIR_MLX)/libmlx.a
+# DIR_MLX 					= ../../minilibx_opengl_20191021
+# MLX_FLAGS 					= -L$(DIR_MLX) -lmlx -framework OpenGL -framework AppKit
 
-PWD							:=	/Users/kipark/42_cub3d
 DIR_INCS 					:=	../../includes
 DIR_LIBFT					:=	../../libft
 
@@ -51,14 +50,14 @@ endif
 
 all: $(NAME)
 
-$(NAME)		: $(LIBFT) $(MLXLIB) $(OBJS)
-	$(CC) $(CFLAGS) $(LIBFT_FLAGS) $(MLX_FLAGS) $(OBJS) -o $@
+$(NAME)		: $(LIBFT) $(OBJS)
+	$(CC) $(CFLAGS) $(LIBFT_FLAGS) $(OBJS) -o $@
 
 %.o			: %.c
 	$(CC) $(CFLAGS) $(INCS_FLAGS)  -c $< -o $@
 
-$(MLXLIB)	:
-	make -C $(DIR_MLX) all
+# $(MLXLIB)	:
+# 	make -C $(DIR_MLX) all
 
 $(LIBFT)	:
 	make -C $(DIR_LIBFT) all
@@ -72,13 +71,13 @@ leaks:
 clean:
 	rm -rf $(OBJS) $(NAME).dSYM
 	make clean -C $(DIR_LIBFT)
-	make clean -C $(DIR_MLX)
+# make clean -C $(DIR_MLX)
 
 fclean:
 	make clean
 	make fclean -C $(DIR_LIBFT)
-	make fclean -C $(DIR_MLX)
 	rm -f $(NAME)
+# make fclean -C $(DIR_MLX)
 
 re: 
 	make fclean
