@@ -1,30 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   parse_map.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/12 11:27:47 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/17 12:33:43 by jayoon           ###   ########.fr       */
+/*   Created: 2022/10/17 10:58:52 by jayoon            #+#    #+#             */
+/*   Updated: 2022/10/17 12:26:31 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
-#include "libft.h"
-#include <stdlib.h>
-#include <unistd.h>
+#ifndef PARSE_MAP
+# define PARSE_MAP
 
-int	exit_window(void *not_use)
+enum e_direction
 {
-	(void)not_use;
-	exit(0);
-}
+	EA,
+	WE,
+	SO,
+	NO
+};
 
-void	print_error_str(char *str)
+enum e_color
 {
-	write(WRITE_ERROR_FD, "ERROR\n", ft_strlen("ERROR\n"));
-	if (str != NULL)
-		write(WRITE_ERROR_FD, str, ft_strlen(str));
-	exit(1);
-}
+	R,
+	G,
+	B
+};
+
+typedef struct s_map_info
+{
+	char	*texture_path[4];
+	int		floor[3];
+	int		ceilling[3];
+	char	**map;
+}	t_map_info;
+
+#endif

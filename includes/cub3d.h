@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 14:57:19 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/14 17:29:08 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/17 12:34:11 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,7 @@ char	*get_next_line(int fd);
 int		get_list_head_colum(char *head_str);
 int		get_list_head_row(t_list_so_long *list_head);
 
-void	print_error(int exit_flag);
-void	print_error_str(int exit_flag, char *str);
+void	print_error_str(char *str);
 void	set_parsed_str(char *parsed_str, char *head_str);
 
 int		parsed_str_error_check(char **parsed_str);

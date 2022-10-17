@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 15:01:26 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/14 17:44:49 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/17 12:35:36 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	main(int argc, char **argv)
 	char	**map;
 
 	if (argc != 2)
-		print_error_str(EXIT_ERROR_PLAG, "Error\nArguments not match\n");
+		print_error_str("Arguments not match\n");
 	str_head = NULL;
 	map = parse(&str_head, argv);
 	game_start(map);
