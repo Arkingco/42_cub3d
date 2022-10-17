@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:41:09 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/14 17:29:07 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/17 13:59:54 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ typedef struct s_mini_map
 {
 	t_data	map;
 	t_data	player;
+	t_data	ray;
 	float	player_y;
 	float	player_x;
 	float	player_ray_line;

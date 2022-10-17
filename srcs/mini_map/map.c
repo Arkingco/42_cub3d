@@ -56,9 +56,9 @@ void draw_minimap(t_data *mini_map, char **map)
 		{
 			y_pixel = i * 40;
 			x_pixel = j * 40;
-			if (map[i][j] == '0')
-				draw_minimap_pixel(mini_map, y_pixel, x_pixel, 0x00000000);
-			else if (map[i][j] == '1')
+			// if (map[i][j] == '0')
+			// 	draw_minimap_pixel(mini_map, y_pixel, x_pixel, 0x00000000);
+			if (map[i][j] == '1')
 				draw_minimap_pixel(mini_map, y_pixel, x_pixel, 0x000FF0FF);
 			++j;
 		}
