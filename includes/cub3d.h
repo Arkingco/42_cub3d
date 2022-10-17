@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 14:57:19 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/17 12:34:11 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/17 13:15:19 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,6 @@
 
 #include "struct.h"
 #include "minimap.h"
-
-# define EXIT_ERROR_PLAG		1
-# define WRITE_ERROR_FD			2
 
 typedef struct s_param
 {
@@ -45,7 +42,6 @@ char	*get_next_line(int fd);
 int		get_list_head_colum(char *head_str);
 int		get_list_head_row(t_list_so_long *list_head);
 
-void	print_error_str(char *str);
 void	set_parsed_str(char *parsed_str, char *head_str);
 
 int		parsed_str_error_check(char **parsed_str);
@@ -55,7 +51,5 @@ char	*so_long_strjoin(char *buffer);
 
 char	**parse(t_list_so_long **str_head, char **argv);
 void	set_background(void *mlx, void *mlx_win);
-
-int		exit_window(void *not_use);
 
 #endif

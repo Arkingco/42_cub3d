@@ -1,41 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_map.h                                        :+:      :+:    :+:   */
+/*   error.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/17 10:58:52 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/17 14:19:24 by jayoon           ###   ########.fr       */
+/*   Created: 2022/10/17 13:11:37 by jayoon            #+#    #+#             */
+/*   Updated: 2022/10/17 13:15:55 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSE_MAP
-# define PARSE_MAP
+#ifndef ERROR_H
+# define ERROR_H
 
-enum e_direction
-{
-	EA,
-	WE,
-	SO,
-	NO
-};
+# define WRITE_ERROR_FD			2
 
-enum e_color
-{
-	R,
-	G,
-	B
-};
-
-typedef struct s_map_info
-{
-	char	*texture_path[4];
-	int		floor[3];
-	int		ceilling[3];
-	char	**map;
-}	t_map_info;
-
-void	init_map_info(t_map_info *param, int argc, char *file_path);
+int		exit_window(void *not_use);
+void	exit_perror(void);
+void	print_error_str(char *str);
 
 #endif

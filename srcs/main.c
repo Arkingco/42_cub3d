@@ -6,11 +6,12 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 15:01:26 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/17 12:35:36 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/17 13:13:18 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "error.h"
 #include "mlx.h"
 #include "minimap.h"
 #include "key.h"

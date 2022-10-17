@@ -6,11 +6,12 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 14:57:05 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/17 12:36:37 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/17 13:13:38 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "error.h"
 #include "unistd.h"
 #include "stdlib.h"
 #include "fcntl.h"

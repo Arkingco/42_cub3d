@@ -6,17 +6,30 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:27:47 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/17 14:01:30 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/17 14:08:02 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../includes/cub3d.h"
 #include <errno.h>
-#include "error.h"
-#include "libft.h"
+#include "../../includes/error.h"
+#include "../../libft/libft.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+
+size_t	ft_strlen(const char *str)
+{
+	size_t	len;
+
+	len = 0;
+	while (*str)
+	{
+		++len;
+		++str;
+	}
+	return (len);
+}
 
 int	exit_window(void *not_use)
 {

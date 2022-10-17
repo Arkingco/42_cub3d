@@ -6,11 +6,12 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 17:31:52 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/17 12:36:19 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/17 13:13:29 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "error.h"
 #include "unistd.h"
 
 static int	check_str_row_length(char **parsed_str)
