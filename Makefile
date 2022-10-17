@@ -6,7 +6,7 @@
 #    By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/27 15:13:41 by kipark            #+#    #+#              #
-#    Updated: 2022/10/17 15:44:48 by jayoon           ###   ########.fr        #
+#    Updated: 2022/10/17 20:14:38 by jayoon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,6 @@ DIR_OBJS					:=	./objs
 DIR_EVENT					:=	./event
 
 DIR_EVENT					:=	$(DIR_SRCS)/event
-DIR_PARSER					:=	$(DIR_SRCS)/parser
 DIR_ERROR					:=	$(DIR_SRCS)/error
 DIR_MINI_MAP				:=	$(DIR_SRCS)/mini_map
 
@@ -63,7 +62,7 @@ OJBS_ERROR					:=	$(addprefix $(DIR_OBJS)/, $(SRCS_ERROR))
 SRCS_ERROR					:=	$(addprefix $(DIR_ERROR)/, $(SRCS_ERROR))
 
 SRCS						:=	$(SRCS_MAIN)			\
-								$(SRCS_PARSER)			\
+								$(SRCS_PARSE_MAP)		\
 								$(SRCS_EVENT)			\
 								$(SRCS_ERROR)			\
 								$(SRCS_MINI_MAP)		

@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 15:01:26 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/17 13:13:18 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/17 20:17:46 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	my_mlx_pixel_pu2t(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-static void	game_start(char **map)
+int	main(int argc, char *argv[])
 {
 	void	*mlx;
 	void	*mlx_win;
