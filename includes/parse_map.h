@@ -6,19 +6,21 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 10:58:52 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/17 14:19:24 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/17 17:11:31 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSE_MAP
 # define PARSE_MAP
 
-enum e_direction
+enum e_identifier
 {
-	EA,
-	WE,
-	SO,
-	NO
+	EAST,
+	WEST,
+	SOUTH,
+	NORTH,
+	FLOOR,
+	CEILING
 };
 
 enum e_color
@@ -27,6 +29,13 @@ enum e_color
 	G,
 	B
 };
+
+typedef struct s_identifier
+{
+	char				*str;
+	size_t				len;
+	enum e_identifier	identifier;
+}	t_identifier;
 
 typedef struct s_map_info
 {
