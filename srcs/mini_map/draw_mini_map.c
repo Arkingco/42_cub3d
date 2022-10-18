@@ -56,10 +56,10 @@ static void draw_map(t_data *mini_map, char **map)
 		{
 			y_pixel = i * 20;
 			x_pixel = j * 20;
-			printf("%d %d\n", i, j);
+			// printf("%d %d %c\n", i, j, map[i][j]);
 			if (map[i][j] == '0')
 				draw_minimap_pixel(mini_map, y_pixel, x_pixel, 0x00000000);
-			if (map[i][j] == '1')
+			if (map[i][j] == '1' || map[i][j] == 'P' )
 				draw_minimap_pixel(mini_map, y_pixel, x_pixel, 0x000FF0FF);
 			++j;
 		}

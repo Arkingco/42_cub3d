@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 15:01:26 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/18 21:36:34 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/18 21:58:51 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	set_player(t_game *game)
 
 	this_player->dirX = -1;
 	this_player->dirY = 0; //initial direction vector
-	this_player->planeX = 0.6;
+	this_player->planeX = 0.2;
 	this_player->planeY = 0.00; // the 2d raycaster version of camera plane
 }
 
@@ -62,11 +62,11 @@ static void	game_start(char **map)
 	set_player(game);
 
 	draw_mini_map(game);
+	mlx_put_image_to_window(game->mlx, game->mlx_win, game->minimap->img, 0, 0);
 
-	mlx_hook(game->mlx_win, EVENT_KEY_PRESS, 0, &key_press, &game);
+	mlx_hook(game->mlx_win, EVENT_KEY_PRESS, 0, &key_press, game);
 	mlx_hook(game->mlx_win, X_EVENT_EXIT, 0, &exit_window, NULL);
 	
-	mlx_put_image_to_window(game->mlx, game->mlx_win, game->minimap->img, 0, 0);
 	mlx_loop(game->mlx);
 }
 
