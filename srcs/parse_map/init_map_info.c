@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 13:04:54 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/17 17:21:28 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/18 19:08:08 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,32 +58,22 @@ static void	init_arr(t_identifier *arr)
 	arr[3].str = "NO ";
 	arr[4].str = "F ";
 	arr[5].str = "C ";
-	i = 0;
-	while (i < 6)
-	{
-		printf("%d: %s, %zu, %d\n", i, arr[i].str, arr[i].len, arr[i].identifier);
-		++i;
-	}
 }
 
 static int	what_is_identifier(char *str)
 {
 	t_identifier	arr[6];
+	int				i;
 
+	i = 0;
 	init_arr(arr);
-	if (!ft_strncmp(str, "EA ", 3))
-		return (EAST);
-	else if (!ft_strncmp(str, "WE ", 3))
-		return (WEST);
-	else if (!ft_strncmp(str, "SO ", 3))
-		return (SOUTH);
-	else if (!ft_strncmp(str, "NO ", 3))
-		return (NORTH);
-	else if (!ft_strncmp(str, "F ", 2))
-		return (FLOOR);
-	else if (!ft_strncmp(str, "C ", 2))
-		return (CEILING);
-	return (0);
+	while (i < 6)
+	{
+		if (!ft_strncmp(str, arr[i].str, arr[i].len))
+			return (arr[i].identifier);
+		++i;
+	}
+	return (-1);
 }
 
 static int	is_identifier(char *str)
@@ -107,7 +97,7 @@ static void	init_element(t_map_info *param, int fd)
 		str = get_next_line(fd);
 		if (str == NULL)
 			break ;
-		if (!is_identifier(str))
+		if (is_identifier(str) == -1)
 			print_error_str("Invalid identifier\n");
 		
 	}
