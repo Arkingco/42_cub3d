@@ -1,1 +1,1 @@
-# Wellcome this this the second project of jaypark!
+# Welcome this this the second project of jaypark!
