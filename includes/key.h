@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 14:53:28 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/14 16:11:00 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/18 21:18:10 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define KEY_H
 
 #include "cub3d.h"
+#include "minimap.h"
 
 # define EVENT_KEY_PRESS		2
 # define EVENT_KEY_RELEASE		3
@@ -25,6 +26,6 @@
 # define KEY_D					2
 # define PX						64
 
-int	key_press(int keycode, t_param *param);
+int	key_press(int keycode, t_game *param);
 
 #endif

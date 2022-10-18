@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 17:31:52 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/13 16:45:21 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/18 21:09:00 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ static int	check_str_row_length(char **parsed_str)
 
 static int	check_str_rectangle(char **parsed_str)
 {
-	int	before_colum_length;
-	int	idx;
+int	before_colum_length;
+int	idx;
 
 	before_colum_length = get_column_length(parsed_str[0]);
 	idx = 1;
@@ -68,7 +68,7 @@ static int	check_wall_surrounded(char **parse_str, int colum_length)
 		return (1);
 	return (0);
 }
-
+ 
 int	parsed_str_error_check(char **parsed_str)
 {
 	if (check_str_row_length(parsed_str))

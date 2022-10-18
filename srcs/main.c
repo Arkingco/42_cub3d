@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 15:01:26 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/17 19:59:13 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/18 21:36:34 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,108 +14,60 @@
 #include "mlx.h"
 #include "minimap.h"
 #include "key.h"
+#include "libft.h"
 #include <unistd.h>
 #include <math.h>
 
-	void	*mlx;
-	void	*mlx_win;
-	t_param	param;
-	t_mini_map	mini_map;
-
-void	my_mlx_pixel_pu2t(t_data *data, int x, int y, int color)
+static void set_game(t_game *game, char **map)
 {
-	char	*dst;
+	t_data *minimap;
 
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
+	// map 도 임의로 지정 해줘야함
+	game->width = 1200;
+	game->height = 900;
+	game->map = map;
+	game->mlx = mlx_init();
+	game->mlx_win = mlx_new_window(game->mlx, game->width, game->height, "cub3D");
+	game->player = ft_safe_malloc(sizeof(t_player));
+	game->minimap = ft_safe_malloc(sizeof(t_data));
+	minimap = game->minimap;
+	minimap->img = mlx_new_image(game->mlx, 1200, 1200);
+	minimap->addr = mlx_get_data_addr(minimap->img, \
+			&minimap->bits_per_pixel, &minimap->line_length, &minimap->endian);
 }
-#include <stdio.h>
 
-static void	draw_minimap()
+static void	set_player(t_game *game)
 {
-	double posX = 600, posY = 200;  //x and y start position
-	double dirX = -1, dirY = 0; //initial direction vector
-	double planeX = 0.01, planeY = 0.00; //the 2d raycaster version of camera plane
-	int	witdh = 1200;
-	int height = 500;
-	for(int x = 0; x < witdh; x++)
-    {
-		//calculate ray position and direction
-		double cameraX = 2 * x / (double)witdh - 1; //x-coordinate in camera space
-		double rayDirX = dirX + planeX * cameraX;
-		double rayDirY = dirY + planeY * cameraX;
-		for (int y=0; y<height; y++)
-		{
-			rayDirX = rayDirX + cameraX * planeX;
-			rayDirY += 1;
-			// printf("%f     %f     %f\n", rayDirX, rayDirY, cameraX);
-			my_mlx_pixel_pu2t(&mini_map.player, rayDirX + posX, \
-					rayDirY + posY, 0x00FF0000);
-		}
-		//   int mapX = (int)posX;z	
-		//   int mapY = (int)posY;
+	t_player *this_player;
 
-		//   //length of ray from current position to next x or y-side
-		//   double sideDistX;
-		//   double sideDistY; 	
+	this_player = game->player;
 
-		//    //length of ray from one x or y-side to next x or y-side
-		//   double deltaDistX = fabs(1 / rayDirX);
-		//   double deltaDistY = fabs(1 / rayDirY);
-		//   double perpWallDist;
+	// 이 부분은 따로 P의 위치를 찾는 로직을 넣어야함 	
+	this_player->posX = 20;
+	this_player->posY = 20;
+	//
 
-		//   //what direction to step in x or y-direction (either +1 or -1)
-		//   int stepX;
-		//   int stepY;
-
-		//   int hit = 0; //was there a wall hit?
-		//   int side; //was a NS or a EW wall hit?
-
-	}
-	// double time = 0; //time of current frame
-	// double oldTime = 0; //time of previous frame
-	  
+	this_player->dirX = -1;
+	this_player->dirY = 0; //initial direction vector
+	this_player->planeX = 0.6;
+	this_player->planeY = 0.00; // the 2d raycaster version of camera plane
 }
 
 static void	game_start(char **map)
 {
-	// void	*mlx;
-	// void	*mlx_win;
-	// t_param	param;
-	// t_mini_map	mini_map;
+	t_game *game;
 
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, 1920, 1080, "cub3D");
+	game = ft_safe_malloc(sizeof(t_game));
+	set_game(game, map);
+	set_player(game);
+
+	draw_mini_map(game);
+
+	mlx_hook(game->mlx_win, EVENT_KEY_PRESS, 0, &key_press, &game);
+	mlx_hook(game->mlx_win, X_EVENT_EXIT, 0, &exit_window, NULL);
 	
-
-	// 이미지 선언 및 addr세팅
-	mini_map.player.img = mlx_new_image(mlx, 1200, 1200);
-	mini_map.player.addr = mlx_get_data_addr(mini_map.player.img, &mini_map.player.bits_per_pixel, &mini_map.player.line_length,
-								&mini_map.player.endian);
-	mini_map.map.img = mlx_new_image(mlx, 1200, 1200);
-	mini_map.map.addr = mlx_get_data_addr(mini_map.map.img, &mini_map.map.bits_per_pixel, &mini_map.map.line_length,
-								&mini_map.map.endian);
-	
-	param.map = map;
-	param.mlx = mlx;
-	param.mlx_win = mlx_win;
-	param.mini_map = &mini_map;
-	param.mini_map->player_y = 100.0;
-	param.mini_map->player_x = 100.0;
-	// 이미지 세팅 
-	draw_minimap();
-	
-	set_mini_map(&mini_map, map);
-	set_mini_map_player(&mini_map);
-
-	// 이미지 찍기
-	mlx_put_image_to_window(mlx, mlx_win, mini_map.map.img, 0, 0);
-	mlx_put_image_to_window(mlx, mlx_win, mini_map.player.img, param.mini_map->player_y, param.mini_map->player_x);
-
-	mlx_hook(mlx_win, EVENT_KEY_PRESS, 0, &key_press, &param);
-	mlx_hook(mlx_win, X_EVENT_EXIT, 0, &exit_window, NULL);
-
-	mlx_loop(mlx);
+	mlx_put_image_to_window(game->mlx, game->mlx_win, game->minimap->img, 0, 0);
+	mlx_loop(game->mlx);
 }
 
 int	main(int argc, char **argv)

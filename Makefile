@@ -6,7 +6,7 @@
 #    By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/27 15:13:41 by kipark            #+#    #+#              #
-#    Updated: 2022/10/14 17:10:52 by kipark           ###   ########seoul.kr   #
+#    Updated: 2022/10/18 21:37:45 by kipark           ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,8 +53,7 @@ SRCS_EVENT					:=	key.c
 OJBS_EVENT					:=	$(addprefix $(DIR_OBJS)/, $(SRCS_EVENT))
 SRCS_EVENT					:=	$(addprefix $(DIR_EVENT)/, $(SRCS_EVENT))
 
-SRCS_MINI_MAP					:=	map.c		\
-									player.c
+SRCS_MINI_MAP					:=	draw_mini_map.c
 OJBS_MINI_MAP					:=	$(addprefix $(DIR_OBJS)/, $(SRCS_MINI_MAP))
 SRCS_MINI_MAP					:=	$(addprefix $(DIR_MINI_MAP)/, $(SRCS_MINI_MAP))
 
@@ -90,7 +89,7 @@ all: $(NAME)
 
 $(NAME)		: $(LIBFT) $(MLXLIB) $(OBJS)
 	$(CC) $(CFLAGS) $(LIBFT_FLAGS) $(MLX_FLAGS) $(OBJS_OBJS) -o $@
-	./cub3d map/test_map.ber
+	./cub3d ./map/test_map.ber
 
 %.o			: %.c
 	$(CC) $(CFLAGS) $(INCS_FLAGS)  -c $< -o $@

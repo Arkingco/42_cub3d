@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 14:57:19 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/14 17:29:08 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/18 18:38:36 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,6 @@
 
 # define EXIT_ERROR_PLAG		1
 # define WRITE_ERROR_FD			2
-
-typedef struct s_param
-{
-	char		**map;
-	void		*mlx;
-	void		*mlx_win;
-	t_mini_map	*mini_map;
-}				t_param;
-
-
-typedef struct s_list_so_long
-{
-	char			*str;
-	struct s_list_so_long	*next;
-}				t_list_so_long;
-
 
 int		gnl_strchr(char *s, char word);
 int		gnl_strlen(char *s);
