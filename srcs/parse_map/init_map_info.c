@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 13:04:54 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/19 17:17:45 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/19 21:48:42 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,30 @@ static t_num_iden	process_texture_path(t_map_info *map_info, char *str, \
 						t_num_iden num_iden)
 {
 	// 실패하면 ELEMENT_FAIL
+	char	*start;
+	char	*end;
+	int		flag;
+
+	start = NULL;
+	end = NULL;
+	str = str + 3;
+	flag = 0;
+	while (*str)
+	{
+		if (*str != ' ')
+		{
+			if (end != NULL)
+				return (ELEMENT_FAIL);
+			if (flag == 0)
+				start = str;
+			flag = 1;
+			if (*(str + 1) == '\0' || *(str + 1) == ' ')
+				end = str;
+		}
+		++str;
+	}
+	if (str != NULL)
+		// map_info->texture_path[num_iden] = ft_substr();
 	return (num_iden);
 }
 
@@ -67,9 +91,9 @@ static t_num_iden	what_is_identifier(t_map_info *map_info, char *str)
 	return (ELEMENT_FAIL);
 }
 
-static 	parse_element(t_map_info *map_info, char *str)
+static t_num_iden 	parse_element(t_map_info *map_info, char *str)
 {
-	while (*str != '\n')
+	while (*str)
 	{
 		if (*str != ' ')
 			return (what_is_identifier(map_info, str));
@@ -81,16 +105,18 @@ static 	parse_element(t_map_info *map_info, char *str)
 static void	init_element(t_map_info *map_info, int fd)
 {
 	char		*str;
-	t_num_iden	num;
 
+	// texture 4개, color 2개, 이어져 있는 map 1개 총 7개이후 있는 요소는 에러
 	while (1)
 	{
 		str = get_next_line(fd);
 		if (str == NULL)
 			break ;
-		// 맵 읽고 해당 identifier 인지 확인하면 그것에 맞게 데이터 가공
-		if (parse_element(map_info, str) == ELEMENT_FAIL)
-			print_error_str("Invalid identifier\n");
+		if (*str != '\n')
+		{
+			if (parse_element(map_info, str) == ELEMENT_FAIL)
+				print_error_str("Invalid identifier\n");
+		}
 		free(str);
 		str = NULL;
 	}
