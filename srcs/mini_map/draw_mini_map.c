@@ -56,7 +56,7 @@ static void draw_map(t_data *mini_map, char **map)
 		{
 			y_pixel = i * 20;
 			x_pixel = j * 20;
-			// printf("%d %d %c\n", i, j, map[i][j]);
+
 			if (map[i][j] == '0')
 				draw_minimap_pixel(mini_map, y_pixel, x_pixel, 0x00000000);
 			if (map[i][j] == '1' || map[i][j] == 'P' )
@@ -88,6 +88,7 @@ void draw_player(t_game *game)
 	}
 }
 
+#include <math.h>
 int is_ray(double ray_dir, double pos, int max_size)
 {
 	double ret;
@@ -103,24 +104,26 @@ void draw_ray(t_game *game)
 	t_player *player;
 
 	player = game->player;
-	for(int x = 0; x < game->width / 2; x++)
-    {
+	printf("start \n");
+	for(int x = 0; x <= 6; x++)
+	{
 		//calculate ray position and direction
-		double cameraX = 2 * x / (double)game->width - 1; //x-coordinate in camera space
-		double rayDirX = player->dirX + player->planeX * cameraX;
-		double rayDirY = player->dirY + player->planeY * cameraX;
-
+		double cameraX = 2 * x / (double)6 - 1;
+		double rayDirX = 0;
+		double rayDirY = 0;
+		rayDirX = player->dirX + player->planeX * cameraX / 2;
+		rayDirY = player->dirY + player->planeY * cameraX / 2;
+		printf("ray x : %f  y : %f\n", rayDirX, rayDirY);
+		// printf("ray pow \n");
 		for (int y=0; y<game->height; y++)
 		{
-			rayDirX = rayDirX + cameraX * player->planeY;
-			rayDirY = rayDirY + cameraX * player->planeX;
+			rayDirX += player->dirX + player->planeX * cameraX / 2;
+			rayDirY += player->dirY + player->planeY * cameraX / 2;
 			if(is_ray(rayDirX, player->posX, game->width) || \
-				is_ray(rayDirY, player->posY, game->width))
+						is_ray(rayDirY, player->posY, game->width))
 				continue ;
-			// printf("%f     %f     %f\n", rayDirX, rayDirY, cameraX);
-			my_mlx_pixel_put(game->minimap, rayDirX + player->posX, \
-					rayDirY + player->posY, 0x00FF0000);
-			
+			my_mlx_pixel_put(game->minimap, rayDirX + player->posX + PLAYER_SIZE / 2, \
+					rayDirY + player->posY + PLAYER_SIZE / 2, 0x00FF0000);
 		}
 		//   int mapX = (int)posX;z	
 		//   int mapY = (int)posY;

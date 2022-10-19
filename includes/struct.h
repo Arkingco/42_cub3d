@@ -6,14 +6,14 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 17:23:00 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/18 21:52:04 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/19 21:15:24 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
 
-#define PLAYER_SIZE 5
+#define PLAYER_SIZE 20
 
 typedef struct s_data
 {

@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 15:01:26 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/19 09:59:54 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/19 21:00:26 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ static void	set_player(t_game *game)
 	this_player = game->player;
 
 	// 이 부분은 따로 P의 위치를 찾는 로직을 넣어야함 	
-	this_player->posX = 20;
-	this_player->posY = 20;
+	this_player->posX = 100;
+	this_player->posY = 100;
 	//
 
 	this_player->dirX = -1;
