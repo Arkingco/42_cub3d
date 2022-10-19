@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 14:53:28 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/18 21:18:10 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/19 10:54:43 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@
 # define KEY_S					1
 # define KEY_D					2
 # define PX						64
+# define RIGHT_ARROR_KEY		123
+# define LEFT_ARROR_KEY		124
+
+
 
 int	key_press(int keycode, t_game *param);
 
