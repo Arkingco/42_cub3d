@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 13:04:54 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/19 21:58:26 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/20 21:39:55 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,47 +33,52 @@ static int	safe_open(char *file_path)
 	return (fd);
 }
 
-static t_num_iden	process_texture_path(t_map_info *map_info, char *str, \
-						t_num_iden num_iden)
+static void	init_variable(t_substr_info *info, char **str, int *flag)
 {
-	// 실패하면 ELEMENT_FAIL
-	char	*start;
-	char	*end;
-	int		flag;
+	info->start = NULL;
+	info->end = NULL;
+	*str = *str + 3;
+	*flag = 0;
+}
 
-	start = NULL;
-	end = NULL;
-	str = str + 3;
-	flag = 0;
-	while (*str)
+static t_identifier	process_texture_path(t_map_info *map_info, char *str, \
+						t_identifier num_iden)
+{
+	t_substr_info	info;
+	int				flag;
+
+	init_variable(&info, &str, &flag);
+	while (*str != '\n')
 	{
 		if (*str != ' ')
 		{
-			if (end != NULL)
-				return (ELEMENT_FAIL);
+			if (info.end != NULL)
+				print_error_str("Too many information!\n");
 			if (flag == 0)
-				start = str;
+				info.start = str;
 			flag = 1;
-			if (*(str + 1) == '\0' || *(str + 1) == ' ')
-				end = str;
+			if (*(str + 1) == '\n' || *(str + 1) == ' ')
+				info.end = str;
 		}
 		++str;
 	}
-	if (str != NULL)
+	if (info.start != NULL)
 		// map_info->texture_path[num_iden] = ft_substr();
+	else
+		print_error_str("There is not information!\n");
 	return (num_iden);
 }
 
-static t_num_iden	process_color(t_map_info *map_info, char *str, \
-						t_num_iden num_iden)
+static t_identifier	process_color(t_map_info *map_info, char *str, \
+						t_identifier num_iden)
 {
 	// 실패하면 ELEMENT_FAIL
 	return (num_iden);
 }
 
-static t_num_iden	what_is_identifier(t_map_info *map_info, char *str)
+static t_identifier	check_identifier(t_map_info *map_info, char *str)
 {
-	const t_identifier	arr[6] = {{"EA ", 3, EAST, process_texture_path}, \
+	const t_identifier_info	arr[6] = {{"EA ", 3, EAST, process_texture_path}, \
 									{"WE ", 3, WEST, process_texture_path}, \
 									{"SO ", 3, SOUTH, process_texture_path}, \
 									{"NO ", 3, NORTH, process_texture_path}, \
@@ -91,12 +96,15 @@ static t_num_iden	what_is_identifier(t_map_info *map_info, char *str)
 	return (ELEMENT_FAIL);
 }
 
-static t_num_iden 	parse_element(t_map_info *map_info, char *str)
+/**
+ * First character followd some space is identifier.
+ */
+static t_identifier 	parse_string(t_map_info *map_info, char *str)
 {
-	while (*str)
+	while (*str != '\n')
 	{
 		if (*str != ' ')
-			return (what_is_identifier(map_info, str));
+			return (check_identifier(map_info, str));
 		++str;
 	}
 	return (ELEMENT_FAIL);
@@ -106,7 +114,6 @@ static void	init_element(t_map_info *map_info, int fd)
 {
 	char		*str;
 
-	// texture 4개, color 2개, 이어져 있는 map 1개 총 7개이후 있는 요소는 에러
 	while (1)
 	{
 		str = get_next_line(fd);
@@ -114,7 +121,7 @@ static void	init_element(t_map_info *map_info, int fd)
 			break ;
 		if (*str != '\n')
 		{
-			if (parse_element(map_info, str) == ELEMENT_FAIL)
+			if (parse_string(map_info, str) == ELEMENT_FAIL)
 				print_error_str("Invalid identifier\n");
 		}
 		free(str);
@@ -129,7 +136,6 @@ void	init_map_info(t_map_info *map_info, int argc, char *file_path)
 	if (check_argc(argc))
 		print_error_str("Argument must be one\n");
 	fd = safe_open(file_path);
-	// element 값 데이터 가공
 	init_element(map_info, fd);
 	// map content 데이터 가공
 	close(fd);
