@@ -1,33 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   game_view.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/12 11:27:47 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/20 17:34:51 by kipark           ###   ########seoul.kr  */
+/*   Created: 2022/10/20 16:48:32 by kipark            #+#    #+#             */
+/*   Updated: 2022/10/21 19:36:50 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
-#include <unistd.h>
-#include <stdlib.h>
+#ifndef GAME_VIEW_H
+# define GAME_VIEW_H
 
-int	exit_window(void *not_use)
-{
-	(void)not_use;
-	exit(0);
-}
+# include "struct.h"
 
-void	print_error(int exit_flag)
-{
-	write(WRITE_ERROR_FD, "Error\n", 6);
-	exit(exit_flag);
-}
+void draw_game_view(t_game *game);
 
-void	print_error_str(int exit_flag, char *str)
-{
-	write(WRITE_ERROR_FD, str, get_column_length(str));
-	exit(exit_flag);
-}
+#endif

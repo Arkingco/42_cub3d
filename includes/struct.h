@@ -6,14 +6,23 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 17:23:00 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/19 21:15:24 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/21 20:16:57 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
 
-#define PLAYER_SIZE 20
+#define PLAYER_SIZE 5
+
+typedef enum e_draw_color
+{
+	COLOR_RED = 0x00FF0000,
+	COLOR_BLUE = 0x000000FF,
+	COLOR_BLACK = 0x00000000,
+	COLOR_PINK = 0x00FF00FF,
+	COLOR_ORANGE = 0x00DF7401
+} t_draw_color;
 
 typedef struct s_data
 {
@@ -47,9 +56,29 @@ typedef struct s_game
 	void		*mlx_win;
 	int			width;
 	int			height;
+	int			mini_width;
+	int			mini_height;
 	t_player	*player;
 	t_data		*minimap;
+	t_data		*game_view;
 }	t_game;
 
+typedef struct s_dda
+{
+	int		mapX;
+	int		mapY;
+	double	sideDistX;
+	double	sideDistY;
+	double	perpWallDist;
+	double	deltaDistX;
+	double	deltaDistY;
+	int		stepX;
+	int		stepY;
+	int		hit;
+	int		side;
+	int		lineHeight;
+	int		drawStart;
+	int		drawEnd;
+}	t_dda;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 14:57:05 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/14 17:00:48 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/21 16:19:32 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ char	**parse(t_list_so_long **list_head, char **argv)
 	check_ber_file(argv[1]);
 	set_parsing_head(list_head, argv);
 	map = set_head_to_char(*list_head);
-	if (parsed_str_error_check(map))
-		print_error(1);
+	// if (parsed_str_error_check(map))
+	// 	print_error(1);
 	return (map);
 }

@@ -6,7 +6,7 @@
 #    By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/27 15:13:41 by kipark            #+#    #+#              #
-#    Updated: 2022/10/18 21:37:45 by kipark           ###   ########seoul.kr   #
+#    Updated: 2022/10/21 14:49:54 by kipark           ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ DIR_EVENT					:=	$(DIR_SRCS)/event
 DIR_PARSER					:=	$(DIR_SRCS)/parser
 DIR_ERROR					:=	$(DIR_SRCS)/error
 DIR_MINI_MAP				:=	$(DIR_SRCS)/mini_map
-
+DIR_GAME_VIEW				:=	$(DIR_SRCS)/game_view
 
 SRCS_MAIN					:=	main.c
 OJBS_MAIN					:=	$(addprefix $(DIR_OBJS)/, $(SRCS_MAIN))
@@ -61,11 +61,17 @@ SRCS_ERROR					:=	error.c
 OJBS_ERROR					:=	$(addprefix $(DIR_OBJS)/, $(SRCS_ERROR))
 SRCS_ERROR					:=	$(addprefix $(DIR_ERROR)/, $(SRCS_ERROR))
 
+SRCS_GAME_VIEW				:=	game_view.c
+OJBS_GAME_VIEW				:=	$(addprefix $(DIR_OBJS)/, $(SRCS_GAME_VIEW))
+SRCS_GAME_VIEW				:=	$(addprefix $(DIR_GAME_VIEW)/, $(SRCS_GAME_VIEW))
+
 SRCS						:=	$(SRCS_MAIN)			\
 								$(SRCS_PARSER)			\
 								$(SRCS_EVENT)			\
 								$(SRCS_ERROR)			\
-								$(SRCS_MINI_MAP)		
+								$(SRCS_MINI_MAP)		\
+								$(SRCS_GAME_VIEW)		
+								
 
 OBJS						:=	$(SRCS:.c=.o)
 
@@ -73,7 +79,8 @@ OBJS_SRCS					:= 	$(OJBS_MAIN)			\
 								$(OJBS_PARSER)			\
 								$(OJBS_EVENT)			\
 								$(OJBS_ERROR)			\
-								$(OJBS_MINI_MAP)		
+								$(OJBS_MINI_MAP)		\
+								$(OJBS_GAME_VIEW)		
 
 OBJS_OBJS					:=	$(OBJS_SRCS:.c=.o)
 

@@ -10,10 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
 #include "mlx.h"
+#include "cub3d.h"
+#include <stdio.h>
 
-#include<stdio.h>
 static void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
 	char	*dst;
@@ -22,8 +22,8 @@ static void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-void draw_minimap_pixel(t_data *mini_map, int y_pixel, \
-												int x_pixel, int color)
+void draw_minimap_pixel(t_data *mini_map, int x_pixel, \
+												int y_pixel, int color)
 {
 	int i;
 	int j;
@@ -34,7 +34,7 @@ void draw_minimap_pixel(t_data *mini_map, int y_pixel, \
 		j = x_pixel;
 		while (j < x_pixel + 20)
 		{
-			my_mlx_pixel_put(mini_map, i, j, color);
+			my_mlx_pixel_put(mini_map, j, i, color);
 			++j; 
 		}
 		++i;
@@ -58,9 +58,9 @@ static void draw_map(t_data *mini_map, char **map)
 			x_pixel = j * 20;
 
 			if (map[i][j] == '0')
-				draw_minimap_pixel(mini_map, y_pixel, x_pixel, 0x00000000);
-			if (map[i][j] == '1' || map[i][j] == 'P' )
-				draw_minimap_pixel(mini_map, y_pixel, x_pixel, 0x000FF0FF);
+				draw_minimap_pixel(mini_map, x_pixel, y_pixel, COLOR_BLACK);
+			else if (map[i][j] == '1' || map[i][j] == 'P' )
+				draw_minimap_pixel(mini_map, x_pixel, y_pixel, COLOR_ORANGE);
 			++j;
 		}
 		++i;
@@ -80,8 +80,8 @@ void draw_player(t_game *game)
 		j = 0;
 		while (j < PLAYER_SIZE)
 		{
-			my_mlx_pixel_put(game->minimap, this_player->posX + j, \
-											this_player->posY + i, 0x00FF0000);
+			my_mlx_pixel_put(game->minimap, this_player->posX * 20 + j, \
+											this_player->posY * 20 + i, COLOR_RED);
 			++j;
 		}
 		++i;
@@ -89,12 +89,9 @@ void draw_player(t_game *game)
 }
 
 #include <math.h>
-int is_ray(double ray_dir, double pos, int max_size)
+int is_ray(double ray_size, int max_size)
 {
-	double ret;
-
-	ret = ray_dir + pos;
-	if ((int)ret < 0 || ret > max_size)
+	if (ray_size < 0 || ray_size > max_size)
 		return (1);
 	return (0);
 }
@@ -104,50 +101,24 @@ void draw_ray(t_game *game)
 	t_player *player;
 
 	player = game->player;
-	printf("start \n");
-	for(int x = 0; x <= 6; x++)
+	for(int x = 0; x <= 60; x++)
 	{
-		//calculate ray position and direction
-		double cameraX = 2 * x / (double)6 - 1;
+		double cameraX = 2 * x / (double)60 - 1;
 		double rayDirX = 0;
 		double rayDirY = 0;
 		rayDirX = player->dirX + player->planeX * cameraX / 2;
 		rayDirY = player->dirY + player->planeY * cameraX / 2;
-		printf("ray x : %f  y : %f\n", rayDirX, rayDirY);
-		// printf("ray pow \n");
-		for (int y=0; y<game->height; y++)
+		for (int y=0; y<game->mini_height * 30; y++)
 		{
 			rayDirX += player->dirX + player->planeX * cameraX / 2;
 			rayDirY += player->dirY + player->planeY * cameraX / 2;
-			if(is_ray(rayDirX, player->posX, game->width) || \
-						is_ray(rayDirY, player->posY, game->width))
+			if(is_ray(rayDirX + (player->posX * 20) + PLAYER_SIZE / 2, game->mini_width * 20) || \
+				is_ray(rayDirY + (player->posY * 20) + PLAYER_SIZE / 2, game->mini_height * 20))
 				continue ;
-			my_mlx_pixel_put(game->minimap, rayDirX + player->posX + PLAYER_SIZE / 2, \
-					rayDirY + player->posY + PLAYER_SIZE / 2, 0x00FF0000);
+			my_mlx_pixel_put(game->minimap, rayDirX + (player->posX * 20) + PLAYER_SIZE / 2, \
+					rayDirY + (player->posY * 20) + PLAYER_SIZE / 2, 0x00FF0000);
 		}
-		//   int mapX = (int)posX;z	
-		//   int mapY = (int)posY;
-
-		//   //length of ray from current position to next x or y-side
-		//   double sideDistX;
-		//   double sideDistY; 	
-
-		//    //length of ray from one x or y-side to next x or y-side
-		//   double deltaDistX = fabs(1 / rayDirX);
-		//   double deltaDistY = fabs(1 / rayDirY);
-		//   double perpWallDist;
-
-		//   //what direction to step in x or y-direction (either +1 or -1)
-		//   int stepX;
-		//   int stepY;
-
-		//   int hit = 0; //was there a wall hit?
-		//   int side; //was a NS or a EW wall hit?
-
 	}
-	// double time = 0; //time of current frame
-	// double oldTime = 0; //time of previous frame
-	  
 }
 
 void draw_mini_map(t_game *game)
