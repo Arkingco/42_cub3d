@@ -4,10 +4,9 @@ C 224,2,2
 SO ./path_to_the_south_texture
 WE           ./path_to_the_west_texture
 
-NO  .
 F 220,100,0
 
-
+WE           ./path_to_the_west_texture
 
 
 
