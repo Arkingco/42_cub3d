@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:27:47 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/20 21:35:43 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/22 18:03:04 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	print_error_str(char *str)
 {
 	ssize_t	ret;
 
-	write(WRITE_ERROR_FD, "ERROR\n", ft_strlen("ERROR\n"));
+	ret = write(WRITE_ERROR_FD, "ERROR\n", ft_strlen("ERROR\n"));
 	if (ret == -1)
 		perror("cub3d :");
 	if (str != NULL)

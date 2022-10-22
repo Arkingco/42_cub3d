@@ -1,11 +1,14 @@
+C 224,2,2
 
 
-NO     ./path_to_the_north_texture a
 SO ./path_to_the_south_texture
-WE ./path _to_the_west_texture
-EA ./path_to_the_east_texture
+WE           ./path_to_the_west_texture
 
-
+NO  .
 F 220,100,0
-C 225,30,0
-q
+
+
+
+
+
+EA ./path_to_the_east_texture

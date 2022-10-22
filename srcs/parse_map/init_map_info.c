@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 13:04:54 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/21 19:27:49 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/22 20:33:43 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static t_identifier	process_texture_path(t_map_info *map_info, char *str, \
 	}
 	if (info.start != NULL)
 		map_info->texture_path[num_iden] \
-			= ft_substr(info.start, 0, info.end - info.start);
+			= ft_substr(info.start, 0, (info.end - info.start) + 1);
 	else
 		print_error_str("There is not information!\n");
 	return (num_iden);
@@ -102,26 +102,38 @@ static size_t	count_comma(char *str)
 	return (cnt);
 }
 
+static void	check_0_to_255(int num)
+{
+	if (num < 0 || num > 255)
+		print_error_str("Invalid nubmer!\n");
+}
+
 static void	get_color(t_map_info *map_info, t_identifier num_iden, char *str)
 {
 	char			**arr_rgb;
 	t_color			color;
+	int				num;
 
 	color = RED;
 	arr_rgb = ft_split(str, ',');
-	while (arr_rgb)
+	while (*arr_rgb)
 	{
+		num = cub3d_atoi(*arr_rgb);
+		if (num == -1)
+			print_error_str("Invalid number!\n");
+		check_0_to_255(num);
 		if (num_iden == FLOOR)
-			map_info->floor[color] = cub3d_atoi(*arr_rgb);
+			map_info->floor[color] = num;
 		else
-			map_info->ceilling[color] = cub3d_atoi(*arr_rgb);
-		
+			map_info->ceiling[color] = num;
 		++color;
 		++arr_rgb;
 	}
+	if (color != 3)
+		print_error_str("Invalid information!\n");
 }
 
-/**
+/*
  * Format is [  "F or C"  R,G,B  ]
  */
 static t_identifier	process_color(t_map_info *map_info, char *str, \
@@ -138,7 +150,7 @@ static t_identifier	process_color(t_map_info *map_info, char *str, \
 	if (cnt_comma == 2)
 		get_color(map_info, num_iden, str);
 	else
-		print_error_str("Information is invalid!\n");
+		print_error_str("Invalid information!\n");
 	return (num_iden);
 }
 
@@ -162,7 +174,17 @@ static t_identifier	check_identifier(t_map_info *map_info, char *str)
 	return (ELEMENT_FAIL);
 }
 
-/**
+static void	change_eol_to_nul(char *str)
+{
+	while (*str)
+	{
+		if (*str == '\n')
+			*str = '\0';
+		++str;
+	}
+}
+
+/*
  * First word followd zero or some space is identifier.
  */
 static t_identifier 	parse_string(t_map_info *map_info, char *str)
@@ -170,18 +192,17 @@ static t_identifier 	parse_string(t_map_info *map_info, char *str)
 	t_identifier	identifier;
 
 	identifier = ELEMENT_FAIL;
+	change_eol_to_nul(str);
 	while (*str)
 	{
-		if (*str == '\n')
-			*str = '\0';
-		else if (*str != ' ')
-			identifier = check_identifier(map_info, str);
+		if (*str != ' ')
+			return (check_identifier(map_info, str));
 		++str;
 	}
 	return (identifier);
 }
 
-/**
+/*
  * If first character is not eol, that identifier will be checked.
  */
 static void	init_element(t_map_info *map_info, int fd)
