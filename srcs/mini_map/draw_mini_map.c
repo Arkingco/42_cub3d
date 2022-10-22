@@ -56,7 +56,6 @@ static void draw_map(t_data *mini_map, char **map)
 		{
 			y_pixel = i * 20;
 			x_pixel = j * 20;
-
 			if (map[i][j] == '0')
 				draw_minimap_pixel(mini_map, x_pixel, y_pixel, COLOR_BLACK);
 			else if (map[i][j] == '1' || map[i][j] == 'P' )
@@ -80,8 +79,8 @@ void draw_player(t_game *game)
 		j = 0;
 		while (j < PLAYER_SIZE)
 		{
-			my_mlx_pixel_put(game->minimap, this_player->posX * 20 + j, \
-											this_player->posY * 20 + i, COLOR_RED);
+			my_mlx_pixel_put(game->minimap, this_player->posX * MINI_SIZE + j, \
+											this_player->posY * MINI_SIZE + i, COLOR_RED);
 			++j;
 		}
 		++i;
@@ -89,35 +88,43 @@ void draw_player(t_game *game)
 }
 
 #include <math.h>
-int is_ray(double ray_size, int max_size)
+int is_ray(double ray_point_X, double ray_point_Y, t_game *game)
 {
-	if (ray_size < 0 || ray_size > max_size)
-		return (1);
+	if (ray_point_X < 0 || ray_point_X > game->mini_width * MINI_SIZE || \
+			ray_point_Y < 0 || ray_point_Y > game->mini_height * MINI_SIZE  || \
+			(int)ray_point_X / MINI_SIZE < 0 || (int)ray_point_X / MINI_SIZE > game->mini_width - 1  ||
+			(int)ray_point_Y / MINI_SIZE < 0 || (int)ray_point_Y / MINI_SIZE > game->mini_height - 1 ||
+			game->map[(int)ray_point_Y / MINI_SIZE][(int)ray_point_X / MINI_SIZE] == '1')
+				return (1);
 	return (0);
 }
 
 void draw_ray(t_game *game)
 {
 	t_player *player;
-
+	
 	player = game->player;
-	for(int x = 0; x <= 60; x++)
+	for(int x = 0; x <= game->width; x++)
 	{
-		double cameraX = 2 * x / (double)60 - 1;
+		double cameraX = 2 * x / (double)game->width - 1;
 		double rayDirX = 0;
 		double rayDirY = 0;
-		rayDirX = player->dirX + player->planeX * cameraX / 2;
-		rayDirY = player->dirY + player->planeY * cameraX / 2;
-		for (int y=0; y<game->mini_height * 30; y++)
+		double ray_point_X;
+		double ray_point_Y;
+		for (int y=0; y<(int)(pow(game->mini_height, 2) + pow(game->mini_width, 2)) * 20; y++)
 		{
-			rayDirX += player->dirX + player->planeX * cameraX / 2;
-			rayDirY += player->dirY + player->planeY * cameraX / 2;
-			if(is_ray(rayDirX + (player->posX * 20) + PLAYER_SIZE / 2, game->mini_width * 20) || \
-				is_ray(rayDirY + (player->posY * 20) + PLAYER_SIZE / 2, game->mini_height * 20))
+			rayDirX += player->dirX + player->planeX * cameraX;
+			rayDirY += player->dirY + player->planeY * cameraX;
+			ray_point_X = rayDirX + (player->posX * MINI_SIZE) + PLAYER_SIZE / 2;
+			ray_point_Y = rayDirY + (player->posY * MINI_SIZE) + PLAYER_SIZE / 2;
+			if(is_ray(ray_point_X, ray_point_Y, game))
+			{
+				y = (int)(pow(game->mini_height, 2) + pow(game->mini_width, 2)) * 20;
 				continue ;
-			my_mlx_pixel_put(game->minimap, rayDirX + (player->posX * 20) + PLAYER_SIZE / 2, \
-					rayDirY + (player->posY * 20) + PLAYER_SIZE / 2, 0x00FF0000);
-		}
+			}
+			my_mlx_pixel_put(game->minimap, ray_point_X, \
+												ray_point_Y, 0x00FF0000);
+		}	
 	}
 }
 

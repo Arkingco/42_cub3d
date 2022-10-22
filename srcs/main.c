@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 15:01:26 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/21 20:26:27 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/22 18:59:29 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ static void set_game(t_game *game, char **map)
 	t_data *game_view;
 
 	// map 도 임의로 지정 해줘야함
-	game->width = 1200;
-	game->height = 900;
-	game->mini_width = 16;
+	game->width = 1500;
+	game->height = 1000;
+	game->mini_width = 50;
 	game->mini_height = 10;
 	game->map = map;
 	game->mlx = mlx_init();
@@ -49,13 +49,10 @@ static void	set_player(t_game *game)
 {
 	t_player *this_player;
 
-	this_player = game->player;
-
+	this_player = game->player; 
 	// 이 부분은 따로 P의 위치를 찾는 로직을 넣어야함 	
 	this_player->posX = 1.5;
 	this_player->posY = 1.5;
-	//
-
 	this_player->dirX = 1;
 	this_player->dirY = 0; //initial direction vector
 	this_player->planeX = 0.00;

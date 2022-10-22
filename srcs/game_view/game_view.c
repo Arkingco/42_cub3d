@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:47:34 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/21 21:08:11 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/22 19:06:07 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void draw_game_view(t_game *game)
 		 	dda.perpWallDist = (dda.mapX - player->posX + (1 - dda.stepX) / 2) / rayDirX;
 		else
 			dda.perpWallDist = (dda.mapY - player->posY + (1 - dda.stepY) / 2) / rayDirY;
-		dda.lineHeight = (int)(game->height / dda.perpWallDist / 2);
+		dda.lineHeight = (int)(game->height / dda.perpWallDist );
 		dda.drawStart = -(dda.lineHeight) / 2 + game->height / 2;
 		if (dda.drawStart < 0)
 			dda.drawStart = 0;

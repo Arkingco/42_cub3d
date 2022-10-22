@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 17:23:00 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/21 20:16:57 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/22 17:48:57 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define STRUCT_H
 
 #define PLAYER_SIZE 5
-
+#define MINI_SIZE 20
 typedef enum e_draw_color
 {
 	COLOR_RED = 0x00FF0000,

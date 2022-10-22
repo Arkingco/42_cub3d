@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 14:53:10 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/21 21:09:33 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/22 19:08:17 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ static void	rot_view(t_player *player, double rot_speed)
 	player->dirX = player->dirX * cos(rot_speed) - olddir * sin(rot_speed);
 	player->planeY = player->planeX * sin(rot_speed) + player->planeY * cos(rot_speed);
 	player->planeX = player->planeX * cos(rot_speed) - oldplane * sin(rot_speed);
-	printf("pos x: %f pos y:%f \n",player->posX, player->posY);
 	printf("dirX : %f   dirY : %f	planeX : %f	planeY : %f\n", player->dirX, player->dirY, player->planeX, player->planeY);
 }
 
@@ -46,9 +45,10 @@ static void move_key(t_game *game, double speed)
 	move_Y = player->dirY * speed;
 
 	printf("%d %d\n", (int)(player->posX + move_X), (int)(player->posY + move_Y));
-	// if (game->map[(int)(player->posX + move_X * 1.1)]\
-	// 				[(int)(player->posY + move_Y * 1.1)] == '1')
-	// 	return ;
+	printf("pos x: %f pos y:%f \n",player->posX, player->posY);
+	if (game->map[(int)(player->posY + move_Y * 1.1)]\
+					[(int)(player->posX + move_X * 1.1)] == '1')
+						return ;
 	player->posX += move_X;	
 	player->posY += move_Y;
 }
@@ -65,7 +65,7 @@ int	key_press(int keycode, t_game *game)
 	else if (keycode == KEY_A)
 		move_key(game, 0.1);
 	else if (keycode == KEY_D)
-		move_key(game, 0.-1);
+		move_key(game, -0.1);
 	else if (keycode == LEFT_ARROR_KEY)
 		rot_view(player, PI / 6);
 	else if (keycode == RIGHT_ARROR_KEY)
