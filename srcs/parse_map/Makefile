@@ -6,7 +6,7 @@
 #    By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/27 15:13:41 by kipark            #+#    #+#              #
-#    Updated: 2022/10/24 13:28:40 by jayoon           ###   ########.fr        #
+#    Updated: 2022/10/24 21:27:14 by jayoon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,10 +31,12 @@ DIR_LIBFT					:=	../../libft
 SRCS_MAIN					:=	main.c
 
 SRCS_PARSE_MAP				:=	init_map_info.c			\
-								cub3d_atoi.c \
-								init_element.c \
-								process_color.c \
-								process_texture_path.c
+								cub3d_atoi.c			\
+								init_element.c			\
+								process_color.c 		\
+								process_texture_path.c	\
+								init_map_content.c		\
+								safe_open.c
 
 SRCS_ERROR					:=	error.c
 
