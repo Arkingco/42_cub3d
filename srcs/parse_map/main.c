@@ -1,4 +1,3 @@
-
 #include "cub3d.h"
 #include "parse_map.h"
 
