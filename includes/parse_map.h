@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 10:58:52 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/24 13:22:56 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/24 16:42:33 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,12 @@ typedef struct s_substr_info
 	int		flag;
 }	t_substr_info;
 
+typedef enum e_gnl_flag
+{
+	GNL_NULL,
+	GNL_NOT_NULL
+}	t_gnl_flag;
+
 typedef struct s_map_info
 {
 	char	*texture_path[4];
@@ -68,7 +74,7 @@ typedef struct s_identifier_info
 
 void			init_map_info(t_map_info *param, int argc, char *file_path);
 int				cub3d_atoi(const char *str);
-void			init_element(t_map_info *map_info, int fd);
+size_t			init_element(t_map_info *map_info, int fd);
 t_identifier	process_color(t_map_info *map_info, char *str, \
 						t_identifier num_iden);
 t_identifier	process_texture_path(t_map_info *map_info, char *str, \

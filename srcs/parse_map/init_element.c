@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 13:10:49 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/24 13:29:12 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/24 16:30:27 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,17 +65,22 @@ static t_identifier	parse_string(t_map_info *map_info, char *str)
 /*
  * If first character is not eol, that identifier will be checked.
  */
-void	init_element(t_map_info *map_info, int fd)
+size_t	init_element(t_map_info *map_info, int fd)
 {
 	char	*str;
 	size_t	cnt_element;	
+	size_t	cnt_gnl;
 
 	cnt_element = 0;
+	cnt_gnl = 0;
 	while (1)
 	{
+		if (cnt_element == 6)
+			break ;
 		str = get_next_line(fd);
 		if (str == NULL)
 			break ;
+		++cnt_gnl;
 		if (*str != '\n')
 		{
 			if (parse_string(map_info, str) == ELEMENT_FAIL)
@@ -84,7 +89,6 @@ void	init_element(t_map_info *map_info, int fd)
 		}
 		free(str);
 		str = NULL;
-		if (cnt_element > 6)
-			break ;
 	}
+	return (cnt_gnl);
 }

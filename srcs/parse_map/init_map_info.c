@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 13:04:54 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/24 13:24:49 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/24 16:51:11 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void	init_map_info_to_initial_value(t_map_info *map_info)
 	}
 }
 
-static void	check_duplication(t_map_info *map_info)
+static int	check_element_parsing(t_map_info *map_info)
 {
 	size_t	i;
 	int		flag_fail;
@@ -68,24 +68,86 @@ static void	check_duplication(t_map_info *map_info)
 		}
 		++i;
 	}
-	if (flag_fail == 1)
-		print_error_str("Identifier is duplication!\n");
+	return (flag_fail);
+}
+
+static void	pass_element(size_t cnt_gnl, int temp_fd)
+{
+	size_t	i;
+	char	*str;
+
+	i = 0;
+	str = NULL;
+	while (cnt_gnl > i)
+	{
+		str = get_next_line(temp_fd);
+		free(str);
+		str = NULL;
+		++i;
+	}
+}
+
+static t_gnl_flag	pass_empty_line(int	temp_fd)
+{
+	char		*str;
+	t_gnl_flag	flag;	
+
+	while (1)
+	{
+		str = get_next_line(temp_fd);
+		if (str == NULL || *str != '\n')
+		{
+			if (str == NULL)
+				flag = GNL_NULL;
+			else
+				flag = GNL_NOT_NULL;
+			break ;
+		}
+		free(str);
+		str = NULL;
+	}
+	if (flag == GNL_NOT_NULL)
+	{
+		free(str);
+		str = NULL;
+	}
+	return (flag);
+}
+
+// static void	count_map_height(int tmep_fd)
+// {
+
+// }
+
+static void	init_map_content(t_map_info *map_info, int this_fd, \
+				char *file_path, size_t cnt_gnl)
+{
+	t_gnl_flag	gnl_flag;
+	int			temp_fd;
+
+	temp_fd = safe_open(file_path);
+	pass_element(cnt_gnl, temp_fd);
+	gnl_flag = pass_empty_line(temp_fd);
+	if (gnl_flag == GNL_NULL)
+		print_error_str("There is not a map!\n");
+	// count_map_height(temp_fd);
+	this_fd = 0;
+	map_info = NULL;
+	close(temp_fd);
 }
 
 void	init_map_info(t_map_info *map_info, int argc, char *file_path)
 {
-	int			fd;
+	size_t	cnt_gnl;
+	int		fd;
 
 	if (check_argc(argc))
 		print_error_str("Argument must be one\n");
 	fd = safe_open(file_path);
 	init_map_info_to_initial_value(map_info);
-	init_element(map_info, fd);
-	check_duplication(map_info);
-	// init_map_content(map_info, fd);
+	cnt_gnl = init_element(map_info, fd);
+	if (check_element_parsing(map_info))
+		print_error_str("There are not enough elements!\n");
+	init_map_content(map_info, fd, file_path, cnt_gnl);
 	close(fd);
 }
-
-	// 중복 없이 모든 식별자를 읽었는지 확인한다.
-	// 그렇다면 map_info의 path가 NULL이 아니다.
-	// ceiling과 floor의 모든 값이 -1이 아니다.
