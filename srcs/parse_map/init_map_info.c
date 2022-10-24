@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 13:04:54 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/24 16:51:11 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/24 17:06:02 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,10 +114,10 @@ static t_gnl_flag	pass_empty_line(int	temp_fd)
 	return (flag);
 }
 
-// static void	count_map_height(int tmep_fd)
-// {
-
-// }
+static void	count_map_height(int tmep_fd)
+{
+	size_t	
+}
 
 static void	init_map_content(t_map_info *map_info, int this_fd, \
 				char *file_path, size_t cnt_gnl)
@@ -130,7 +130,8 @@ static void	init_map_content(t_map_info *map_info, int this_fd, \
 	gnl_flag = pass_empty_line(temp_fd);
 	if (gnl_flag == GNL_NULL)
 		print_error_str("There is not a map!\n");
-	// count_map_height(temp_fd);
+	count_map_height(temp_fd);
+	//test
 	this_fd = 0;
 	map_info = NULL;
 	close(temp_fd);
