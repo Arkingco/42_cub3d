@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 10:58:52 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/24 21:27:30 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/25 21:05:15 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,6 @@ typedef enum e_color
 	BLUE
 }	t_color;
 
-/**
- * Not used
-typedef struct s_map_content
-{
-	char	**map;
-	size_t	width;
-	size_t	height;
-}	t_map_content;
- */
-
 typedef struct s_substr_info
 {
 	char	*start;
@@ -55,6 +45,16 @@ typedef enum e_gnl_flag
 	GNL_NULL,
 	GNL_NOT_NULL
 }	t_gnl_flag;
+
+typedef enum e_map_characters
+{
+	MAP_EMPTY = 1,
+	MAP_WALL = 1 << 1,
+	MAP_NORTH = 1 << 2,
+	MAP_SOUTH = 1 << 3,
+	MAP_EAST = 1 << 4,
+	MAP_WEST = 1 << 5
+}	t_map_characters;
 
 typedef struct s_map_info
 {
