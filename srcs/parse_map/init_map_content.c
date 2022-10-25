@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 21:22:01 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/25 18:24:17 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/25 20:10:29 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,31 +30,19 @@ static void	pass_element(size_t cnt_gnl, int temp_fd)
 	}
 }
 
-static t_gnl_flag	pass_empty_line(int temp_fd)
+static char	*pass_empty_line(int fd)
 {
 	char		*str;
-	t_gnl_flag	flag;
 
 	while (1)
 	{
-		str = get_next_line(temp_fd);
+		str = get_next_line(fd);
 		if (str == NULL || *str != '\n')
-		{
-			if (str == NULL)
-				flag = GNL_NULL;
-			else
-				flag = GNL_NOT_NULL;
 			break ;
-		}
 		free(str);
 		str = NULL;
 	}
-	if (flag == GNL_NOT_NULL)
-	{
-		free(str);
-		str = NULL;
-	}
-	return (flag);
+	return (str);
 }
 
 static size_t	count_map_height(int temp_fd)
@@ -89,11 +77,14 @@ static char	**init_temp_map(t_map_info *map_info, int this_fd)
 
 	i = 0;
 	temp_map = ft_safe_malloc(sizeof(char *) * (map_info->map_height + 1));
-	while (map_info->map_height > i)
+	str = pass_empty_line(this_fd);
+	while (1)
 	{
-		str = get_next_line(this_fd);
 		temp_map[i] = str;
 		++i;
+		if (map_info->map_height == i)
+			break ;
+		str = get_next_line(this_fd);
 	}
 	temp_map[map_info->map_height] = NULL;
 	return (temp_map);
@@ -103,19 +94,19 @@ static char	**init_temp_map(t_map_info *map_info, int this_fd)
 void	init_map_content(t_map_info *map_info, int this_fd, \
 				char *file_path, size_t cnt_gnl)
 {
-	t_gnl_flag	gnl_flag;
-	char		**temp_map;
-	int			temp_fd;
+	char	*str;
+	char	**temp_map;
+	int		temp_fd;
 
 	temp_fd = safe_open(file_path);
 	pass_element(cnt_gnl, temp_fd);
-	gnl_flag = pass_empty_line(temp_fd);
-	if (gnl_flag == GNL_NULL)
+	str = pass_empty_line(temp_fd);
+	if (str == NULL)
 		print_error_str("There is not a map!\n");
 	map_info->map_height = count_map_height(temp_fd);
-	gnl_flag = pass_empty_line(temp_fd);
+	str = pass_empty_line(temp_fd);
 	close(temp_fd);
-	if (gnl_flag == GNL_NOT_NULL)
+	if (str != NULL)
 		print_error_str("There must be not anything under the map!\n");
 	temp_map = init_temp_map(map_info, this_fd);
 	close(this_fd);

@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 10:58:52 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/24 16:42:33 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/24 21:27:30 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ typedef struct s_map_info
 	int		ceiling[3];
 	int		floor[3];
 	char	**map;
+	size_t	map_withd;
+	size_t	map_height;
 }	t_map_info;
 
 typedef struct s_identifier_info
@@ -79,5 +81,8 @@ t_identifier	process_color(t_map_info *map_info, char *str, \
 						t_identifier num_iden);
 t_identifier	process_texture_path(t_map_info *map_info, char *str, \
 						t_identifier num_iden);
+void			init_map_content(t_map_info *map_info, int this_fd, \
+					char *file_path, size_t cnt_gnl);
+int				safe_open(char *file_path);
 
 #endif
