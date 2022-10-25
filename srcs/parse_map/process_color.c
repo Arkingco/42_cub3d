@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 13:14:07 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/24 13:29:36 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/25 16:13:46 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,16 @@ static void	check_0_to_255(int num)
 static void	get_color(t_map_info *map_info, t_identifier num_iden, char *str)
 {
 	char			**arr_rgb;
+	size_t			i;
 	t_color			color;
 	int				num;
 
+	i = 0;
 	color = RED;
 	arr_rgb = ft_split(str, ',');
-	while (*arr_rgb)
+	while (arr_rgb[i])
 	{
-		num = cub3d_atoi(*arr_rgb);
+		num = cub3d_atoi(arr_rgb[i]);
 		if (num == -1)
 			print_error_str("Invalid number!\n");
 		check_0_to_255(num);
@@ -61,11 +63,12 @@ static void	get_color(t_map_info *map_info, t_identifier num_iden, char *str)
 			map_info->floor[color] = num;
 		else
 			map_info->ceiling[color] = num;
+		++i;
 		++color;
-		++arr_rgb;
 	}
 	if (color != 3)
 		print_error_str("Invalid information!\n");
+	ft_safe_free_two_dimentions_arr(arr_rgb);
 }
 
 /*

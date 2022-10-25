@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 13:04:54 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/24 21:25:58 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/25 18:08:42 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,4 @@ void	init_map_info(t_map_info *map_info, int argc, char *file_path)
 	if (check_element_parsing(map_info))
 		print_error_str("There are not enough elements!\n");
 	init_map_content(map_info, fd, file_path, cnt_gnl);
-	close(fd);
 }

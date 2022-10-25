@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 21:22:01 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/24 21:31:53 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/25 18:24:17 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ static void	pass_element(size_t cnt_gnl, int temp_fd)
 	}
 }
 
-static t_gnl_flag	pass_empty_line(int	temp_fd)
+static t_gnl_flag	pass_empty_line(int temp_fd)
 {
 	char		*str;
-	t_gnl_flag	flag;	
+	t_gnl_flag	flag;
 
 	while (1)
 	{
@@ -81,10 +81,30 @@ static size_t	count_map_height(int temp_fd)
 	return (height);
 }
 
+static char	**init_temp_map(t_map_info *map_info, int this_fd)
+{
+	char	**temp_map;
+	char	*str;
+	size_t	i;
+
+	i = 0;
+	temp_map = ft_safe_malloc(sizeof(char *) * (map_info->map_height + 1));
+	while (map_info->map_height > i)
+	{
+		str = get_next_line(this_fd);
+		temp_map[i] = str;
+		++i;
+	}
+	temp_map[map_info->map_height] = NULL;
+	return (temp_map);
+}
+
+#include <stdio.h>
 void	init_map_content(t_map_info *map_info, int this_fd, \
 				char *file_path, size_t cnt_gnl)
 {
 	t_gnl_flag	gnl_flag;
+	char		**temp_map;
 	int			temp_fd;
 
 	temp_fd = safe_open(file_path);
@@ -93,16 +113,25 @@ void	init_map_content(t_map_info *map_info, int this_fd, \
 	if (gnl_flag == GNL_NULL)
 		print_error_str("There is not a map!\n");
 	map_info->map_height = count_map_height(temp_fd);
-	/**
-	 * 맵 이후에 있는 개행, 붙어있지 않은 맵, 유효하지 않은 문자 검사
-	 * map content가 정상이라면 map_height만큼 malloc한 뒤 gnl 반환값 넣기
-	 * 가장 긴 문자열을 찾아 map_width에 넣고 height x width 크기의 배열 할당 받는다.
-	 * memset으로 공백 채우기
-	 * 이후 기존 map 을 넣기
-	 * 맵 구성 요소 검사
-	 */
-	//test
-	this_fd = 0;
-	map_info = NULL;
+	gnl_flag = pass_empty_line(temp_fd);
 	close(temp_fd);
+	if (gnl_flag == GNL_NOT_NULL)
+		print_error_str("There must be not anything under the map!\n");
+	temp_map = init_temp_map(map_info, this_fd);
+	close(this_fd);
+
+
+	size_t	i = 0;
+	while (temp_map[i])
+	{
+		printf("%s", temp_map[i]);
+		i++;
+	}
+	// map_info->map_withd = count_map_width(temp_map);
+	//free_temp_map()
+	/**
+	 * 가장 긴 width 구함
+	 * 0 1 E W S N 만 있는지 확인 (이것을 확인할 것이면 굳이 재귀적으로 도는 것이 좋나? 고민)
+	 * 구한 길이대로 이차원 배열 생성
+	 */
 }
