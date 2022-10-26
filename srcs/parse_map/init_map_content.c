@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 21:22:01 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/26 17:37:50 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/26 20:23:48 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ void	init_map_content(t_map_info *map_info, int this_fd, \
 	str = pass_empty_line(temp_fd);
 	if (str == NULL)
 		print_error_str("There is not a map!\n");
+	ft_safe_free(str);
 	map_info->map_height = get_cnt_map_height(temp_fd);
 	str = pass_empty_line(temp_fd);
 	close(temp_fd);
@@ -126,6 +127,7 @@ void	init_map_content(t_map_info *map_info, int this_fd, \
 	map_info->map_width = get_cnt_map_width(temp_map);
 	get_map(map_info, temp_map);
 	ft_safe_free_two_dimentions_arr(temp_map);
+	system("leaks cub3D");
 
 	//test
 	size_t	i = 0;
