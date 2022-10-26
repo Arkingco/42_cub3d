@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 13:04:54 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/25 18:08:42 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/26 11:38:58 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	init_map_info_to_initial_value(t_map_info *map_info)
 		}
 		++i;
 	}
-	map_info->map_withd = 0;
+	map_info->map_width = 0;
 	map_info->map_height = 0;
 }
 

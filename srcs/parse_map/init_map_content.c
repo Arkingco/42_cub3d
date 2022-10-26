@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 21:22:01 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/25 20:10:29 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/26 17:37:50 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,30 +45,6 @@ static char	*pass_empty_line(int fd)
 	return (str);
 }
 
-static size_t	count_map_height(int temp_fd)
-{
-	size_t	height;
-	char	*str;
-
-	height = 1;
-	str = NULL;
-	while (1)
-	{
-		str = get_next_line(temp_fd);
-		if (str == NULL || *str == '\n')
-			break ;
-		++height;
-		free(str);
-		str = NULL;
-	}
-	if (str != NULL)
-	{
-		free(str);
-		str = NULL;
-	}
-	return (height);
-}
-
 static char	**init_temp_map(t_map_info *map_info, int this_fd)
 {
 	char	**temp_map;
@@ -90,6 +66,43 @@ static char	**init_temp_map(t_map_info *map_info, int this_fd)
 	return (temp_map);
 }
 
+// static int	check_valid_character(char c, size_t y, size_t x)
+// {
+// 	if (c == '1')
+// 	{
+
+// 	}
+// }
+
+static void	get_map(t_map_info *map_info, char **temp_map)
+{
+	size_t	i;
+	size_t	j;
+
+	map_info->map = ft_safe_malloc(sizeof(char *) * (map_info->map_height + 1));
+	i = 0;
+	while (map_info->map_height > i)
+	{
+		j = 0;
+		map_info->map[i] = ft_safe_malloc(map_info->map_width + 1);
+		while (temp_map[i][j] != '\n' && temp_map[i][j] != '\0')
+		{
+			map_info->map[i][j] = temp_map[i][j];
+			// if (check_valid_character(map_info->map[i][j], i, j))
+			// 	print_error_str("Invalid character in the map!\n");
+			++j;
+		}
+		while (map_info->map_width > j)
+		{
+			map_info->map[i][j] = ' ';
+			++j;
+		}
+		map_info->map[i][j] = '\0';
+		++i;
+	}
+	map_info->map[i] = NULL;
+}
+
 #include <stdio.h>
 void	init_map_content(t_map_info *map_info, int this_fd, \
 				char *file_path, size_t cnt_gnl)
@@ -103,26 +116,29 @@ void	init_map_content(t_map_info *map_info, int this_fd, \
 	str = pass_empty_line(temp_fd);
 	if (str == NULL)
 		print_error_str("There is not a map!\n");
-	map_info->map_height = count_map_height(temp_fd);
+	map_info->map_height = get_cnt_map_height(temp_fd);
 	str = pass_empty_line(temp_fd);
 	close(temp_fd);
 	if (str != NULL)
 		print_error_str("There must be not anything under the map!\n");
 	temp_map = init_temp_map(map_info, this_fd);
 	close(this_fd);
+	map_info->map_width = get_cnt_map_width(temp_map);
+	get_map(map_info, temp_map);
+	ft_safe_free_two_dimentions_arr(temp_map);
 
-
+	//test
 	size_t	i = 0;
-	while (temp_map[i])
+	size_t	j = 0;
+	while (map_info->map[i])
 	{
-		printf("%s", temp_map[i]);
+		j = 0;
+		while (map_info->map[i][j])
+		{
+			write(1, &map_info->map[i][j], 1);
+			j++;
+		}
+		write(1, "\n", 1);
 		i++;
 	}
-	// map_info->map_withd = count_map_width(temp_map);
-	//free_temp_map()
-	/**
-	 * 가장 긴 width 구함
-	 * 0 1 E W S N 만 있는지 확인 (이것을 확인할 것이면 굳이 재귀적으로 도는 것이 좋나? 고민)
-	 * 구한 길이대로 이차원 배열 생성
-	 */
 }

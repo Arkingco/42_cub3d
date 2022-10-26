@@ -8,7 +8,7 @@ F 220,100,0
 SO ./path_to_the_south_texture
 
 
-C -8,30,0
+C 8,30,0
 WE ./path_to_the_west_texture
 
 

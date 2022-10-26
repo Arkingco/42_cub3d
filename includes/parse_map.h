@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 10:58:52 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/25 21:05:15 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/26 11:46:19 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ typedef enum e_map_characters
 	MAP_NORTH = 1 << 2,
 	MAP_SOUTH = 1 << 3,
 	MAP_EAST = 1 << 4,
-	MAP_WEST = 1 << 5
+	MAP_WEST = 1 << 5,
+	MAP_DIRECTION = MAP_NORTH | MAP_SOUTH | MAP_EAST | MAP_WEST
 }	t_map_characters;
 
 typedef struct s_map_info
@@ -62,7 +63,7 @@ typedef struct s_map_info
 	int		ceiling[3];
 	int		floor[3];
 	char	**map;
-	size_t	map_withd;
+	size_t	map_width;
 	size_t	map_height;
 }	t_map_info;
 
@@ -84,5 +85,7 @@ t_identifier	process_texture_path(t_map_info *map_info, char *str, \
 void			init_map_content(t_map_info *map_info, int this_fd, \
 					char *file_path, size_t cnt_gnl);
 int				safe_open(char *file_path);
+size_t			get_cnt_map_height(int temp_fd);
+size_t			get_cnt_map_width(char **map);
 
 #endif

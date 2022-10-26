@@ -6,7 +6,7 @@
 #    By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/27 15:13:41 by kipark            #+#    #+#              #
-#    Updated: 2022/10/24 21:27:14 by jayoon           ###   ########.fr        #
+#    Updated: 2022/10/26 11:02:03 by jayoon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,9 @@ SRCS_PARSE_MAP				:=	init_map_info.c			\
 								process_color.c 		\
 								process_texture_path.c	\
 								init_map_content.c		\
-								safe_open.c
+								safe_open.c				\
+								get_cnt_map_height.c	\
+								get_cnt_map_width.c
 
 SRCS_ERROR					:=	error.c
 
