@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 17:23:00 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/22 17:48:57 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/24 16:06:53 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,20 @@ typedef struct s_list_so_long
 {
 	char			*str;
 	struct s_list_so_long	*next;
-}				t_list_so_long;
+}	t_list_so_long;
+
+
+typedef struct s_texture
+{
+	void	*east;
+	t_data	*east_img;
+	void	*west;
+	t_data	*west_img;
+	void	*south;
+	t_data	*south_img;
+	void	*north;
+	t_data	*north_img;
+}	t_texture;
 
 typedef struct s_game
 {
@@ -61,10 +74,17 @@ typedef struct s_game
 	t_player	*player;
 	t_data		*minimap;
 	t_data		*game_view;
+	t_texture	*texture;
+	int			**draw_buffer;
+	int			**texture_color;
 }	t_game;
 
 typedef struct s_dda
 {
+	int		color;
+	double	cameraX;
+	double	rayDirX;
+	double	rayDirY;
 	int		mapX;
 	int		mapY;
 	double	sideDistX;

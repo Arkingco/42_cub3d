@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 14:53:10 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/22 19:08:17 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/24 14:03:51 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ static void move_key(t_game *game, double speed)
 
 	printf("%d %d\n", (int)(player->posX + move_X), (int)(player->posY + move_Y));
 	printf("pos x: %f pos y:%f \n",player->posX, player->posY);
-	if (game->map[(int)(player->posY + move_Y * 1.1)]\
-					[(int)(player->posX + move_X * 1.1)] == '1')
+	if (game->map[(int)(player->posY + move_Y * 1.2)]\
+					[(int)(player->posX + move_X * 1.2)] != '0')
 						return ;
 	player->posX += move_X;	
 	player->posY += move_Y;
