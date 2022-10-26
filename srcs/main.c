@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 15:01:26 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/14 17:44:49 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/17 20:17:46 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "error.h"
 #include "mlx.h"
 #include "minimap.h"
 #include "key.h"
@@ -24,7 +25,7 @@ void	my_mlx_pixel_pu2t(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-static void	game_start(char **map)
+int	main(int argc, char *argv[])
 {
 	void	*mlx;
 	void	*mlx_win;
@@ -68,7 +69,7 @@ int	main(int argc, char **argv)
 	char	**map;
 
 	if (argc != 2)
-		print_error_str(EXIT_ERROR_PLAG, "Error\nArguments not match\n");
+		print_error_str("Arguments not match\n");
 	str_head = NULL;
 	map = parse(&str_head, argv);
 	game_start(map);

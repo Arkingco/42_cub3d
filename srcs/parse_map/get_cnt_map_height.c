@@ -1,45 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   get_cnt_map_height.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/12 11:27:47 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/17 20:17:48 by jayoon           ###   ########.fr       */
+/*   Created: 2022/10/26 10:48:43 by jayoon            #+#    #+#             */
+/*   Updated: 2022/10/26 10:49:06 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
-#include <errno.h>
-#include "error.h"
 #include "libft.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
 
-int	exit_window(void *not_use)
+size_t	get_cnt_map_height(int temp_fd)
 {
-	(void)not_use;
-	exit(0);
-}
+	size_t	height;
+	char	*str;
 
-void	exit_perror(void)
-{
-	perror("Error\n");
-	exit(1);
-}
-
-void	print_error_str(char *str)
-{
-	ssize_t	ret;
-
-	write(WRITE_ERROR_FD, "ERROR\n", ft_strlen("ERROR\n"));
-	if (str != NULL)
-	{	
-		ret = write(WRITE_ERROR_FD, str, ft_strlen(str));
-		if (ret == -1)
-			perror("cub3d :");
+	height = 1;
+	str = NULL;
+	while (1)
+	{
+		str = get_next_line(temp_fd);
+		if (str == NULL || *str == '\n')
+			break ;
+		++height;
+		free(str);
+		str = NULL;
 	}
-	exit(1);
+	if (str != NULL)
+	{
+		free(str);
+		str = NULL;
+	}
+	return (height);
 }

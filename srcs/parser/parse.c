@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 14:57:05 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/14 17:00:48 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/17 20:17:49 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "error.h"
 #include "unistd.h"
 #include "stdlib.h"
 #include "fcntl.h"
@@ -22,14 +23,14 @@ static char	**set_head_to_char(t_list_so_long *list_head)
 
 	map = malloc(sizeof(char *) * get_list_head_row(list_head) + 1);
 	if (map == NULL)
-		print_error(1);
+		print_error_str(NULL);
 	idx = 0;
 	while (list_head != NULL)
 	{
 		map[idx] = malloc(sizeof(char) * \
 									get_list_head_colum(list_head->str) + 1);
 		if (map == NULL)
-			print_error(1);
+			print_error_str(NULL);
 		set_parsed_str(map[idx], list_head->str);
 		list_head = list_head->next;
 		idx++;
@@ -45,7 +46,7 @@ static void	head_append_node(t_list_so_long **list_head, char *gnl_return_str)
 
 	new_node = malloc(sizeof(t_list_so_long) * 1);
 	if (new_node == NULL)
-		print_error(1);
+		print_error_str(NULL);
 	new_node->str = so_long_strjoin(gnl_return_str);
 	new_node->next = NULL;
 	if (*list_head == NULL)
@@ -66,7 +67,7 @@ static void	set_parsing_head(t_list_so_long **list_head, char **argv)
 
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
-		print_error_str(1, "Error\nfile_not_found\n");
+		print_error_str("file_not_found\n");
 	while (1)
 	{
 		gnl_return_str = get_next_line(fd);
@@ -93,7 +94,7 @@ static void	check_ber_file(char *file_name)
 	while (idx < file_length)
 	{
 		if (file_name[idx] != ber_file[(idx + ber_file_length) - file_length])
-			print_error_str(1, "Error\nfile_is_not_.ber\n");
+			print_error_str("file_is_not_.ber\n");
 		idx++;
 	}
 }
@@ -107,6 +108,6 @@ char	**parse(t_list_so_long **list_head, char **argv)
 	set_parsing_head(list_head, argv);
 	map = set_head_to_char(*list_head);
 	if (parsed_str_error_check(map))
-		print_error(1);
+		print_error_str(NULL);
 	return (map);
 }

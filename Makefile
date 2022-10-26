@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+         #
+#    By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/27 15:13:41 by kipark            #+#    #+#              #
-#    Updated: 2022/10/14 17:10:52 by kipark           ###   ########seoul.kr   #
+#    Updated: 2022/10/17 20:14:38 by jayoon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME 						= cub3d
+NAME 						= cub3D
 
 CC							=	cc
 CFLAGS						=	-Wall -Wextra -Werror
@@ -33,7 +33,6 @@ DIR_OBJS					:=	./objs
 DIR_EVENT					:=	./event
 
 DIR_EVENT					:=	$(DIR_SRCS)/event
-DIR_PARSER					:=	$(DIR_SRCS)/parser
 DIR_ERROR					:=	$(DIR_SRCS)/error
 DIR_MINI_MAP				:=	$(DIR_SRCS)/mini_map
 
@@ -63,7 +62,7 @@ OJBS_ERROR					:=	$(addprefix $(DIR_OBJS)/, $(SRCS_ERROR))
 SRCS_ERROR					:=	$(addprefix $(DIR_ERROR)/, $(SRCS_ERROR))
 
 SRCS						:=	$(SRCS_MAIN)			\
-								$(SRCS_PARSER)			\
+								$(SRCS_PARSE_MAP)		\
 								$(SRCS_EVENT)			\
 								$(SRCS_ERROR)			\
 								$(SRCS_MINI_MAP)		

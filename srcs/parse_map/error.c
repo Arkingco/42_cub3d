@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:27:47 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/17 20:17:48 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/22 18:03:04 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+
+size_t	ft_strlen(const char *str)
+{
+	size_t	len;
+
+	len = 0;
+	while (*str)
+	{
+		++len;
+		++str;
+	}
+	return (len);
+}
 
 int	exit_window(void *not_use)
 {
@@ -34,7 +47,9 @@ void	print_error_str(char *str)
 {
 	ssize_t	ret;
 
-	write(WRITE_ERROR_FD, "ERROR\n", ft_strlen("ERROR\n"));
+	ret = write(WRITE_ERROR_FD, "ERROR\n", ft_strlen("ERROR\n"));
+	if (ret == -1)
+		perror("cub3d :");
 	if (str != NULL)
 	{	
 		ret = write(WRITE_ERROR_FD, str, ft_strlen(str));
