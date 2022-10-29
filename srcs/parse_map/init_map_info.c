@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 13:04:54 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/26 18:01:42 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/29 18:12:25 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ static void	init_map_info_to_initial_value(t_map_info *map_info)
 	size_t	i;
 
 	i = 0;
-	while (i < 4)
+	while (i < CNT_TEXTURE)
 	{
 		map_info->texture_path[i] = NULL;
-		if (i < 3)
+		if (i < CNT_COLOR)
 		{
 			map_info->ceiling[i] = -1;
 			map_info->floor[i] = -1;
@@ -49,11 +49,11 @@ static int	check_element_parsing(t_map_info *map_info)
 
 	i = 0;
 	flag_fail = 0;
-	while (i < 4)
+	while (i < CNT_TEXTURE)
 	{
 		if (map_info->texture_path[i] == NULL)
 			flag_fail = 1;
-		if (i < 3)
+		if (i < CNT_COLOR)
 		{
 			if (map_info->ceiling[i] == -1 || map_info->floor[i] == -1)
 				flag_fail = 1;
@@ -69,11 +69,12 @@ void	init_map_info(t_map_info *map_info, int argc, char *file_path)
 	int		fd;
 
 	if (check_argc(argc))
-		print_error_str("Argument must be one\n");
+		print_error_str(MSG_ERR_ARGS);
+	// .cub 확인
 	fd = safe_open(file_path);
 	init_map_info_to_initial_value(map_info);
 	cnt_gnl = init_element(map_info, fd);
 	if (check_element_parsing(map_info))
-		print_error_str("There are not enough elements!\n");
+		print_error_str(MSG_ERR_ELEMENT);
 	init_map_content(map_info, fd, file_path, cnt_gnl);
 }

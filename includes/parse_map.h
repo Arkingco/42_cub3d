@@ -6,12 +6,25 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 10:58:52 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/26 11:46:19 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/29 18:13:03 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSE_MAP
 # define PARSE_MAP
+
+# define CNT_TEXTURE			4
+# define CNT_COLOR				3
+
+# define CNT_IDENTIFIER			6
+
+# define CNT_WORD_OF_TEXTRUE	3
+# define CNT_WORD_OF_COLOR		2
+
+# define MSG_ERR_ARGS			"Argument must be one!\n"
+# define MSG_ERR_ELEMENT		"Invalid element!\n"
+# define MSG_ERR_IDNETIFIER		"Invalid identifier!\n"
+# define MSG_ERR_MAP			"Invalid map!\n"
 
 # include <stdlib.h>
 
