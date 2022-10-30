@@ -6,13 +6,17 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:27:47 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/20 17:34:51 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/26 20:35:38 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include <unistd.h>
+#include <errno.h>
+#include "error.h"
+#include "libft.h"
+#include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 int	exit_window(void *not_use)
 {
@@ -20,14 +24,22 @@ int	exit_window(void *not_use)
 	exit(0);
 }
 
-void	print_error(int exit_flag)
+void	exit_perror(void)
 {
-	write(WRITE_ERROR_FD, "Error\n", 6);
-	exit(exit_flag);
+	perror("Error\n");
+	exit(1);
 }
 
-void	print_error_str(int exit_flag, char *str)
+void	print_error_str(char *str)
 {
-	write(WRITE_ERROR_FD, str, get_column_length(str));
-	exit(exit_flag);
+	ssize_t	ret;
+
+	write(WRITE_ERROR_FD, "ERROR\n", ft_strlen("ERROR\n"));
+	if (str != NULL)
+	{	
+		ret = write(WRITE_ERROR_FD, str, ft_strlen(str));
+		if (ret == -1)
+			perror("cub3d :");
+	}
+	exit(1);
 }

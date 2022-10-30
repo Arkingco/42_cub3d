@@ -6,11 +6,11 @@
 #    By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/27 15:13:41 by kipark            #+#    #+#              #
-#    Updated: 2022/10/22 17:24:28 by kipark           ###   ########seoul.kr   #
+#    Updated: 2022/10/26 20:47:17 by kipark           ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
-NAME 						= cub3d
+NAME 						= cub3D
 
 CC							=	cc
 CFLAGS						=	-Wall -Wextra -Werror
@@ -30,13 +30,12 @@ DIR_SRCS					:=	./srcs
 DIR_INCS 					:=	./includes
 DIR_LIBFT					:=	./libft
 DIR_OBJS					:=	./objs
-DIR_EVENT					:=	./event
 
 DIR_EVENT					:=	$(DIR_SRCS)/event
-DIR_PARSER					:=	$(DIR_SRCS)/parser
 DIR_ERROR					:=	$(DIR_SRCS)/error
 DIR_MINI_MAP				:=	$(DIR_SRCS)/mini_map
 DIR_GAME_VIEW				:=	$(DIR_SRCS)/game_view
+DIR_PARSER					:=	$(DIR_SRCS)/parser
 
 SRCS_MAIN					:=	main.c
 OJBS_MAIN					:=	$(addprefix $(DIR_OBJS)/, $(SRCS_MAIN))
@@ -53,9 +52,9 @@ SRCS_EVENT					:=	key.c
 OJBS_EVENT					:=	$(addprefix $(DIR_OBJS)/, $(SRCS_EVENT))
 SRCS_EVENT					:=	$(addprefix $(DIR_EVENT)/, $(SRCS_EVENT))
 
-SRCS_MINI_MAP					:=	draw_mini_map.c
-OJBS_MINI_MAP					:=	$(addprefix $(DIR_OBJS)/, $(SRCS_MINI_MAP))
-SRCS_MINI_MAP					:=	$(addprefix $(DIR_MINI_MAP)/, $(SRCS_MINI_MAP))
+SRCS_MINI_MAP				:=	draw_mini_map.c
+OJBS_MINI_MAP				:=	$(addprefix $(DIR_OBJS)/, $(SRCS_MINI_MAP))
+SRCS_MINI_MAP				:=	$(addprefix $(DIR_MINI_MAP)/, $(SRCS_MINI_MAP))
 
 SRCS_ERROR					:=	error.c
 OJBS_ERROR					:=	$(addprefix $(DIR_OBJS)/, $(SRCS_ERROR))
@@ -66,9 +65,9 @@ OJBS_GAME_VIEW				:=	$(addprefix $(DIR_OBJS)/, $(SRCS_GAME_VIEW))
 SRCS_GAME_VIEW				:=	$(addprefix $(DIR_GAME_VIEW)/, $(SRCS_GAME_VIEW))
 
 SRCS						:=	$(SRCS_MAIN)			\
-								$(SRCS_PARSER)			\
 								$(SRCS_EVENT)			\
 								$(SRCS_ERROR)			\
+								$(SRCS_PARSER)			\
 								$(SRCS_MINI_MAP)		\
 								$(SRCS_GAME_VIEW)		
 								
@@ -76,9 +75,9 @@ SRCS						:=	$(SRCS_MAIN)			\
 OBJS						:=	$(SRCS:.c=.o)
 
 OBJS_SRCS					:= 	$(OJBS_MAIN)			\
-								$(OJBS_PARSER)			\
 								$(OJBS_EVENT)			\
 								$(OJBS_ERROR)			\
+								$(OJBS_PARSER)			\
 								$(OJBS_MINI_MAP)		\
 								$(OJBS_GAME_VIEW)		
 

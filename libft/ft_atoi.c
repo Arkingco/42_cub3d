@@ -3,20 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 20:51:39 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/24 20:04:40 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/21 18:50:12 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-static void	init_utils(int *p_res, int *p_sign)
-{
-	*p_res = 0;
-	*p_sign = 1;
-}
 
 static const char	*pass_space(const char *str)
 {
@@ -51,7 +45,8 @@ int	ft_atoi(const char *str)
 	int		res;
 	int		sign;
 
-	init_utils(&res, &sign);
+	res = 0;
+	sign = 1;
 	str = pass_space(str);
 	str = check_sign(str, &sign);
 	make_atoi(str, &res);
