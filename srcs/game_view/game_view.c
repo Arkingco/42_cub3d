@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:47:34 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/26 16:25:47 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/30 18:17:32 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@ static void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-int set_view_color(t_game *game, t_dda *dda)
+int set_view_color(t_game *game, t_ray_casting *rc)
 {
 	int	color;
 
 	color = 0;
-	if (game->map[dda->mapY][dda->mapX] == '1')
+	if (game->map[rc->mapY][rc->mapX] == '1')
 		color = COLOR_BLUE;
-	if (dda->side == 1)
+	if (rc->side == 1)
 			color = color / 2;
 	return (color);
 }
@@ -63,114 +63,126 @@ static void draw_background(t_game *game, \
 	}
 }
 
-static void set_dda_algorithm(t_dda *dda, t_player *player, t_game *game, int x)
+static void set_dda_algorithm(t_ray_casting *rc, t_player *player, t_game *game, int x)
 {
-	dda->cameraX = 2 * x / (double)game->width - 1;
-	dda->rayDirX = player->dirX + player->planeX * dda->cameraX;
-	dda->rayDirY = player->dirY + player->planeY * dda->cameraX;
-	dda->mapX = (int)player->posX;
-	dda->mapY = (int)player->posY;
-	dda->deltaDistX = fabs(1 / dda->rayDirX);
-	dda->deltaDistY = fabs(1 / dda->rayDirY);
-	printf("%f %f \n", dda->deltaDistX, dda->deltaDistY);
-	dda->hit = 0;
-	if (dda->rayDirX < 0)
+	rc->cameraX = 2 * x / (double)game->width - 1;
+	rc->rayDirX = player->dirX + player->planeX * rc->cameraX;
+	rc->rayDirY = player->dirY + player->planeY * rc->cameraX;
+	rc->mapX = (int)player->posX;
+	rc->mapY = (int)player->posY;
+	rc->deltaDistX = fabs(1 / rc->rayDirX);
+	rc->deltaDistY = fabs(1 / rc->rayDirY);
+	rc->hit = 0;
+	if (rc->rayDirX < 0)
 	{
-		dda->stepX = -1;
-		dda->sideDistX = (player->posX - dda->mapX) * dda->deltaDistX;
+		rc->stepX = -1;
+		rc->sideDistX = (player->posX - rc->mapX) * rc->deltaDistX;
 	}
 	else
 	{
-		dda->stepX = 1;
-		dda->sideDistX = (dda->mapX + 1.0 - player->posX) * dda->deltaDistX;
+		rc->stepX = 1;
+		rc->sideDistX = (rc->mapX + 1.0 - player->posX) * rc->deltaDistX;
 	}
-	if (dda->rayDirY < 0)
+	if (rc->rayDirY < 0)
 	{
-		dda->stepY = -1;
-		dda->sideDistY = (player->posY - dda->mapY) * dda->deltaDistY;
+		rc->stepY = -1;
+		rc->sideDistY = (player->posY - rc->mapY) * rc->deltaDistY;
 	}
 	else
 	{
-		dda->stepY = 1;
-		dda->sideDistY = (dda->mapY + 1.0 - player->posY) * dda->deltaDistY;
+		rc->stepY = 1;
+		rc->sideDistY = (rc->mapY + 1.0 - player->posY) * rc->deltaDistY;
 	}
 }
 
-static void run_dda_algorithm(t_game *game, t_dda *dda)
+static void run_dda_algorithm(t_game *game, t_ray_casting *rc)
 {
-	while (dda->hit == 0)
+	while (rc->hit == 0)
 	{
-		if (dda->sideDistX < dda->sideDistY)
+		if (rc->sideDistX < rc->sideDistY)
 		{
-			dda->sideDistX += dda->deltaDistX;
-			dda->mapX += dda->stepX;
-			dda->side = 0;
+			rc->sideDistX += rc->deltaDistX;
+			rc->mapX += rc->stepX;
+			rc->side = 0;
 		}
 		else
 		{
-			dda->sideDistY += dda->deltaDistY;
-			dda->mapY += dda->stepY;
-			dda->side = 1;
+			rc->sideDistY += rc->deltaDistY;
+			rc->mapY += rc->stepY;
+			rc->side = 1;
 		}
-		if (game->map[dda->mapY][dda->mapX] > '0') dda->hit = 1;
+		if (game->map[rc->mapY][rc->mapX] > '0') rc->hit = 1;
 	}
 }
 
-static void set_draw_length(t_game *game, t_dda *dda, t_player *player)
+static void set_draw_length(t_game *game, t_ray_casting *rc, t_player *player)
 {
-	if (dda->side == 0)
-		 	dda->perpWallDist = (dda->mapX - player->posX + (1 - dda->stepX) / 2) / dda->rayDirX;
+	if (rc->side == 0)
+		 	rc->perpWallDist = (rc->mapX - player->posX + (1 - rc->stepX) / 2) / rc->rayDirX;
 	else
-		dda->perpWallDist = (dda->mapY - player->posY + (1 - dda->stepY) / 2) / dda->rayDirY;
-	dda->lineHeight = (int)(game->height / dda->perpWallDist );
-	dda->drawStart = -(dda->lineHeight) / 2 + game->height / 2;
-	if (dda->drawStart < 0)
-		dda->drawStart = 0;
-	dda->drawEnd = dda->lineHeight / 2 + game->height / 2;
-	if (dda->drawEnd >= game->height)
-		dda->drawEnd = game->height - 1;
+		rc->perpWallDist = (rc->mapY - player->posY + (1 - rc->stepY) / 2) / rc->rayDirY;
+	rc->lineHeight = (int)(game->height / rc->perpWallDist );
+	rc->drawStart = -(rc->lineHeight) / 2 + game->height / 2;
+	if (rc->drawStart < 0)
+		rc->drawStart = 0;
+	rc->drawEnd = rc->lineHeight / 2 + game->height / 2;
+	if (rc->drawEnd >= game->height)
+		rc->drawEnd = game->height - 1;
+}
+
+static int set_texture(t_ray_casting *rc)
+{
+	if (rc->side == 1)
+	{
+		if (rc->rayDirY > 0)
+			return (2);
+		else
+			return (3);
+	}
+	else
+	{
+		if (rc->rayDirX > 0)
+			return (0);
+		else
+			return (1);
+	}
 }
 
 void draw_game_view(t_game *game)
 {
 	t_player *player;
-	t_dda dda;
+	t_ray_casting rc;
 
 	player = game->player;
 
 	draw_background(game, COLOR_PINK, COLOR_BLACK);
 	for(int x = 0; x < game->width; x++)
 	{
-		set_dda_algorithm(&dda, player, game, x);
-		run_dda_algorithm(game, &dda);
-		set_draw_length(game, &dda, player);
+		set_dda_algorithm(&rc, player, game, x);
+		run_dda_algorithm(game, &rc);
+		set_draw_length(game, &rc, player);
 
-		//texturing calculations
-		int texNum = game->map[dda.mapY][dda.mapX] - '1'; //1 subtracted from it so that texture 0 can be used!
+		if (rc.side == 0)
+			rc.wallX = player->posY + rc.perpWallDist * rc.rayDirY;
+		else
+			rc.wallX = player->posX + rc.perpWallDist * rc.rayDirX;
+		rc.wallX = rc.wallX - floor((rc.wallX));
 
-		//calculate value of wallX
-		double wallX; //where exactly the wall was hit
-		if (dda.side == 0) wallX = player->posY + dda.perpWallDist * dda.rayDirY;
-		else				wallX = player->posX + dda.perpWallDist * dda.rayDirX;
-		wallX -= floor((wallX));
+		rc.texX = (double)rc.wallX * (double)TEX_WIDTH;
+		if(rc.side == 0 && rc.rayDirX > 0) rc.texX = TEX_WIDTH - rc.texX - 1;
+		if(rc.side == 1 && rc.rayDirY < 0) rc.texX = TEX_WIDTH - rc.texX - 1;
 
-		//x coordinate on the texture
-		int texX = (int)wallX * (double)TEX_WIDTH;
-		if(dda.side == 0 && dda.rayDirX > 0) texX = TEX_WIDTH - texX - 1;
-		if(dda.side == 1 && dda.rayDirY < 0) texX = TEX_WIDTH - texX - 1;
-
-		double step = 1.0 * TEX_HEIGHT / dda.lineHeight;
-      // Starting texture coordinate
-		double texPos = (dda.drawStart - game->height / 2 + dda.lineHeight / 2) * step;
-		for(int y = dda.drawStart; y<dda.drawEnd; y++)
+		rc.step = 1.0 * TEX_HEIGHT / rc.lineHeight;
+		rc.texPos = (rc.drawStart - game->height / 2 + rc.lineHeight / 2) * rc.step;
+		for(int y = rc.drawStart; y<rc.drawEnd; y++)
 		{
-			// Cast the texture coordinate to integer, and mask with (texHeight - 1) in case of overflow
-			int texY = (int)texPos & (TEX_HEIGHT - 1);
-			texPos += step;
-			dda.color = game->texture_color[texNum][TEX_HEIGHT * texY + texX];
-			//make color darker for y-sides: R, G and B byte each divided through two with a "shift" and an "and"
-			if(dda.side == 1) dda.color = (dda.color >> 1) & 8355711;
-			game->draw_buffer[y][x] = dda.color;
+			int texY = (int)rc.texPos & (TEX_HEIGHT - 1);
+			rc.texPos += rc.step;
+			
+			rc.color = game->texture_color[set_texture(&rc)]\
+								[TEX_HEIGHT * texY + (TEX_WIDTH - rc.texX - 1)];
+			if(rc.side == 1) rc.color = (rc.color >> 1) & 8355711;
+			game->draw_buffer[y][x] = rc.color;
 			my_mlx_pixel_put(game->game_view, x, y, game->draw_buffer[y][x]);
 		}
 	}

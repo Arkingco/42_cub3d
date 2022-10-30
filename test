@@ -1,0 +1,21 @@
+cc -Wall -Wextra -Werror -I ./libft -I ./includes  -c srcs/main.c -o srcs/main.o
+mv srcs/main.o /Users/kipark/42_cub3d/objs
+cc -Wall -Wextra -Werror -I ./libft -I ./includes  -c srcs/event/key.c -o srcs/event/key.o
+mv srcs/event/key.o /Users/kipark/42_cub3d/objs
+cc -Wall -Wextra -Werror -I ./libft -I ./includes  -c srcs/error/error.c -o srcs/error/error.o
+mv srcs/error/error.o /Users/kipark/42_cub3d/objs
+cc -Wall -Wextra -Werror -I ./libft -I ./includes  -c srcs/parser/error_utils.c -o srcs/parser/error_utils.o
+mv srcs/parser/error_utils.o /Users/kipark/42_cub3d/objs
+cc -Wall -Wextra -Werror -I ./libft -I ./includes  -c srcs/parser/parse_error.c -o srcs/parser/parse_error.o
+mv srcs/parser/parse_error.o /Users/kipark/42_cub3d/objs
+cc -Wall -Wextra -Werror -I ./libft -I ./includes  -c srcs/parser/parse_utils.c -o srcs/parser/parse_utils.o
+mv srcs/parser/parse_utils.o /Users/kipark/42_cub3d/objs
+cc -Wall -Wextra -Werror -I ./libft -I ./includes  -c srcs/parser/parse.c -o srcs/parser/parse.o
+mv srcs/parser/parse.o /Users/kipark/42_cub3d/objs
+cc -Wall -Wextra -Werror -I ./libft -I ./includes  -c srcs/mini_map/draw_mini_map.c -o srcs/mini_map/draw_mini_map.o
+mv srcs/mini_map/draw_mini_map.o /Users/kipark/42_cub3d/objs
+cc -Wall -Wextra -Werror -I ./libft -I ./includes  -c srcs/game_view/game_view.c -o srcs/game_view/game_view.o
+mv srcs/game_view/game_view.o /Users/kipark/42_cub3d/objs
+cc -Wall -Wextra -Werror -L./libft -lft -L./minilibx_opengl_20191021 -lmlx -framework OpenGL -framework AppKit ./objs/main.o ./objs/key.o ./objs/error.o ./objs/error_utils.o ./objs/parse_error.o ./objs/parse_utils.o ./objs/parse.o ./objs/draw_mini_map.o ./objs/game_view.o -o cub3D
+./cub3d ./map/test_map.ber
+map pointer start ! : 0x7f9a06c0e310 

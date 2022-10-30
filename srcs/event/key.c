@@ -6,20 +6,19 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 14:53:10 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/24 14:03:51 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/30 18:28:45 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "key.h"
-#include "cub3d.h"
 #include "mlx.h"
-#include <math.h>
+#include "cub3d.h"
 #include "minimap.h"
 #include "game_view.h"
+#include <math.h>
 #include <stdlib.h>
 
-#include <stdio.h>
-static void	rot_view(t_player *player, double rot_speed)
+static void	rot_view(t_player *player, double rot)
 {
 	double	olddir;
 	double	oldplane;
@@ -27,30 +26,48 @@ static void	rot_view(t_player *player, double rot_speed)
 
 	olddir = player->dirY;
 	oldplane = player->planeY;
-	player->dirY = player->dirX * sin(rot_speed) + player->dirY * cos(rot_speed);
-	player->dirX = player->dirX * cos(rot_speed) - olddir * sin(rot_speed);
-	player->planeY = player->planeX * sin(rot_speed) + player->planeY * cos(rot_speed);
-	player->planeX = player->planeX * cos(rot_speed) - oldplane * sin(rot_speed);
-	printf("dirX : %f   dirY : %f	planeX : %f	planeY : %f\n", player->dirX, player->dirY, player->planeX, player->planeY);
+	player->dirY = player->dirX * sin(rot) + player->dirY * cos(rot);
+	player->dirX = player->dirX * cos(rot) - olddir * sin(rot);
+	player->planeY = player->planeX * sin(rot) + player->planeY * cos(rot);
+	player->planeX = player->planeX * cos(rot) - oldplane * sin(rot);
 }
 
-static void move_key(t_game *game, double speed)
+static void set_move_dir(t_player *player , int key_type, \
+												double *moveX_dir, double *moveY_dir)
 {
-	double		move_X;
-	double		move_Y;
+	double	olddir;
+
+	olddir = player->dirY;
+	if (key_type == KEY_A)
+	{
+		*moveY_dir = (player->dirX * sin(A_PI) + player->dirY * cos(A_PI));
+		*moveX_dir = (player->dirX * cos(A_PI) - olddir * sin(A_PI));
+		return ;
+	}
+	else if (key_type == KEY_D)
+	{
+		*moveY_dir = (player->dirX * sin(D_PI) + player->dirY * cos(D_PI));
+		*moveX_dir = (player->dirX * cos(D_PI) - olddir * sin(D_PI));
+		return ;
+	}
+	*moveX_dir = player->dirX;
+	*moveY_dir = player->dirY;
+	return ;
+}
+
+static void move_key(t_game *game, double speed, int key_type)
+{
+	double		moveY_dir;
+	double		moveX_dir;
 	t_player	*player;
 
 	player = game->player;
-	move_X = player->dirX * speed;
-	move_Y = player->dirY * speed;
-
-	printf("%d %d\n", (int)(player->posX + move_X), (int)(player->posY + move_Y));
-	printf("pos x: %f pos y:%f \n",player->posX, player->posY);
-	if (game->map[(int)(player->posY + move_Y * 1.2)]\
-					[(int)(player->posX + move_X * 1.2)] != '0')
+	set_move_dir(player, key_type, &moveX_dir, &moveY_dir);
+	if (game->map[(int)(player->posY + (moveY_dir * speed) * 1.2)]\
+					[(int)(player->posX + (moveX_dir * speed) * 1.2)] != '0')
 						return ;
-	player->posX += move_X;	
-	player->posY += move_Y;
+	player->posY += moveY_dir * speed;
+	player->posX += moveX_dir * speed;	
 }
 
 int	key_press(int keycode, t_game *game)
@@ -59,13 +76,13 @@ int	key_press(int keycode, t_game *game)
 
 	player = game->player;
 	if (keycode == KEY_W)
-		move_key(game, 0.1);
+		move_key(game, 0.1, KEY_W);
 	else if (keycode == KEY_S)
-		move_key(game, -0.1);
+		move_key(game, -0.1, KEY_S);
 	else if (keycode == KEY_A)
-		move_key(game, 0.1);
+		move_key(game, 0.1, KEY_A);
 	else if (keycode == KEY_D)
-		move_key(game, -0.1);
+		move_key(game, 0.1, KEY_D);
 	else if (keycode == LEFT_ARROR_KEY)
 		rot_view(player, PI / 6);
 	else if (keycode == RIGHT_ARROR_KEY)

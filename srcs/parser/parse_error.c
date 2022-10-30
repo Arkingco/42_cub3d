@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 17:31:52 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/30 14:16:48 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/30 15:08:03 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,6 @@ int	parsed_str_error_check(char **parsed_str)
 	// 	print_error_str("not_rectangle\n");
 	// if (check_wall_surrounded(parsed_str, get_column_length(parsed_str[0])))
 	// 	print_error_str("not_wal_surrounded\n");
-	printf("%s \n", parsed_str[0]);
+	printf("map pointer start ! : %p \n", parsed_str);
 	return (0);
 }

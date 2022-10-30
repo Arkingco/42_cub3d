@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 17:23:00 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/24 16:06:53 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/30 18:17:37 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ typedef struct s_game
 	int			**texture_color;
 }	t_game;
 
-typedef struct s_dda
+typedef struct s_ray_casting
 {
 	int		color;
 	double	cameraX;
@@ -99,6 +99,11 @@ typedef struct s_dda
 	int		lineHeight;
 	int		drawStart;
 	int		drawEnd;
-}	t_dda;
+	double	wallX;
+	int		texX;
+	int		texY;
+	double	step;
+	double	texPos;
+}	t_ray_casting;
 
 #endif
