@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 10:58:52 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/29 18:13:03 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/31 15:15:42 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # define CNT_WORD_OF_COLOR		2
 
 # define MSG_ERR_ARGS			"Argument must be one!\n"
+# define MSG_ERR_FILE_NAME		"File name is invalid!\n"
 # define MSG_ERR_ELEMENT		"Invalid element!\n"
 # define MSG_ERR_IDNETIFIER		"Invalid identifier!\n"
 # define MSG_ERR_MAP			"Invalid map!\n"

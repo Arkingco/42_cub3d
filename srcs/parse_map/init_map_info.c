@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 13:04:54 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/29 18:12:25 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/31 15:20:05 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,18 @@ static int	check_element_parsing(t_map_info *map_info)
 	return (flag_fail);
 }
 
+static int	check_map_name_format(char *file_path)
+{
+	char	*this_str;
+
+	this_str = ft_strrchr(file_path, '.');
+	if (this_str == NULL)
+		return (1);
+	if (ft_strncmp(this_str, ".cub", 5))
+		return (1);
+	return (0);
+}
+
 void	init_map_info(t_map_info *map_info, int argc, char *file_path)
 {
 	size_t	cnt_gnl;
@@ -70,7 +82,8 @@ void	init_map_info(t_map_info *map_info, int argc, char *file_path)
 
 	if (check_argc(argc))
 		print_error_str(MSG_ERR_ARGS);
-	// .cub 확인
+	if (check_map_name_format(file_path))
+		print_error_str(MSG_ERR_FILE_NAME);
 	fd = safe_open(file_path);
 	init_map_info_to_initial_value(map_info);
 	cnt_gnl = init_element(map_info, fd);
