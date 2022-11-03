@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 21:22:01 by jayoon            #+#    #+#             */
-/*   Updated: 2022/11/02 21:24:31 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/11/03 17:43:49 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,10 @@ static char	**init_temp_map(t_map_info *map_info, int this_fd)
 	return (temp_map);
 }
 
-static int	check_valid_character(char c, size_t y, size_t x)
+/**
+ * feat: check the number of characters and whether valid character
+ */
+static int	check_valid_character(char c)
 {
 	if (c == '1')
 	{
