@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 10:58:52 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/31 15:15:42 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/11/05 03:53:21 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,16 +89,21 @@ typedef struct s_identifier_info
 	t_identifier	(*f_parsing)(t_map_info *, char *, t_identifier);
 }	t_identifier_info;
 
+/* main */
 void			init_map_info(t_map_info *param, int argc, char *file_path);
-int				cub3d_atoi(const char *str);
 size_t			init_element(t_map_info *map_info, int fd);
+void			init_map_content(t_map_info *map_info, int this_fd, \
+					char *file_path, size_t cnt_gnl);
 t_identifier	process_color(t_map_info *map_info, char *str, \
 						t_identifier num_iden);
 t_identifier	process_texture_path(t_map_info *map_info, char *str, \
 						t_identifier num_iden);
-void			init_map_content(t_map_info *map_info, int this_fd, \
-					char *file_path, size_t cnt_gnl);
+
+/* utils */
+int				cub3d_atoi(const char *str);
 int				safe_open(char *file_path);
+void			pass_element(size_t cnt_gnl, int temp_fd);
+char			*pass_empty_line(int fd);
 size_t			get_cnt_map_height(int temp_fd);
 size_t			get_cnt_map_width(char **map);
 

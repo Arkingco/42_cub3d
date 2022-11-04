@@ -3,47 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   init_map_content.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 21:22:01 by jayoon            #+#    #+#             */
-/*   Updated: 2022/11/03 17:43:49 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/11/05 03:50:23 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "error.h"
 #include "libft.h"
 #include "parse_map.h"
-
-static void	pass_element(size_t cnt_gnl, int temp_fd)
-{
-	size_t	i;
-	char	*str;
-
-	i = 0;
-	str = NULL;
-	while (cnt_gnl > i)
-	{
-		str = get_next_line(temp_fd);
-		free(str);
-		str = NULL;
-		++i;
-	}
-}
-
-static char	*pass_empty_line(int fd)
-{
-	char		*str;
-
-	while (1)
-	{
-		str = get_next_line(fd);
-		if (str == NULL || *str != '\n')
-			break ;
-		free(str);
-		str = NULL;
-	}
-	return (str);
-}
 
 static char	**init_temp_map(t_map_info *map_info, int this_fd)
 {
