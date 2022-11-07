@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map_content.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 21:22:01 by jayoon            #+#    #+#             */
-/*   Updated: 2022/11/05 03:50:23 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/11/07 13:45:43 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,21 @@ static char	**init_temp_map(t_map_info *map_info, int this_fd)
 	return (temp_map);
 }
 
+static int	is_valid_character(char c)
+{
+	return (c == '0' || c == '1' || c == 'N' || c == 'S' || c == 'E' \
+		|| c == 'W' || c == ' ');
+}
+
 /**
  * feat: check the number of characters and whether valid character
  */
 static int	check_valid_character(char c)
 {
-	if (c == '1')
-	{
+	size_t	cnt_spon;
 
-	}
+	if (is_valid_charater(c) == FALSE)
+		return (1);
 }
 
 static void	put_in_space_at_edge_and_init(t_map_info *map_info)

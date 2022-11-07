@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 10:58:52 by jayoon            #+#    #+#             */
-/*   Updated: 2022/11/05 03:53:21 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/11/07 13:44:08 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,6 @@ typedef enum e_color
 	BLUE
 }	t_color;
 
-typedef struct s_substr_info
-{
-	char	*start;
-	char	*end;
-	int		flag;
-}	t_substr_info;
-
 typedef enum e_gnl_flag
 {
 	GNL_NULL,
@@ -68,8 +61,23 @@ typedef enum e_map_characters
 	MAP_SOUTH = 1 << 3,
 	MAP_EAST = 1 << 4,
 	MAP_WEST = 1 << 5,
-	MAP_DIRECTION = MAP_NORTH | MAP_SOUTH | MAP_EAST | MAP_WEST
+	MAP_SPACE = 1 << 6,
+	MAP_VALID = MAP_EMPTY | MAP_WALL \
+		| MAP_NORTH | MAP_SOUTH | MAP_EAST | MAP_WEST | MAP_SPACE
 }	t_map_characters;
+
+enum e_bool
+{
+	FALSE,
+	TRUE
+};
+
+typedef struct s_substr_info
+{
+	char	*start;
+	char	*end;
+	int		flag;
+}	t_substr_info;
 
 typedef struct s_map_info
 {
