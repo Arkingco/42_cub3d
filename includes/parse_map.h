@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 10:58:52 by jayoon            #+#    #+#             */
-/*   Updated: 2022/11/07 13:44:08 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/11/07 21:12:07 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ t_identifier	process_color(t_map_info *map_info, char *str, \
 						t_identifier num_iden);
 t_identifier	process_texture_path(t_map_info *map_info, char *str, \
 						t_identifier num_iden);
+void			get_map(t_map_info *map_info, char **temp_map);
 
 /* utils */
 int				cub3d_atoi(const char *str);

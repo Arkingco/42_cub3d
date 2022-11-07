@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 21:22:01 by jayoon            #+#    #+#             */
-/*   Updated: 2022/11/07 13:45:43 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/11/07 21:12:57 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,61 +33,6 @@ static char	**init_temp_map(t_map_info *map_info, int this_fd)
 	}
 	temp_map[map_info->map_height] = NULL;
 	return (temp_map);
-}
-
-static int	is_valid_character(char c)
-{
-	return (c == '0' || c == '1' || c == 'N' || c == 'S' || c == 'E' \
-		|| c == 'W' || c == ' ');
-}
-
-/**
- * feat: check the number of characters and whether valid character
- */
-static int	check_valid_character(char c)
-{
-	size_t	cnt_spon;
-
-	if (is_valid_charater(c) == FALSE)
-		return (1);
-}
-
-static void	put_in_space_at_edge_and_init(t_map_info *map_info)
-{
-	size_t	i;
-
-	i = 0;
-	map_info->map = ft_safe_malloc(sizeof(char *) * (map_info->map_height + 3));
-	while (map_info->map_height + 2 > i)
-	{
-		map_info->map[i] = ft_safe_malloc(map_info->map_width + 3);
-		ft_memset(map_info->map[i], ' ', map_info->map_width + 2);
-		++i;
-	}
-}
-
-static void	get_map(t_map_info *map_info, char **temp_map)
-{
-	size_t	i;
-	size_t	j;
-
-	put_in_space_at_edge_and_init(map_info);
-	i = 1;
-	while (map_info->map_height + 1 > i)
-	{
-		j = 1;
-		while (temp_map[i - 1][j - 1] != '\0')
-		{
-			if (temp_map[i - 1][j - 1] != '\n')
-				map_info->map[i][j] = temp_map[i - 1][j - 1];
-			if (check_valid_character(map_info->map[i][j]))
-				print_error_str(MSG_ERR_MAP);
-			++j;
-		}
-		map_info->map[i][map_info->map_width + 2] = '\0';
-		++i;
-	}
-	map_info->map[map_info->map_height + 2] = NULL;
 }
 
 #include <stdio.h>
