@@ -93,8 +93,10 @@ int is_ray(double ray_point_X, double ray_point_Y, t_game *game)
 {
 	if (ray_point_X < 0 || ray_point_X > game->mini_width * MINI_SIZE || \
 			ray_point_Y < 0 || ray_point_Y > game->mini_height * MINI_SIZE  || \
-			(int)ray_point_X / MINI_SIZE < 0 || (int)ray_point_X / MINI_SIZE > game->mini_width - 1  ||
-			(int)ray_point_Y / MINI_SIZE < 0 || (int)ray_point_Y / MINI_SIZE > game->mini_height - 1 ||
+			(int)ray_point_X / MINI_SIZE < 0 || \
+			(int)ray_point_X / MINI_SIZE > game->mini_width - 1  ||
+			(int)ray_point_Y / MINI_SIZE < 0 || \
+			(int)ray_point_Y / MINI_SIZE > game->mini_height - 1 ||
 			game->map[(int)ray_point_Y / MINI_SIZE][(int)ray_point_X / MINI_SIZE] == '1')
 				return (1);
 	return (0);

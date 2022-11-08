@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:47:34 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/30 18:17:32 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/30 18:38:05 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ int set_view_color(t_game *game, t_ray_casting *rc)
 	return (color);
 }
 
-void draw_line(t_game *game, int x, double draw_start, double draw_end, int color)
+void draw_line(t_game *game, int x, double draw_start, \
+											double draw_end, int color)
 {
 	int y;
 
@@ -63,7 +64,8 @@ static void draw_background(t_game *game, \
 	}
 }
 
-static void set_dda_algorithm(t_ray_casting *rc, t_player *player, t_game *game, int x)
+static void set_dda_algorithm(t_ray_casting *rc, t_player *player, \
+														t_game *game, int x)
 {
 	rc->cameraX = 2 * x / (double)game->width - 1;
 	rc->rayDirX = player->dirX + player->planeX * rc->cameraX;
@@ -118,9 +120,13 @@ static void run_dda_algorithm(t_game *game, t_ray_casting *rc)
 static void set_draw_length(t_game *game, t_ray_casting *rc, t_player *player)
 {
 	if (rc->side == 0)
-		 	rc->perpWallDist = (rc->mapX - player->posX + (1 - rc->stepX) / 2) / rc->rayDirX;
+	{
+		rc->perpWallDist = (rc->mapX - player->posX + (1 - rc->stepX) / 2)\
+																/ rc->rayDirX;
+	}
 	else
-		rc->perpWallDist = (rc->mapY - player->posY + (1 - rc->stepY) / 2) / rc->rayDirY;
+		rc->perpWallDist = (rc->mapY - player->posY + (1 - rc->stepY) / 2)\
+																/ rc->rayDirY;
 	rc->lineHeight = (int)(game->height / rc->perpWallDist );
 	rc->drawStart = -(rc->lineHeight) / 2 + game->height / 2;
 	if (rc->drawStart < 0)
@@ -147,14 +153,12 @@ static int set_texture(t_ray_casting *rc)
 			return (1);
 	}
 }
-
 void draw_game_view(t_game *game)
 {
-	t_player *player;
-	t_ray_casting rc;
+	t_player		*player;
+	t_ray_casting	rc;
 
 	player = game->player;
-
 	draw_background(game, COLOR_PINK, COLOR_BLACK);
 	for(int x = 0; x < game->width; x++)
 	{
@@ -176,11 +180,11 @@ void draw_game_view(t_game *game)
 		rc.texPos = (rc.drawStart - game->height / 2 + rc.lineHeight / 2) * rc.step;
 		for(int y = rc.drawStart; y<rc.drawEnd; y++)
 		{
-			int texY = (int)rc.texPos & (TEX_HEIGHT - 1);
+			rc.texY = (int)rc.texPos & (TEX_HEIGHT - 1);
 			rc.texPos += rc.step;
 			
 			rc.color = game->texture_color[set_texture(&rc)]\
-								[TEX_HEIGHT * texY + (TEX_WIDTH - rc.texX - 1)];
+								[TEX_HEIGHT * rc.texY + (TEX_WIDTH - rc.texX - 1)];
 			if(rc.side == 1) rc.color = (rc.color >> 1) & 8355711;
 			game->draw_buffer[y][x] = rc.color;
 			my_mlx_pixel_put(game->game_view, x, y, game->draw_buffer[y][x]);

@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 14:53:10 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/30 18:28:45 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/11/08 14:35:04 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	rot_view(t_player *player, double rot)
 }
 
 static void set_move_dir(t_player *player , int key_type, \
-												double *moveX_dir, double *moveY_dir)
+										double *moveX_dir, double *moveY_dir)
 {
 	double	olddir;
 
@@ -63,8 +63,8 @@ static void move_key(t_game *game, double speed, int key_type)
 
 	player = game->player;
 	set_move_dir(player, key_type, &moveX_dir, &moveY_dir);
-	if (game->map[(int)(player->posY + (moveY_dir * speed) * 1.2)]\
-					[(int)(player->posX + (moveX_dir * speed) * 1.2)] != '0')
+	if (game->map[(int)(player->posY + (moveY_dir * speed) * 2.5)]\
+					[(int)(player->posX + (moveX_dir * speed) * 2.5)] != '0')
 						return ;
 	player->posY += moveY_dir * speed;
 	player->posX += moveX_dir * speed;	
