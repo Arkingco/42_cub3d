@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 13:04:54 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/31 15:20:05 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/11/10 20:20:19 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,62 @@ static int	check_map_name_format(char *file_path)
 	return (0);
 }
 
+static int	is_zero_or_start_position(char c)
+{
+	return (c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W');
+}
+
+static void	check_the_door_is_closed(char **map, size_t i, size_t j)
+{
+	if (map[i - 1][j - 1] == ' ' || map[i - 1][j] == ' ' \
+		|| map[i - 1][j + 1] == ' '	|| map[i][j - 1] == ' ' \
+		|| map[i][j + 1] == ' '|| map[i + 1][j - 1] == ' ' \
+		|| map[i + 1][j] == ' '|| map[i + 1][j + 1] == ' ')
+		print_error_str(MSG_ERR_MAP);
+}
+
+static t_cnt_start_position	is_valid_map(t_map_info *map_info)
+{
+	char	**map;
+	size_t	i;
+	size_t	j;
+
+	map = map_info->map;
+	i = 1;
+	while (map_info->map_height + 1 > i)
+	{
+		j = 1;
+		while (map_info->map_width + 1 > j)
+		{
+			if (is_zero_or_start_position(map[i][j]))
+				check_the_door_is_closed(map, i, j);
+			++j;
+		}
+		++i;
+	}
+	return (CUB_ONE);
+}
+
+//test
+#include <stdio.h>
+static void	print_map(t_map_info *map_info)
+{
+	//test
+	size_t	i = 0;
+	size_t	j = 0;
+	while (map_info->map[i])
+	{
+		j = 0;
+		while (map_info->map[i][j])
+		{
+			write(1, &map_info->map[i][j], 1);
+			j++;
+		}
+		write(1, "\n", 1);
+		i++;
+	}
+}
+
 void	init_map_info(t_map_info *map_info, int argc, char *file_path)
 {
 	size_t	cnt_gnl;
@@ -90,4 +146,9 @@ void	init_map_info(t_map_info *map_info, int argc, char *file_path)
 	if (check_element_parsing(map_info))
 		print_error_str(MSG_ERR_ELEMENT);
 	init_map_content(map_info, fd, file_path, cnt_gnl);
+	if (is_valid_map(map_info) == CUB_ZERO)
+		print_error_str(MSG_ERR_MAP);
+
+	//test
+	print_map(map_info);
 }
