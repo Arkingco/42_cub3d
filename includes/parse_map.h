@@ -6,12 +6,12 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 10:58:52 by jayoon            #+#    #+#             */
-/*   Updated: 2022/11/10 19:48:56 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/11/10 21:28:07 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSE_MAP
-# define PARSE_MAP
+#ifndef PARSE_MAP_H
+# define PARSE_MAP_H
 
 # define CNT_TEXTURE			4
 # define CNT_COLOR				3
@@ -76,7 +76,7 @@ typedef enum e_cnt_start_position
 {
 	CUB_ZERO,
 	CUB_ONE
-}	t_cnt_start_position;
+}	t_cnt_start_pos;
 
 typedef struct s_substr_info
 {
@@ -100,7 +100,7 @@ typedef struct s_identifier_info
 	char			*str;
 	size_t			len;
 	t_identifier	identifier;
-	t_identifier	(*f_parsing)(t_map_info *, char *, t_identifier);
+	t_identifier	((*f_parsing)(t_map_info *, char *, t_identifier));
 }	t_identifier_info;
 
 /* main */
@@ -121,5 +121,6 @@ void			pass_element(size_t cnt_gnl, int temp_fd);
 char			*pass_empty_line(int fd);
 size_t			get_cnt_map_height(int temp_fd);
 size_t			get_cnt_map_width(char **map);
+t_cnt_start_pos	is_valid_map(t_map_info *map_info);
 
 #endif
