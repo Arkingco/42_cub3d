@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 21:22:01 by jayoon            #+#    #+#             */
-/*   Updated: 2022/11/07 21:12:57 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/11/10 20:20:17 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ static char	**init_temp_map(t_map_info *map_info, int this_fd)
 	return (temp_map);
 }
 
-#include <stdio.h>
 void	init_map_content(t_map_info *map_info, int this_fd, \
 				char *file_path, size_t cnt_gnl)
 {
@@ -57,21 +56,7 @@ void	init_map_content(t_map_info *map_info, int this_fd, \
 	temp_map = init_temp_map(map_info, this_fd);
 	close(this_fd);
 	map_info->map_width = get_cnt_map_width(temp_map);
-	get_map(map_info, temp_map);
+	if (get_map(map_info, temp_map) == 0)
+		print_error_str(MSG_ERR_MAP);
 	ft_safe_free_two_dimentions_arr(temp_map);
-
-	//test
-	size_t	i = 0;
-	size_t	j = 0;
-	while (map_info->map[i])
-	{
-		j = 0;
-		while (map_info->map[i][j])
-		{
-			write(1, &map_info->map[i][j], 1);
-			j++;
-		}
-		write(1, "\n", 1);
-		i++;
-	}
 }

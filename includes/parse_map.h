@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 10:58:52 by jayoon            #+#    #+#             */
-/*   Updated: 2022/11/07 21:12:07 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/11/10 19:48:56 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,17 @@ typedef enum e_map_characters
 		| MAP_NORTH | MAP_SOUTH | MAP_EAST | MAP_WEST | MAP_SPACE
 }	t_map_characters;
 
-enum e_bool
+typedef enum e_cub_bool
 {
-	FALSE,
-	TRUE
-};
+	CUB_FAIL,
+	CUB_SUCCESS
+}	t_cub_bool;
+
+typedef enum e_cnt_start_position
+{
+	CUB_ZERO,
+	CUB_ONE
+}	t_cnt_start_position;
 
 typedef struct s_substr_info
 {
@@ -106,7 +112,7 @@ t_identifier	process_color(t_map_info *map_info, char *str, \
 						t_identifier num_iden);
 t_identifier	process_texture_path(t_map_info *map_info, char *str, \
 						t_identifier num_iden);
-void			get_map(t_map_info *map_info, char **temp_map);
+size_t			get_map(t_map_info *map_info, char **temp_map);
 
 /* utils */
 int				cub3d_atoi(const char *str);
