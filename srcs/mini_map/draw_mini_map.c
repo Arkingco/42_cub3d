@@ -105,28 +105,27 @@ int is_ray(double ray_point_X, double ray_point_Y, t_game *game)
 void draw_ray(t_game *game)
 {
 	t_player *player;
-	
+	t_ray_casting ray_casting;
+
 	player = game->player;
 	for(int x = 0; x <= game->width; x++)
 	{
-		double cameraX = 2 * x / (double)game->width - 1;
-		double rayDirX = 0;
-		double rayDirY = 0;
-		double ray_point_X;
-		double ray_point_Y;
+		ray_casting.cameraX = 2 * x / (double)game->width - 1;
+		ray_casting. rayDirX = 0;
+		ray_casting. rayDirY = 0;
 		for (int y=0; y<(int)(pow(game->mini_height, 2) + pow(game->mini_width, 2)) * 20; y++)
 		{
-			rayDirX += player->dirX + player->planeX * cameraX;
-			rayDirY += player->dirY + player->planeY * cameraX;
-			ray_point_X = rayDirX + (player->posX * MINI_SIZE) + PLAYER_SIZE / 2;
-			ray_point_Y = rayDirY + (player->posY * MINI_SIZE) + PLAYER_SIZE / 2;
-			if(is_ray(ray_point_X, ray_point_Y, game))
+			ray_casting.rayDirX += player->dirX + player->planeX * ray_casting.cameraX;
+			ray_casting.rayDirY += player->dirY + player->planeY * ray_casting.cameraX;
+			ray_casting.ray_point_X = ray_casting.rayDirX + (player->posX * MINI_SIZE) + PLAYER_SIZE / 2;
+			ray_casting.ray_point_Y = ray_casting.rayDirY + (player->posY * MINI_SIZE) + PLAYER_SIZE / 2;
+			if(is_ray(ray_casting.ray_point_X, ray_casting.ray_point_Y, game))
 			{
 				y = (int)(pow(game->mini_height, 2) + pow(game->mini_width, 2)) * 20;
 				continue ;
 			}
-			my_mlx_pixel_put(game->minimap, ray_point_X, \
-												ray_point_Y, 0x00FF0000);
+			my_mlx_pixel_put(game->minimap, ray_casting.ray_point_X, \
+												ray_casting.ray_point_Y, 0x00FF0000);
 		}	
 	}
 }

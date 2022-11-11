@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 17:23:00 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/30 18:17:37 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/11/08 14:40:07 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,8 @@ typedef struct s_ray_casting
 	int		texY;
 	double	step;
 	double	texPos;
+	double ray_point_X;
+	double ray_point_Y;
 }	t_ray_casting;
 
 #endif
