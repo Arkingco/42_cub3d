@@ -6,7 +6,7 @@
 #    By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/27 15:13:41 by kipark            #+#    #+#              #
-#    Updated: 2022/10/26 11:02:03 by jayoon           ###   ########.fr        #
+#    Updated: 2022/11/10 21:43:53 by jayoon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,11 @@ SRCS_PARSE_MAP				:=	init_map_info.c			\
 								init_map_content.c		\
 								safe_open.c				\
 								get_cnt_map_height.c	\
-								get_cnt_map_width.c
+								get_cnt_map_width.c		\
+								pass_empty_line.c		\
+								pass_element.c			\
+								get_map.c				\
+								is_valid_map.c
 
 SRCS_ERROR					:=	error.c
 

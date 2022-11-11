@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 13:21:30 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/24 13:29:55 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/29 18:10:27 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_identifier	process_texture_path(t_map_info *map_info, char *str, \
 		if (*str != ' ')
 		{
 			if (info.end != NULL)
-				print_error_str("Too many information!\n");
+				print_error_str(MSG_ERR_ELEMENT);
 			if (info.flag == 0)
 			{
 				info.start = str;
@@ -48,6 +48,6 @@ t_identifier	process_texture_path(t_map_info *map_info, char *str, \
 		map_info->texture_path[num_iden] \
 			= ft_substr(info.start, 0, (info.end - info.start) + 1);
 	else
-		print_error_str("There is not information!\n");
+		print_error_str(MSG_ERR_ELEMENT);
 	return (num_iden);
 }
