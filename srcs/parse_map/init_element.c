@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 13:10:49 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/24 16:30:27 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/29 18:12:11 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,17 @@
 
 static t_identifier	check_identifier(t_map_info *map_info, char *str)
 {
-	const t_identifier_info	arr[6] = {{"EA ", 3, EAST, process_texture_path}, \
-									{"WE ", 3, WEST, process_texture_path}, \
-									{"SO ", 3, SOUTH, process_texture_path}, \
-									{"NO ", 3, NORTH, process_texture_path}, \
-									{"F ", 2, FLOOR, process_color}, \
-									{"C ", 2, CEILING, process_color}};
+	const t_identifier_info	arr[6] = \
+					{{"EA ", CNT_WORD_OF_TEXTRUE, EAST, process_texture_path}, \
+					{"WE ", CNT_WORD_OF_TEXTRUE, WEST, process_texture_path}, \
+					{"SO ", CNT_WORD_OF_TEXTRUE, SOUTH, process_texture_path}, \
+					{"NO ", CNT_WORD_OF_TEXTRUE, NORTH, process_texture_path}, \
+					{"F ", CNT_WORD_OF_COLOR, FLOOR, process_color}, \
+					{"C ", CNT_WORD_OF_COLOR, CEILING, process_color}};
 	int						i;
 
 	i = 0;
-	while (i < 6)
+	while (i < CNT_IDENTIFIER)
 	{
 		if (!ft_strncmp(str, arr[i].str, arr[i].len))
 			return (arr[i].f_parsing(map_info, str, arr[i].identifier));
@@ -75,7 +76,7 @@ size_t	init_element(t_map_info *map_info, int fd)
 	cnt_gnl = 0;
 	while (1)
 	{
-		if (cnt_element == 6)
+		if (cnt_element == CNT_IDENTIFIER)
 			break ;
 		str = get_next_line(fd);
 		if (str == NULL)
@@ -84,7 +85,7 @@ size_t	init_element(t_map_info *map_info, int fd)
 		if (*str != '\n')
 		{
 			if (parse_string(map_info, str) == ELEMENT_FAIL)
-				print_error_str("Invalid identifier\n");
+				print_error_str(MSG_ERR_IDNETIFIER);
 			++cnt_element;
 		}
 		free(str);

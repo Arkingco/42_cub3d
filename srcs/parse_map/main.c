@@ -7,7 +7,7 @@ static void	free_all(t_map_info *map_info)
 	size_t	i;
 
 	i = 0;
-	while (i < 4)
+	while (i < CNT_TEXTURE)
 	{
 		ft_safe_free(map_info->texture_path[i]);
 		++i;
