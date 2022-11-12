@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.h                                            :+:      :+:    :+:   */
+/*   game_view.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/17 13:11:37 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/26 20:35:46 by kipark           ###   ########seoul.kr  */
+/*   Created: 2022/10/20 16:48:32 by kipark            #+#    #+#             */
+/*   Updated: 2022/10/24 16:15:27 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERROR_H
-# define ERROR_H
+#ifndef GAME_VIEW_H
+# define GAME_VIEW_H
 
-# define WRITE_ERROR_FD			2
+# include "struct.h"
 
-int		exit_window(void *not_use);
-void	exit_perror(void);
-void	print_error_str(char *str);
+#define TEX_WIDTH		64
+#define TEX_HEIGHT		64
+
+void draw_game_view(t_game *game);
 
 #endif

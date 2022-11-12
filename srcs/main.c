@@ -3,64 +3,149 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 15:01:26 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/17 20:17:46 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/11/11 12:07:39 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "error.h"
 #include "mlx.h"
-#include "minimap.h"
 #include "key.h"
+#include "libft.h"
+#include "cub3d.h"
+#include "minimap.h"
+#include "game_view.h"
 #include <unistd.h>
+#include <math.h>
 
-void	my_mlx_pixel_pu2t(t_data *data, int x, int y, int color)
+
+#include <stdio.h>
+static unsigned int	my_mlx_pixel_catch(t_data *data, int x, int y)
 {
-	char	*dst;
-
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
+	return (*(unsigned int *)(data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8))));
 }
 
-int	main(int argc, char *argv[])
+static void set_buffer(t_game *game)
 {
-	void	*mlx;
-	void	*mlx_win;
-	t_param	param;
-	t_mini_map	mini_map;
+	game->draw_buffer = ft_safe_malloc(sizeof(int *) * game->height);
+	for (int i=0; i<game->height; ++i)
+		game->draw_buffer[i] = ft_safe_malloc(sizeof(int) * game->width);
+}
 
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, 1920, 1080, "cub3D");
+static void set_texture(t_game *game)
+{
+	int img_witdh;
+	int img_height;
+	t_texture *texture;
+
+	texture = game->texture;
+	texture->east = mlx_xpm_file_to_image(game->mlx, "/Users/kipark/42_cub3d/srcs/img/east.xpm", &img_witdh, &img_height);
+	texture->west = mlx_xpm_file_to_image(game->mlx, "/Users/kipark/42_cub3d/srcs/img/west.xpm", &img_witdh, &img_height);
+	texture->south = mlx_xpm_file_to_image(game->mlx, "/Users/kipark/42_cub3d/srcs/img/south.xpm", &img_witdh, &img_height);
+	texture->north = mlx_xpm_file_to_image(game->mlx, "/Users/kipark/42_cub3d/srcs/img/north.xpm", &img_witdh, &img_height);
 	
+	texture->east_img = ft_safe_malloc(sizeof(t_data));
+	texture->west_img = ft_safe_malloc(sizeof(t_data));
+	texture->south_img = ft_safe_malloc(sizeof(t_data));
+	texture->north_img = ft_safe_malloc(sizeof(t_data));
+	
+	texture->east_img->addr = mlx_get_data_addr(texture->east, \
+	&texture->east_img->bits_per_pixel, \
+	&texture->east_img->line_length, &texture->east_img->endian);
 
-	// 이미지 선언 및 addr세팅
-	mini_map.player.img = mlx_new_image(mlx, 10, 10);
-	mini_map.player.addr = mlx_get_data_addr(mini_map.player.img, &mini_map.player.bits_per_pixel, &mini_map.player.line_length,
-								&mini_map.player.endian);
-	mini_map.map.img = mlx_new_image(mlx, 1200, 1200);
-	mini_map.map.addr = mlx_get_data_addr(mini_map.map.img, &mini_map.map.bits_per_pixel, &mini_map.map.line_length,
-								&mini_map.map.endian);
-	param.map = map;
-	param.mlx = mlx;
-	param.mlx_win = mlx_win;
-	param.mini_map = &mini_map;
-	param.mini_map->player_y = 100.0;
-	param.mini_map->player_x = 100.0;
-	// 이미지 세팅 
-	set_mini_map(&mini_map, map);
-	set_mini_map_player(&mini_map);
+	texture->west_img->addr = mlx_get_data_addr(texture->west, \
+	&texture->west_img->bits_per_pixel, \
+	&texture->west_img->line_length, &texture->west_img->endian);
 
-	// 이미지 찍기
-	mlx_put_image_to_window(mlx, mlx_win, mini_map.map.img, 0, 0);
-	mlx_put_image_to_window(mlx, mlx_win, mini_map.player.img, param.mini_map->player_y, param.mini_map->player_x);
+	texture->south_img->addr = mlx_get_data_addr(texture->south, \
+	&texture->south_img->bits_per_pixel, \
+	&texture->south_img->line_length, &texture->south_img->endian);
 
-	mlx_hook(mlx_win, EVENT_KEY_PRESS, 0, &key_press, &param);
-	mlx_hook(mlx_win, X_EVENT_EXIT, 0, &exit_window, NULL);
+	texture->north_img->addr = mlx_get_data_addr(texture->north, \
+	&texture->north_img->bits_per_pixel, \
+	&texture->north_img->line_length, &texture->north_img->endian);
 
-	mlx_loop(mlx);
+	
+	game->texture_color = ft_safe_malloc(sizeof(int *) * 8);
+	for (int i=0; i<4; ++i)
+		game->texture_color[i] = ft_safe_malloc(sizeof(int) * (TEX_HEIGHT * TEX_WIDTH));
+	for(int y = 0; y < TEX_HEIGHT; y++)
+	for(int x = 0; x < TEX_WIDTH; x++)
+	{
+		// 동
+		game->texture_color[0][TEX_WIDTH * y + x] = my_mlx_pixel_catch(texture->east_img, x, y);
+		// 서
+		game->texture_color[1][TEX_WIDTH * y + x] = my_mlx_pixel_catch(texture->west_img, x, y);
+		// 남
+		game->texture_color[2][TEX_WIDTH * y + x] = my_mlx_pixel_catch(texture->south_img, x, y);
+		// 북
+		game->texture_color[3][TEX_WIDTH * y + x] = my_mlx_pixel_catch(texture->north_img, x, y);
+	}
+
+}
+
+static void set_game(t_game *game, char **map)
+{
+	t_data *minimap;
+	t_data *game_view;
+
+	game->width = 1500;
+	game->height = 1000;
+	game->mini_width = 50;
+	game->mini_height = 10;
+	game->map = map;
+	game->mlx = mlx_init();
+	game->mlx_win = mlx_new_window(game->mlx, game->width, game->height, "cub3D");
+	game->player = ft_safe_malloc(sizeof(t_player));
+	game->minimap = ft_safe_malloc(sizeof(t_data));
+	game->game_view = ft_safe_malloc(sizeof(t_data));
+	minimap = game->minimap;
+	minimap->img = mlx_new_image(game->mlx, game->mini_width * 20, game->mini_height * 20);
+	minimap->addr = mlx_get_data_addr(minimap->img, \
+			&minimap->bits_per_pixel, &minimap->line_length, &minimap->endian);
+	game_view = game->game_view;
+	game_view->img = mlx_new_image(game->mlx, game->width, game->height);
+	game_view->addr = mlx_get_data_addr(game_view->img, \
+	&game_view->bits_per_pixel, &game_view->line_length, &game_view->endian);
+	game->texture = ft_safe_malloc(sizeof(t_texture));
+	set_buffer(game);
+	set_texture(game);
+}
+
+static void	set_player(t_game *game)
+{
+	t_player *this_player;
+
+	this_player = game->player; 
+	// 이 부분은 따로 P의 위치를 찾는 로직을 넣어야함 	
+	this_player->posX = 1.5;
+	this_player->posY = 1.5;
+	this_player->dirX = 1;
+	this_player->dirY = 0; //initial direction vector
+	this_player->planeX = 0.00;
+	this_player->planeY = 0.77; // the 2d raycaster version of camera plane
+}
+
+static void	game_start(char **map)
+{
+	t_game	*game;
+
+	game = ft_safe_malloc(sizeof(t_game));
+	set_game(game, map);
+	set_player(game);
+
+	draw_game_view(game);
+	mlx_put_image_to_window(game->mlx, game->mlx_win, game->game_view->img, 0, 0);
+	draw_mini_map(game);
+	mlx_put_image_to_window(game->mlx, game->mlx_win, game->minimap->img, 0, 0);
+	
+	mlx_hook(game->mlx_win, EVENT_KEY_PRESS, 0, &key_press, game);
+	mlx_hook(game->mlx_win, X_EVENT_EXIT, 0, &exit_window, NULL);
+	
+	mlx_loop(game->mlx);
 }
 
 int	main(int argc, char **argv)

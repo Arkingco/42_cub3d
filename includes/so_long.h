@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 14:57:19 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/14 16:07:45 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/26 20:27:24 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ char	*get_next_line(int fd);
 int		get_list_head_colum(char *head_str);
 int		get_list_head_row(t_list *list_head);
 
-void	print_error_str(char *str);
 void	set_parsed_str(char *parsed_str, char *head_str);
 
 int		parsed_str_error_check(char **parsed_str);

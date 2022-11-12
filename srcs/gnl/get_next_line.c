@@ -6,11 +6,12 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 15:14:40 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/13 16:06:13 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/18 18:35:38 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"cub3d.h"
+#include <stdio.h>
 
 char	*gnl_strjoin(char *static_line, char *buffer, int buffer_length)
 {

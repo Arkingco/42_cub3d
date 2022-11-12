@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:27:47 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/22 18:03:04 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/26 20:34:59 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include <errno.h>
-#include "error.h"
+// #include "error.h
 #include "libft.h"
 #include <stdio.h>
 #include <stdlib.h>

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 14:57:19 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/17 13:15:19 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/30 16:56:35 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,8 @@
 #include "struct.h"
 #include "minimap.h"
 
-typedef struct s_param
-{
-	char		**map;
-	void		*mlx;
-	void		*mlx_win;
-	t_mini_map	*mini_map;
-}				t_param;
-
-
-typedef struct s_list_so_long
-{
-	char			*str;
-	struct s_list_so_long	*next;
-}				t_list_so_long;
-
+# define EXIT_ERROR_PLAG		1
+# define WRITE_ERROR_FD			2
 
 int		gnl_strchr(char *s, char word);
 int		gnl_strlen(char *s);

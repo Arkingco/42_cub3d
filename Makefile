@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+         #
+#    By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/27 15:13:41 by kipark            #+#    #+#              #
-#    Updated: 2022/10/17 20:14:38 by jayoon           ###   ########.fr        #
+#    Updated: 2022/10/26 20:47:17 by kipark           ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,12 +30,12 @@ DIR_SRCS					:=	./srcs
 DIR_INCS 					:=	./includes
 DIR_LIBFT					:=	./libft
 DIR_OBJS					:=	./objs
-DIR_EVENT					:=	./event
 
 DIR_EVENT					:=	$(DIR_SRCS)/event
 DIR_ERROR					:=	$(DIR_SRCS)/error
 DIR_MINI_MAP				:=	$(DIR_SRCS)/mini_map
-
+DIR_GAME_VIEW				:=	$(DIR_SRCS)/game_view
+DIR_PARSER					:=	$(DIR_SRCS)/parser
 
 SRCS_MAIN					:=	main.c
 OJBS_MAIN					:=	$(addprefix $(DIR_OBJS)/, $(SRCS_MAIN))
@@ -52,28 +52,34 @@ SRCS_EVENT					:=	key.c
 OJBS_EVENT					:=	$(addprefix $(DIR_OBJS)/, $(SRCS_EVENT))
 SRCS_EVENT					:=	$(addprefix $(DIR_EVENT)/, $(SRCS_EVENT))
 
-SRCS_MINI_MAP					:=	map.c		\
-									player.c
-OJBS_MINI_MAP					:=	$(addprefix $(DIR_OBJS)/, $(SRCS_MINI_MAP))
-SRCS_MINI_MAP					:=	$(addprefix $(DIR_MINI_MAP)/, $(SRCS_MINI_MAP))
+SRCS_MINI_MAP				:=	draw_mini_map.c
+OJBS_MINI_MAP				:=	$(addprefix $(DIR_OBJS)/, $(SRCS_MINI_MAP))
+SRCS_MINI_MAP				:=	$(addprefix $(DIR_MINI_MAP)/, $(SRCS_MINI_MAP))
 
 SRCS_ERROR					:=	error.c
 OJBS_ERROR					:=	$(addprefix $(DIR_OBJS)/, $(SRCS_ERROR))
 SRCS_ERROR					:=	$(addprefix $(DIR_ERROR)/, $(SRCS_ERROR))
 
+SRCS_GAME_VIEW				:=	game_view.c
+OJBS_GAME_VIEW				:=	$(addprefix $(DIR_OBJS)/, $(SRCS_GAME_VIEW))
+SRCS_GAME_VIEW				:=	$(addprefix $(DIR_GAME_VIEW)/, $(SRCS_GAME_VIEW))
+
 SRCS						:=	$(SRCS_MAIN)			\
-								$(SRCS_PARSE_MAP)		\
 								$(SRCS_EVENT)			\
 								$(SRCS_ERROR)			\
-								$(SRCS_MINI_MAP)		
+								$(SRCS_PARSER)			\
+								$(SRCS_MINI_MAP)		\
+								$(SRCS_GAME_VIEW)		
+								
 
 OBJS						:=	$(SRCS:.c=.o)
 
 OBJS_SRCS					:= 	$(OJBS_MAIN)			\
-								$(OJBS_PARSER)			\
 								$(OJBS_EVENT)			\
 								$(OJBS_ERROR)			\
-								$(OJBS_MINI_MAP)		
+								$(OJBS_PARSER)			\
+								$(OJBS_MINI_MAP)		\
+								$(OJBS_GAME_VIEW)		
 
 OBJS_OBJS					:=	$(OBJS_SRCS:.c=.o)
 
@@ -89,7 +95,7 @@ all: $(NAME)
 
 $(NAME)		: $(LIBFT) $(MLXLIB) $(OBJS)
 	$(CC) $(CFLAGS) $(LIBFT_FLAGS) $(MLX_FLAGS) $(OBJS_OBJS) -o $@
-	./cub3d map/test_map.ber
+	./cub3d ./map/test_map.ber
 
 %.o			: %.c
 	$(CC) $(CFLAGS) $(INCS_FLAGS)  -c $< -o $@
