@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 10:58:52 by jayoon            #+#    #+#             */
-/*   Updated: 2022/11/15 22:39:35 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/11/15 22:57:20 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 # define MSG_ERR_ELEMENT		"Invalid element!\n"
 # define MSG_ERR_IDNETIFIER		"Invalid identifier!\n"
 # define MSG_ERR_MAP			"Invalid map!\n"
+
+# define INT_MAX				2147483647
 
 # include <stdlib.h>
 
@@ -115,5 +117,6 @@ char			*pass_empty_line(int fd);
 size_t			get_cnt_map_height(int temp_fd);
 size_t			get_cnt_map_width(char **map);
 t_cnt_start_pos	is_valid_map(t_map_info *map_info);
+int				is_valid_character(char c);
 
 #endif
