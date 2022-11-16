@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:41:09 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/18 19:31:56 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/11/16 22:04:19 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,6 @@
 
 # include "struct.h"
 
-void draw_mini_map(t_game *game);
+void	draw_mini_map(t_game *game);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/27 15:13:41 by kipark            #+#    #+#              #
-#    Updated: 2022/10/26 20:47:17 by kipark           ###   ########seoul.kr   #
+#    Updated: 2022/11/16 20:28:53 by kipark           ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,6 @@ MLXLIB 						= $(DIR_MLX)/libmlx.a
 DIR_MLX 					= ./minilibx_opengl_20191021
 MLX_FLAGS 					= -L$(DIR_MLX) -lmlx -framework OpenGL -framework AppKit
 
-PWD							:=	/Users/kipark/42_cub3d
 DIR_SRCS					:=	./srcs
 DIR_INCS 					:=	./includes
 DIR_LIBFT					:=	./libft
@@ -36,6 +35,7 @@ DIR_ERROR					:=	$(DIR_SRCS)/error
 DIR_MINI_MAP				:=	$(DIR_SRCS)/mini_map
 DIR_GAME_VIEW				:=	$(DIR_SRCS)/game_view
 DIR_PARSER					:=	$(DIR_SRCS)/parser
+DIR_SET_GAME				:=	$(DIR_SRCS)/set_game
 
 SRCS_MAIN					:=	main.c
 OJBS_MAIN					:=	$(addprefix $(DIR_OBJS)/, $(SRCS_MAIN))
@@ -52,7 +52,9 @@ SRCS_EVENT					:=	key.c
 OJBS_EVENT					:=	$(addprefix $(DIR_OBJS)/, $(SRCS_EVENT))
 SRCS_EVENT					:=	$(addprefix $(DIR_EVENT)/, $(SRCS_EVENT))
 
-SRCS_MINI_MAP				:=	draw_mini_map.c
+SRCS_MINI_MAP				:=	draw_mini_map.c			\
+								draw_mini_player.c		\
+								draw_mini_ray.c
 OJBS_MINI_MAP				:=	$(addprefix $(DIR_OBJS)/, $(SRCS_MINI_MAP))
 SRCS_MINI_MAP				:=	$(addprefix $(DIR_MINI_MAP)/, $(SRCS_MINI_MAP))
 
@@ -60,26 +62,34 @@ SRCS_ERROR					:=	error.c
 OJBS_ERROR					:=	$(addprefix $(DIR_OBJS)/, $(SRCS_ERROR))
 SRCS_ERROR					:=	$(addprefix $(DIR_ERROR)/, $(SRCS_ERROR))
 
-SRCS_GAME_VIEW				:=	game_view.c
+SRCS_GAME_VIEW				:=	game_view.c 			\
+								game_dda.c				\
+								game_draw.c
 OJBS_GAME_VIEW				:=	$(addprefix $(DIR_OBJS)/, $(SRCS_GAME_VIEW))
 SRCS_GAME_VIEW				:=	$(addprefix $(DIR_GAME_VIEW)/, $(SRCS_GAME_VIEW))
+
+SRCS_SET_GAME				:=	set_mlx.c				\
+								set_texture.c
+OJBS_SET_GAME				:=	$(addprefix $(DIR_OBJS)/, $(SRCS_SET_GAME))
+SRCS_SET_GAME				:=	$(addprefix $(DIR_SET_GAME)/, $(SRCS_SET_GAME))
 
 SRCS						:=	$(SRCS_MAIN)			\
 								$(SRCS_EVENT)			\
 								$(SRCS_ERROR)			\
 								$(SRCS_PARSER)			\
 								$(SRCS_MINI_MAP)		\
-								$(SRCS_GAME_VIEW)		
+								$(SRCS_GAME_VIEW)		\
+								$(SRCS_SET_GAME)
 								
 
 OBJS						:=	$(SRCS:.c=.o)
-
 OBJS_SRCS					:= 	$(OJBS_MAIN)			\
 								$(OJBS_EVENT)			\
 								$(OJBS_ERROR)			\
 								$(OJBS_PARSER)			\
 								$(OJBS_MINI_MAP)		\
-								$(OJBS_GAME_VIEW)		
+								$(OJBS_GAME_VIEW)		\
+								$(OJBS_SET_GAME)
 
 OBJS_OBJS					:=	$(OBJS_SRCS:.c=.o)
 
@@ -99,7 +109,7 @@ $(NAME)		: $(LIBFT) $(MLXLIB) $(OBJS)
 
 %.o			: %.c
 	$(CC) $(CFLAGS) $(INCS_FLAGS)  -c $< -o $@
-	mv $@ $(PWD)/objs
+	mv $@ ./objs
 
 $(MLXLIB)	:
 	make -C $(DIR_MLX) all

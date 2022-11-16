@@ -6,15 +6,16 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 17:23:00 by kipark            #+#    #+#             */
-/*   Updated: 2022/11/08 14:40:07 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/11/16 22:04:30 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
 
-#define PLAYER_SIZE 5
-#define MINI_SIZE 20
+# define PLAYER_SIZE 5
+# define MINI_SIZE 20
+
 typedef enum e_draw_color
 {
 	COLOR_RED = 0x00FF0000,
@@ -22,7 +23,7 @@ typedef enum e_draw_color
 	COLOR_BLACK = 0x00000000,
 	COLOR_PINK = 0x00FF00FF,
 	COLOR_ORANGE = 0x00DF7401
-} t_draw_color;
+}	t_draw_color;
 
 typedef struct s_data
 {
@@ -35,20 +36,19 @@ typedef struct s_data
 
 typedef struct s_player
 {
-	double posX;
-	double posY;
-	double dirX;
-	double dirY;
-	double planeX;
-	double planeY;
+	double	pos_x;
+	double	pos_y;
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
 }	t_player;
 
 typedef struct s_list_so_long
 {
-	char			*str;
+	char					*str;
 	struct s_list_so_long	*next;
 }	t_list_so_long;
-
 
 typedef struct s_texture
 {
@@ -75,37 +75,36 @@ typedef struct s_game
 	t_data		*minimap;
 	t_data		*game_view;
 	t_texture	*texture;
-	int			**draw_buffer;
 	int			**texture_color;
 }	t_game;
 
 typedef struct s_ray_casting
 {
 	int		color;
-	double	cameraX;
-	double	rayDirX;
-	double	rayDirY;
-	int		mapX;
-	int		mapY;
-	double	sideDistX;
-	double	sideDistY;
-	double	perpWallDist;
-	double	deltaDistX;
-	double	deltaDistY;
-	int		stepX;
-	int		stepY;
+	double	camera_x;
+	double	raydir_x;
+	double	raydir_y;
+	int		map_x;
+	int		map_y;
+	double	side_dist_x;
+	double	side_dist_y;
+	double	perp_wall_dist;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	int		step_x;
+	int		step_y;
 	int		hit;
 	int		side;
-	int		lineHeight;
-	int		drawStart;
-	int		drawEnd;
-	double	wallX;
-	int		texX;
-	int		texY;
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
+	double	wall_x;
+	int		tex_x;
+	int		tex_y;
 	double	step;
-	double	texPos;
-	double ray_point_X;
-	double ray_point_Y;
+	double	tex_pos;
+	double	ray_point_x;
+	double	ray_point_y;
 }	t_ray_casting;
 
 #endif
