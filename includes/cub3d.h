@@ -6,15 +6,15 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 14:57:19 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/30 16:56:35 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/11/16 22:01:18 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-#include "struct.h"
-#include "minimap.h"
+# include "struct.h"
+# include "minimap.h"
 
 # define EXIT_ERROR_PLAG		1
 # define WRITE_ERROR_FD			2
@@ -38,5 +38,9 @@ char	*so_long_strjoin(char *buffer);
 
 char	**parse(t_list_so_long **str_head, char **argv);
 void	set_background(void *mlx, void *mlx_win);
+
+void	set_player(t_game *game);
+void	set_game(t_game *game, char **map);
+void	set_texture(t_game *game);
 
 #endif

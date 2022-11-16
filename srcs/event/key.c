@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 14:53:10 by kipark            #+#    #+#             */
-/*   Updated: 2022/11/08 14:35:04 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/11/16 22:05:38 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,57 +22,56 @@ static void	rot_view(t_player *player, double rot)
 {
 	double	olddir;
 	double	oldplane;
-	
 
-	olddir = player->dirY;
-	oldplane = player->planeY;
-	player->dirY = player->dirX * sin(rot) + player->dirY * cos(rot);
-	player->dirX = player->dirX * cos(rot) - olddir * sin(rot);
-	player->planeY = player->planeX * sin(rot) + player->planeY * cos(rot);
-	player->planeX = player->planeX * cos(rot) - oldplane * sin(rot);
+	olddir = player->dir_y;
+	oldplane = player->plane_y;
+	player->dir_y = player->dir_x * sin(rot) + player->dir_y * cos(rot);
+	player->dir_x = player->dir_x * cos(rot) - olddir * sin(rot);
+	player->plane_y = player->plane_x * sin(rot) + player->plane_y * cos(rot);
+	player->plane_x = player->plane_x * cos(rot) - oldplane * sin(rot);
 }
 
-static void set_move_dir(t_player *player , int key_type, \
-										double *moveX_dir, double *moveY_dir)
+static void	set_move_dir(t_player *player, int key_type, \
+										double *move_x_dir, double *move_y_dir)
 {
 	double	olddir;
 
-	olddir = player->dirY;
+	olddir = player->dir_y;
 	if (key_type == KEY_A)
 	{
-		*moveY_dir = (player->dirX * sin(A_PI) + player->dirY * cos(A_PI));
-		*moveX_dir = (player->dirX * cos(A_PI) - olddir * sin(A_PI));
+		*move_y_dir = (player->dir_x * sin(A_PI) + player->dir_y * cos(A_PI));
+		*move_x_dir = (player->dir_x * cos(A_PI) - olddir * sin(A_PI));
 		return ;
 	}
 	else if (key_type == KEY_D)
 	{
-		*moveY_dir = (player->dirX * sin(D_PI) + player->dirY * cos(D_PI));
-		*moveX_dir = (player->dirX * cos(D_PI) - olddir * sin(D_PI));
+		*move_y_dir = (player->dir_x * sin(D_PI) + player->dir_y * cos(D_PI));
+		*move_x_dir = (player->dir_x * cos(D_PI) - olddir * sin(D_PI));
 		return ;
 	}
-	*moveX_dir = player->dirX;
-	*moveY_dir = player->dirY;
+	*move_x_dir = player->dir_x;
+	*move_y_dir = player->dir_y;
 	return ;
 }
 
-static void move_key(t_game *game, double speed, int key_type)
+static void	move_key(t_game *game, double speed, int key_type)
 {
-	double		moveY_dir;
-	double		moveX_dir;
+	double		move_y_dir;
+	double		move_x_dir;
 	t_player	*player;
 
 	player = game->player;
-	set_move_dir(player, key_type, &moveX_dir, &moveY_dir);
-	if (game->map[(int)(player->posY + (moveY_dir * speed) * 2.5)]\
-					[(int)(player->posX + (moveX_dir * speed) * 2.5)] != '0')
-						return ;
-	player->posY += moveY_dir * speed;
-	player->posX += moveX_dir * speed;	
+	set_move_dir(player, key_type, &move_x_dir, &move_y_dir);
+	if (game->map[(int)(player->pos_y + (move_y_dir * speed) * WALL_DIST)] \
+			[(int)(player->pos_x + (move_x_dir * speed) * WALL_DIST)] != '0')
+		return ;
+	player->pos_y += move_y_dir * speed;
+	player->pos_x += move_x_dir * speed;
 }
 
 int	key_press(int keycode, t_game *game)
 {	
-	t_player *player;
+	t_player	*player;
 
 	player = game->player;
 	if (keycode == KEY_W)
@@ -92,7 +91,8 @@ int	key_press(int keycode, t_game *game)
 	else
 		return (0);
 	draw_game_view(game);
-	mlx_put_image_to_window(game->mlx, game->mlx_win, game->game_view->img, 0, 0);
+	mlx_put_image_to_window(game->mlx, \
+									game->mlx_win, game->game_view->img, 0, 0);
 	draw_mini_map(game);
 	mlx_put_image_to_window(game->mlx, game->mlx_win, game->minimap->img, 0, 0);
 	return (0);
