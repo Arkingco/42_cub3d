@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 10:58:52 by jayoon            #+#    #+#             */
-/*   Updated: 2022/11/11 12:08:16 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/11/15 22:57:20 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 # define MSG_ERR_ELEMENT		"Invalid element!\n"
 # define MSG_ERR_IDNETIFIER		"Invalid identifier!\n"
 # define MSG_ERR_MAP			"Invalid map!\n"
+
+# define INT_MAX				2147483647
 
 # include <stdlib.h>
 
@@ -52,19 +54,6 @@ typedef enum e_gnl_flag
 	GNL_NULL,
 	GNL_NOT_NULL
 }	t_gnl_flag;
-
-typedef enum e_map_characters
-{
-	MAP_EMPTY = 1,
-	MAP_WALL = 1 << 1,
-	MAP_NORTH = 1 << 2,
-	MAP_SOUTH = 1 << 3,
-	MAP_EAST = 1 << 4,
-	MAP_WEST = 1 << 5,
-	MAP_SPACE = 1 << 6,
-	MAP_VALID = MAP_EMPTY | MAP_WALL \
-		| MAP_NORTH | MAP_SOUTH | MAP_EAST | MAP_WEST | MAP_SPACE
-}	t_map_characters;
 
 typedef enum e_cub_bool
 {
@@ -103,6 +92,12 @@ typedef struct s_identifier_info
 	t_identifier	((*f_parsing)(t_map_info *, char *, t_identifier));
 }	t_identifier_info;
 
+typedef struct s_get_map_cnt
+{
+	size_t	cnt_start_pos;
+	size_t	cnt_valid_c;
+}	t_get_map_cnt;
+
 /* main */
 void			init_map_info(t_map_info *param, int argc, char *file_path);
 size_t			init_element(t_map_info *map_info, int fd);
@@ -122,5 +117,6 @@ char			*pass_empty_line(int fd);
 size_t			get_cnt_map_height(int temp_fd);
 size_t			get_cnt_map_width(char **map);
 t_cnt_start_pos	is_valid_map(t_map_info *map_info);
+int				is_valid_character(char c);
 
 #endif
