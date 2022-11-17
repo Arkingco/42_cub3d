@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 15:01:26 by kipark            #+#    #+#             */
-/*   Updated: 2022/11/16 22:05:13 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/11/17 17:00:49 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,22 @@
 #include "cub3d.h"
 #include "minimap.h"
 #include "game_view.h"
+#include "parse_map.h"
 #include <unistd.h>
 #include <math.h>
 
-#include <stdio.h>
+static void	free_all(t_map_info *map_info)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < CNT_TEXTURE)
+	{
+		ft_safe_free(map_info->texture_path[i]);
+		++i;
+	}
+	ft_safe_free_two_dimentions_arr(map_info->map);
+}
 
 static void	game_start(char **map)
 {
@@ -43,11 +55,10 @@ static void	game_start(char **map)
 int	main(int argc, char **argv)
 {
 	t_list_so_long	*str_head;
-	char			**map;
+	t_map_info		map_info;
 
-	if (argc != 2)
-		print_error_str("Arguments not match\n");
 	str_head = NULL;
-	map = parse(&str_head, argv);
-	game_start(map);
+	init_map_info(&map_info, argc, argv[1]);
+	game_start(map_info.map);
+	free_all(&map_info);
 }
