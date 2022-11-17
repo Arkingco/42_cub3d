@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_mini_ray.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 18:09:58 by kipark            #+#    #+#             */
-/*   Updated: 2022/11/16 22:03:23 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/11/17 18:49:03 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ static void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 
 int	is_ray(double ray_point_x, double ray_point_y, t_game *game)
 {
-	if (ray_point_x < 0 || ray_point_x > game->mini_width * MINI_SIZE || \
-			ray_point_y < 0 || ray_point_y > game->mini_height * MINI_SIZE || \
-			(int)ray_point_x / MINI_SIZE < 0 || \
-			(int)ray_point_x / MINI_SIZE > game->mini_width - 1 || \
-			(int)ray_point_y / MINI_SIZE < 0 || \
-			(int)ray_point_y / MINI_SIZE > game->mini_height - 1 || \
+	if (ray_point_x <= 0 || ray_point_x > game->mini_width * MINI_SIZE || \
+			ray_point_y <= 0 || ray_point_y > game->mini_height * MINI_SIZE || \
+			(int)ray_point_x / MINI_SIZE <= 0 || \
+			(int)ray_point_x / MINI_SIZE >= game->mini_width - 1 || \
+			(int)ray_point_y / MINI_SIZE <= 0 || \
+			(int)ray_point_y / MINI_SIZE >= game->mini_height - 1 || \
 			game->map[(int)ray_point_y / \
 								MINI_SIZE][(int)ray_point_x / MINI_SIZE] == '1')
 		return (1);

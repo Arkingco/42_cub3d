@@ -6,7 +6,7 @@
 #    By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/27 15:13:41 by kipark            #+#    #+#              #
-#    Updated: 2022/11/17 16:58:10 by jayoon           ###   ########.fr        #
+#    Updated: 2022/11/17 18:39:48 by jayoon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -98,6 +98,7 @@ all: $(NAME)
 
 $(NAME)		: $(LIBFT) $(MLXLIB) $(OBJS)
 	$(CC) $(CFLAGS) $(LIBFT_FLAGS) $(MLX_FLAGS) $(OBJS) -o $@
+	./cub3D asset/map_in_pdf.cub
 
 %.o			: %.c
 	$(CC) $(CFLAGS) $(INCS_FLAGS)  -c $< -o $@

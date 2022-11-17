@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_mini_map.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:38:57 by kipark            #+#    #+#             */
-/*   Updated: 2022/11/16 22:06:49 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/11/17 18:48:03 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,31 @@ static void	draw_map(t_data *mini_map, char **map)
 	}
 }
 
+static void	draw_map_background(t_data *mini_map, char **map)
+{
+	int	i;
+	int	j;
+	int	y_pixel;
+	int	x_pixel;
+
+	i = 0;
+	while (map[i] != NULL)
+	{
+		j = 0;
+		while (map[i][j] != '\0')
+		{
+			y_pixel = i * MINIMAP_SIZE;
+			x_pixel = j * MINIMAP_SIZE;
+			draw_minimap_pixel(mini_map, x_pixel, y_pixel, COLOR_BLACK);
+			++j;
+		}
+		++i;
+	}
+}
+
 void	draw_mini_map(t_game *game)
 {
+	draw_map_background(game->minimap, game->map);
 	draw_map(game->minimap, game->map);
 	draw_minimap_player(game);
 	draw_minimap_ray(game);

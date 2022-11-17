@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 14:57:19 by kipark            #+#    #+#             */
-/*   Updated: 2022/11/16 22:01:18 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/11/17 17:40:37 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,12 @@
 
 # include "struct.h"
 # include "minimap.h"
+# include "parse_map.h"
 
 # define EXIT_ERROR_PLAG		1
 # define WRITE_ERROR_FD			2
+# define GAME_WIDTH				1500
+# define GAME_HEIGHT			1000
 
 int		gnl_strchr(char *s, char word);
 int		gnl_strlen(char *s);
@@ -40,7 +43,7 @@ char	**parse(t_list_so_long **str_head, char **argv);
 void	set_background(void *mlx, void *mlx_win);
 
 void	set_player(t_game *game);
-void	set_game(t_game *game, char **map);
+void	set_game(t_game *game, t_map_info *map_info);
 void	set_texture(t_game *game);
 
 #endif

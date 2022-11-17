@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 15:01:26 by kipark            #+#    #+#             */
-/*   Updated: 2022/11/17 17:00:49 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/11/17 18:40:03 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,12 @@ static void	free_all(t_map_info *map_info)
 	ft_safe_free_two_dimentions_arr(map_info->map);
 }
 
-static void	game_start(char **map)
+static void	game_start(t_map_info *map_info)
 {
 	t_game	*game;
 
 	game = ft_safe_malloc(sizeof(t_game));
-	set_game(game, map);
+	set_game(game, map_info);
 	set_player(game);
 	draw_game_view(game);
 	mlx_put_image_to_window(game->mlx, \
@@ -59,6 +59,6 @@ int	main(int argc, char **argv)
 
 	str_head = NULL;
 	init_map_info(&map_info, argc, argv[1]);
-	game_start(map_info.map);
+	game_start(&map_info);
 	free_all(&map_info);
 }

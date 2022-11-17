@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_mlx.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 18:30:30 by kipark            #+#    #+#             */
-/*   Updated: 2022/11/16 22:03:23 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/11/17 18:55:44 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,20 @@
 #include "cub3d.h"
 #include "minimap.h"
 #include "game_view.h"
+#include "parse_map.h"
 #include <unistd.h>
 #include <math.h>
 
-void	set_game(t_game *game, char **map)
+void	set_game(t_game *game, t_map_info *map_info)
 {
 	t_data	*minimap;
 	t_data	*game_view;
 
-	game->width = 1500;
-	game->height = 1000;
-	game->mini_width = 50;
-	game->mini_height = 10;
-	game->map = map;
+	game->width = GAME_WIDTH;
+	game->height = GAME_HEIGHT;
+	game->mini_width = map_info->map_width + 2;
+	game->mini_height = map_info->map_height + 2;
+	game->map = map_info->map;
 	game->mlx = mlx_init();
 	game->mlx_win = mlx_new_window(game->mlx, \
 											game->width, game->height, "cub3D");
@@ -38,8 +39,8 @@ void	set_game(t_game *game, char **map)
 	game->minimap = ft_safe_malloc(sizeof(t_data));
 	game->game_view = ft_safe_malloc(sizeof(t_data));
 	minimap = game->minimap;
-	minimap->img = \
-		mlx_new_image(game->mlx, game->mini_width * 20, game->mini_height * 20);
+	minimap->img = mlx_new_image(game->mlx, game->mini_width * MINIMAP_SIZE, \
+			game->mini_height * MINIMAP_SIZE);
 	minimap->addr = mlx_get_data_addr(minimap->img, \
 			&minimap->bits_per_pixel, &minimap->line_length, &minimap->endian);
 	game_view = game->game_view;
@@ -55,8 +56,8 @@ void	set_player(t_game *game)
 	t_player	*this_player;
 
 	this_player = game->player;
-	this_player->pos_x = 1.5;
-	this_player->pos_y = 1.5;
+	this_player->pos_x = 11.5;
+	this_player->pos_y = 2.5;
 	this_player->dir_x = 1;
 	this_player->dir_y = 0;
 	this_player->plane_x = 0.00;

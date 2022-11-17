@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 10:58:52 by jayoon            #+#    #+#             */
-/*   Updated: 2022/11/15 22:57:20 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/11/17 19:10:12 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,15 @@ typedef struct s_substr_info
 
 typedef struct s_map_info
 {
-	char	*texture_path[4];
-	int		ceiling[3];
-	int		floor[3];
-	char	**map;
-	size_t	map_width;
-	size_t	map_height;
+	char			*texture_path[4];
+	int				ceiling[3];
+	int				floor[3];
+	char			**map;
+	size_t			map_width;
+	size_t			map_height;
+	t_identifier	view_direction;
+	int				start_pos_x;
+	int				start_pos_y;
 }	t_map_info;
 
 typedef struct s_identifier_info
