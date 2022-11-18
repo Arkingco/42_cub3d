@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   set_mlx.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 18:30:30 by kipark            #+#    #+#             */
-/*   Updated: 2022/11/17 18:55:44 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/11/18 16:33:43 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
 #include "error.h"
 #include "mlx.h"
 #include "key.h"
@@ -29,8 +28,8 @@ void	set_game(t_game *game, t_map_info *map_info)
 
 	game->width = GAME_WIDTH;
 	game->height = GAME_HEIGHT;
-	game->mini_width = map_info->map_width + 2;
-	game->mini_height = map_info->map_height + 2;
+	game->map_width = map_info->map_width + 2;
+	game->map_height = map_info->map_height + 2;
 	game->map = map_info->map;
 	game->mlx = mlx_init();
 	game->mlx_win = mlx_new_window(game->mlx, \
@@ -39,8 +38,8 @@ void	set_game(t_game *game, t_map_info *map_info)
 	game->minimap = ft_safe_malloc(sizeof(t_data));
 	game->game_view = ft_safe_malloc(sizeof(t_data));
 	minimap = game->minimap;
-	minimap->img = mlx_new_image(game->mlx, game->mini_width * MINIMAP_SIZE, \
-			game->mini_height * MINIMAP_SIZE);
+	minimap->img = mlx_new_image(game->mlx, game->map_width * MINIMAP_SIZE, \
+			game->map_height * MINIMAP_SIZE);
 	minimap->addr = mlx_get_data_addr(minimap->img, \
 			&minimap->bits_per_pixel, &minimap->line_length, &minimap->endian);
 	game_view = game->game_view;
@@ -51,15 +50,29 @@ void	set_game(t_game *game, t_map_info *map_info)
 	set_texture(game);
 }
 
-void	set_player(t_game *game)
+static void	set_player_dir(t_game *game, t_map_info *map_info)
+{
+	if (map_info->view_direction & E)
+		return ;
+	else if (map_info->view_direction & W)
+		rot_view(game->player, PI);
+	else if (map_info->view_direction & S)
+		rot_view(game->player, -(PI / 2));
+	else if (map_info->view_direction & N)
+		rot_view(game->player, (PI / 2));
+	return ;
+}
+
+void	set_player(t_game *game, t_map_info *map_info)
 {
 	t_player	*this_player;
 
 	this_player = game->player;
-	this_player->pos_x = 11.5;
-	this_player->pos_y = 2.5;
+	this_player->pos_x = map_info->start_pos_x + 0.5;
+	this_player->pos_y = map_info->start_pos_y + 0.5;
 	this_player->dir_x = 1;
 	this_player->dir_y = 0;
 	this_player->plane_x = 0.00;
 	this_player->plane_y = 0.77;
+	set_player_dir(game, map_info);
 }

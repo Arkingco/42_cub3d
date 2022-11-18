@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_mini_map.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:38:57 by kipark            #+#    #+#             */
-/*   Updated: 2022/11/17 18:48:03 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/11/18 16:44:45 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,5 @@ void	draw_mini_map(t_game *game)
 {
 	draw_map_background(game->minimap, game->map);
 	draw_map(game->minimap, game->map);
-	draw_minimap_player(game);
 	draw_minimap_ray(game);
 }

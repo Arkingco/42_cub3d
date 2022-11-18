@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 17:06:09 by kipark            #+#    #+#             */
-/*   Updated: 2022/11/16 22:06:12 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/11/18 14:42:59 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ static int	get_texture_img(t_ray_casting *rc)
 	if (rc->side == 1)
 	{
 		if (rc->raydir_y > 0)
-			return (2);
-		else
 			return (3);
+		else
+			return (2);
 	}
 	else
 	{

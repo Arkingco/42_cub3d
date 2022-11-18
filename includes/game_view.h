@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_view.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:48:32 by kipark            #+#    #+#             */
-/*   Updated: 2022/11/17 18:42:29 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/11/18 16:34:55 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 
 # include "struct.h"
 
+# define GAME_WIDTH	1500
+# define GAME_HEIGHT 1000
 # define MINIMAP_RAY_COUNT 100
-# define MINIMAP_SIZE 20
+# define MINIMAP_SIZE 15
 # define TEX_WIDTH	64
 # define TEX_HEIGHT	64
 # define TEX_COUNT 4

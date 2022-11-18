@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 15:01:26 by kipark            #+#    #+#             */
-/*   Updated: 2022/11/17 18:40:03 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/11/18 15:53:57 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	game_start(t_map_info *map_info)
 
 	game = ft_safe_malloc(sizeof(t_game));
 	set_game(game, map_info);
-	set_player(game);
+	set_player(game, map_info);
 	draw_game_view(game);
 	mlx_put_image_to_window(game->mlx, \
 									game->mlx_win, game->game_view->img, 0, 0);
@@ -54,10 +54,8 @@ static void	game_start(t_map_info *map_info)
 
 int	main(int argc, char **argv)
 {
-	t_list_so_long	*str_head;
 	t_map_info		map_info;
 
-	str_head = NULL;
 	init_map_info(&map_info, argc, argv[1]);
 	game_start(&map_info);
 	free_all(&map_info);
