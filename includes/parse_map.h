@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 10:58:52 by jayoon            #+#    #+#             */
-/*   Updated: 2022/11/17 22:07:38 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/11/18 14:43:57 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,14 @@ typedef enum e_cnt_start_position
 	CUB_ONE
 }	t_cnt_start_pos;
 
+typedef enum e_view_dir
+{
+	E = 1,
+	W = 1 << 1,
+	S = 1 << 2,
+	N = 1 << 3
+}	t_view_dir;
+
 typedef struct s_substr_info
 {
 	char	*start;
@@ -82,9 +90,9 @@ typedef struct s_map_info
 	char			**map;
 	size_t			map_width;
 	size_t			map_height;
-	t_identifier	view_direction;
-	int				start_pos_x;
-	int				start_pos_y;
+	t_view_dir		view_direction;
+	double			start_pos_x;
+	double			start_pos_y;
 }	t_map_info;
 
 typedef struct s_identifier_info
@@ -112,6 +120,8 @@ t_identifier	process_texture_path(t_map_info *map_info, char *str, \
 						t_identifier num_iden);
 size_t			get_map(t_map_info *map_info, char **temp_map);
 void			get_cnt(char c, t_get_map_cnt *cnt);
+void			get_start_pos_info(char c, t_map_info *map_info, \
+					size_t i, size_t j);
 
 /* utils */
 int				cub3d_atoi(const char *str);

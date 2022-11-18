@@ -6,7 +6,7 @@
 #    By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/27 15:13:41 by kipark            #+#    #+#              #
-#    Updated: 2022/11/17 22:07:12 by jayoon           ###   ########.fr        #
+#    Updated: 2022/11/18 14:44:05 by jayoon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,8 @@ SRCS_PARSE_MAP				:=	init_map_info.c			\
 								is_valid_map.c			\
 								is_valid_character.c	\
 								get_cnt.c				\
-								is_start_position.c
+								is_start_position.c		\
+								get_start_pos_info.c
 SRCS_PARSE_MAP				:=	$(addprefix $(DIR_PARSE_MAP)/, $(SRCS_PARSE_MAP))
 
 SRCS_EVENT					:=	key.c

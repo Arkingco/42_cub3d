@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 21:10:42 by jayoon            #+#    #+#             */
-/*   Updated: 2022/11/17 22:11:00 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/11/18 14:45:08 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@ static void	put_in_space_at_edge_and_init(t_map_info *map_info, size_t *p_i, \
 {
 	size_t	i;
 
+	map_info->view_direction = 0;
+	map_info->start_pos_x = 0;
+	map_info->start_pos_y = 0;
 	*p_i = 1;
 	cnt->cnt_start_pos = 0;
 	cnt->cnt_valid_c = 0;
@@ -40,22 +43,6 @@ static void	init_j_and_cnt_valid_c(size_t *p_j, size_t *p_cnt_valid_c)
 	*p_cnt_valid_c = 0;
 }
 
-// static void	get_view_direction(char c, t_map_info *map_info)
-// {
-
-// }
-// static void	get_start_position(char c, t_map_info *map_info)
-// {
-
-// }
-
-static void	get_start_position_info(char c, t_map_info *map_info, \
-				size_t i, size_t j)
-{
-	get_view_direction(c, map_info);
-	get_start_position(i, j, map_info);
-}
-
 size_t	get_map(t_map_info *map_info, char **temp_map)
 {
 	size_t			i;
@@ -74,7 +61,7 @@ size_t	get_map(t_map_info *map_info, char **temp_map)
 			if (is_valid_character(map_info->map[i][j]) == CUB_FAIL)
 				print_error_str(MSG_ERR_MAP);
 			if (is_start_position(map_info->map[i][j]))
-				get_start_position_info(map_info->map[i][j], map_info, i, j);
+				get_start_pos_info(map_info->map[i][j], map_info, i, j);
 			++j;
 		}
 		if (cnt.cnt_start_pos > 1 || cnt.cnt_valid_c == 0)
