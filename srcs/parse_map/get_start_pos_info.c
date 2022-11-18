@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 14:41:02 by jayoon            #+#    #+#             */
-/*   Updated: 2022/11/18 14:48:27 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/11/18 16:26:03 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,5 @@ void	get_start_pos_info(char c, t_map_info *map_info, \
 {
 	get_view_direction(c, map_info);
 	get_start_position(map_info, i, j);
+	map_info->map[i][j] = '0';
 }

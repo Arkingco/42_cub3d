@@ -1,6 +1,8 @@
 *.DS_Store
 *.vscode
 *libft.a
+*libmlx.a
+cub3D
 ./kipark_jayoon_minishell/minishell
 
 # Prerequisites

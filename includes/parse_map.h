@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 10:58:52 by jayoon            #+#    #+#             */
-/*   Updated: 2022/11/18 14:43:57 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/11/18 15:50:53 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,11 @@ typedef struct s_map_info
 	char			*texture_path[4];
 	int				ceiling[3];
 	int				floor[3];
+
+// 4byte 의 색 정보를 가지고 있는 메모리 값
+	int				ceiling_info;
+	int				floor_info;
+
 	char			**map;
 	size_t			map_width;
 	size_t			map_height;
