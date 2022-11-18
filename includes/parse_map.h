@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 10:58:52 by jayoon            #+#    #+#             */
-/*   Updated: 2022/11/18 16:44:43 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/11/18 18:23:41 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,15 @@
 # define CNT_WORD_OF_TEXTRUE	3
 # define CNT_WORD_OF_COLOR		2
 
+# define MAP_LIMIT_HEIGHT		65
+# define MAP_LIMIT_WIDTH		98
+
 # define MSG_ERR_ARGS			"Argument must be one!\n"
 # define MSG_ERR_FILE_NAME		"File name is invalid!\n"
 # define MSG_ERR_ELEMENT		"Invalid element!\n"
 # define MSG_ERR_IDNETIFIER		"Invalid identifier!\n"
 # define MSG_ERR_MAP			"Invalid map!\n"
+# define MSG_ERR_MAP_IS_BIG		"Map is too big!\n"
 
 # define INT_MAX				2147483647
 

@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 20:35:06 by jayoon            #+#    #+#             */
-/*   Updated: 2022/11/10 20:46:07 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/11/18 18:27:24 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	is_zero_or_start_position(char c)
 static void	check_the_door_is_closed(char **map, size_t i, size_t j)
 {
 	if (map[i - 1][j - 1] == ' ' || map[i - 1][j] == ' ' \
-		|| map[i - 1][j + 1] == ' '	|| map[i][j - 1] == ' ' \
+		|| map[i - 1][j + 1] == ' ' || map[i][j - 1] == ' ' \
 		|| map[i][j + 1] == ' ' || map[i + 1][j - 1] == ' ' \
 		|| map[i + 1][j] == ' ' || map[i + 1][j + 1] == ' ')
 		print_error_str(MSG_ERR_MAP);

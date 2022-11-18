@@ -1,18 +1,14 @@
 C 224,2,2
 
+NO ./srcs/img/north.xpm 
+EA ./srcs/img/east.xpm
+SO ./srcs/img/south.xpm
+WE ./srcs/img/west.xpm
 
-
-SO ./path_to_the_south_texture
-
-NO           ./path_to_the_west_texture
-
-
-WE           ./path_to_the_west_texture
 
 F 220,100,0
 
 
-EA ./path_to_the_east_texture
 
 1111111111111
 10111000111111
