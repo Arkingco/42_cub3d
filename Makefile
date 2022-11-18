@@ -6,7 +6,7 @@
 #    By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/27 15:13:41 by kipark            #+#    #+#              #
-#    Updated: 2022/11/18 18:09:14 by kipark           ###   ########seoul.kr   #
+#    Updated: 2022/11/18 18:56:40 by kipark           ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -111,7 +111,6 @@ all: $(NAME)
 
 $(NAME)		: $(LIBFT) $(MLXLIB) $(OBJS) $(INCS)
 	$(CC) $(CFLAGS) $(LIBFT_FLAGS) $(MLX_FLAGS) $(OBJS) -o $@
-	./cub3D asset/map_in_pdf.cub
 
 %.o			: %.c
 	$(CC) $(CFLAGS) $(INCS_FLAGS)  -c $< -o $@

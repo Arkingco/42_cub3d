@@ -1,0 +1,5 @@
+
+NO ./srcs/img/north.xpm 
+EA ./srcs/img/east.xpm
+SO ./srcs/img/south.xpm
+WE ./srcs/img/west.xpm

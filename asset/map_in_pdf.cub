@@ -1,24 +1,9 @@
-NO      ./srcs/img/north.xpm 
-
-
-
+NO ./srcs/img/north.xpm 
 EA ./srcs/img/east.xpm
-
-
-
-
-F                  1,2,100
 SO ./srcs/img/south.xpm
-
-
-C 8,30,0
 WE ./srcs/img/west.xpm
-
-
-
-
-
-
+F                  1,2,100
+C 8,30,0
         1111111111111111111111111
         1E00000000110000000000001
         1011000001110000000000001

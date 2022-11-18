@@ -1,8 +1,7 @@
-NO ./images/bluestone.png
-SO ./images/bluestone.png
-WE ./images/bluestone.png
-EA ./images/bluestone.png
-
+NO ./srcs/img/north.xpm 
+EA ./srcs/img/east.xpm
+SO ./srcs/img/south.xpm
+WE ./srcs/img/west.xpm
 F 00,00,00
 C 00,00,00
 
