@@ -6,7 +6,7 @@
 #    By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/27 15:13:41 by kipark            #+#    #+#              #
-#    Updated: 2022/11/18 14:44:05 by jayoon           ###   ########.fr        #
+#    Updated: 2022/11/18 16:44:05 by jayoon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,15 @@ DIR_MINI_MAP				:=	$(DIR_SRCS)/mini_map
 DIR_GAME_VIEW				:=	$(DIR_SRCS)/game_view
 DIR_PARSE_MAP				:=	$(DIR_SRCS)/parse_map
 DIR_SET_GAME				:=	$(DIR_SRCS)/set_game
+
+INCS						:=	cub3d.h		\
+								error.h		\
+								game_view.h	\
+								key.h		\
+								minimap.h	\
+								parse_map.h	\
+								struct.h
+INCS						:=	$(addprefix $(DIR_INCS)/, $(INCS))
 
 SRCS_MAIN					:=	main.c
 SRCS_MAIN					:=	$(addprefix $(DIR_SRCS)/, $(SRCS_MAIN))
@@ -99,7 +108,7 @@ endif
 
 all: $(NAME)
 
-$(NAME)		: $(LIBFT) $(MLXLIB) $(OBJS)
+$(NAME)		: $(LIBFT) $(MLXLIB) $(OBJS) $(INCS)
 	$(CC) $(CFLAGS) $(LIBFT_FLAGS) $(MLX_FLAGS) $(OBJS) -o $@
 	./cub3D asset/map_in_pdf.cub
 
@@ -134,5 +143,3 @@ re:
 	make all
 
 .PHONY: all clean fclean re debug leaks
-
- 
