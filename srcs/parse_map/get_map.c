@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 21:10:42 by jayoon            #+#    #+#             */
-/*   Updated: 2022/11/15 23:00:34 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/11/18 14:45:08 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@ static void	put_in_space_at_edge_and_init(t_map_info *map_info, size_t *p_i, \
 {
 	size_t	i;
 
+	map_info->view_direction = 0;
+	map_info->start_pos_x = 0;
+	map_info->start_pos_y = 0;
 	*p_i = 1;
 	cnt->cnt_start_pos = 0;
 	cnt->cnt_valid_c = 0;
@@ -32,16 +35,6 @@ static void	put_in_space_at_edge_and_init(t_map_info *map_info, size_t *p_i, \
 		++i;
 	}
 	map_info->map[map_info->map_height + 2] = NULL;
-}
-
-static int	is_start_position(char c)
-{
-	return (c == 'N' || c == 'S' || c == 'E' || c == 'W');
-}
-
-static int	is_not_space_or_eol(char c)
-{
-	return (c != ' ' && c != '\n');
 }
 
 static void	init_j_and_cnt_valid_c(size_t *p_j, size_t *p_cnt_valid_c)
@@ -64,12 +57,11 @@ size_t	get_map(t_map_info *map_info, char **temp_map)
 		{
 			if (temp_map[i - 1][j - 1] != '\n')
 				map_info->map[i][j] = temp_map[i - 1][j - 1];
-			if (is_not_space_or_eol(map_info->map[i][j]))
-				++cnt.cnt_valid_c;
-			if (is_start_position(map_info->map[i][j]))
-				++cnt.cnt_start_pos;
+			get_cnt(map_info->map[i][j], &cnt);
 			if (is_valid_character(map_info->map[i][j]) == CUB_FAIL)
 				print_error_str(MSG_ERR_MAP);
+			if (is_start_position(map_info->map[i][j]))
+				get_start_pos_info(map_info->map[i][j], map_info, i, j);
 			++j;
 		}
 		if (cnt.cnt_start_pos > 1 || cnt.cnt_valid_c == 0)

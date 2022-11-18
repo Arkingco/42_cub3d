@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 14:53:28 by kipark            #+#    #+#             */
-/*   Updated: 2022/11/16 22:29:06 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/11/18 20:44:32 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@
 # define KEY_D					2
 # define PX						64
 # define RIGHT_ARROR_KEY		123
-# define LEFT_ARROR_KEY		124
-# define D_PI (PI / 2)
-# define A_PI (-PI / 2)
-# define WALL_DIST 3
+# define LEFT_ARROR_KEY			124
+# define WALL_DIST	 			3
+# define PLAYER_SPEED			0.1
 
-int	key_press(int keycode, t_game *param);
+int		key_press(int keycode, t_game *param);
+void	rot_view(t_player *player, double rot);
 
 #endif

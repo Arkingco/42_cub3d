@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map_info.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 13:04:54 by jayoon            #+#    #+#             */
-/*   Updated: 2022/11/10 21:43:40 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/11/18 21:30:24 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,10 @@ static void	init_map_info_to_initial_value(t_map_info *map_info)
 	while (i < CNT_TEXTURE)
 	{
 		map_info->texture_path[i] = NULL;
-		if (i < CNT_COLOR)
-		{
-			map_info->ceiling[i] = -1;
-			map_info->floor[i] = -1;
-		}
 		++i;
 	}
+	map_info->ceiling_info = 0;
+	map_info->floor_info = 0;
 	map_info->map_width = 0;
 	map_info->map_height = 0;
 }
@@ -53,11 +50,6 @@ static int	check_element_parsing(t_map_info *map_info)
 	{
 		if (map_info->texture_path[i] == NULL)
 			flag_fail = 1;
-		if (i < CNT_COLOR)
-		{
-			if (map_info->ceiling[i] == -1 || map_info->floor[i] == -1)
-				flag_fail = 1;
-		}
 		++i;
 	}
 	return (flag_fail);
@@ -73,26 +65,6 @@ static int	check_map_name_format(char *file_path)
 	if (ft_strncmp(this_str, ".cub", 5))
 		return (1);
 	return (0);
-}
-
-//test
-#include <stdio.h>
-static void	print_map(t_map_info *map_info)
-{
-	size_t	i = 0;
-	size_t	j = 0;
-
-	while (map_info->map[i])
-	{
-		j = 0;
-		while (map_info->map[i][j])
-		{
-			write(1, &map_info->map[i][j], 1);
-			j++;
-		}
-		write(1, "\n", 1);
-		i++;
-	}
 }
 
 void	init_map_info(t_map_info *map_info, int argc, char *file_path)
@@ -112,6 +84,4 @@ void	init_map_info(t_map_info *map_info, int argc, char *file_path)
 	init_map_content(map_info, fd, file_path, cnt_gnl);
 	if (is_valid_map(map_info) == CUB_ZERO)
 		print_error_str(MSG_ERR_MAP);
-	//test
-	print_map(map_info);
 }

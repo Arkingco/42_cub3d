@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 17:23:00 by kipark            #+#    #+#             */
-/*   Updated: 2022/11/16 22:04:30 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/11/18 21:05:17 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define STRUCT_H
 
 # define PLAYER_SIZE 5
-# define MINI_SIZE 20
 
 typedef enum e_draw_color
 {
@@ -44,12 +43,6 @@ typedef struct s_player
 	double	plane_y;
 }	t_player;
 
-typedef struct s_list_so_long
-{
-	char					*str;
-	struct s_list_so_long	*next;
-}	t_list_so_long;
-
 typedef struct s_texture
 {
 	void	*east;
@@ -69,8 +62,10 @@ typedef struct s_game
 	void		*mlx_win;
 	int			width;
 	int			height;
-	int			mini_width;
-	int			mini_height;
+	int			map_width;
+	int			map_height;
+	int			ceiling_info;
+	int			floor_info;
 	t_player	*player;
 	t_data		*minimap;
 	t_data		*game_view;

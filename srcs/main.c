@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 15:01:26 by kipark            #+#    #+#             */
-/*   Updated: 2022/11/16 22:05:13 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/11/18 21:28:47 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,16 @@
 #include "cub3d.h"
 #include "minimap.h"
 #include "game_view.h"
+#include "parse_map.h"
 #include <unistd.h>
 #include <math.h>
 
-#include <stdio.h>
-
-static void	game_start(char **map)
+static void	game_start(t_map_info *map_info)
 {
 	t_game	*game;
 
 	game = ft_safe_malloc(sizeof(t_game));
-	set_game(game, map);
-	set_player(game);
+	set_game(game, map_info);
 	draw_game_view(game);
 	mlx_put_image_to_window(game->mlx, \
 									game->mlx_win, game->game_view->img, 0, 0);
@@ -42,12 +40,8 @@ static void	game_start(char **map)
 
 int	main(int argc, char **argv)
 {
-	t_list_so_long	*str_head;
-	char			**map;
+	t_map_info		map_info;
 
-	if (argc != 2)
-		print_error_str("Arguments not match\n");
-	str_head = NULL;
-	map = parse(&str_head, argv);
-	game_start(map);
+	init_map_info(&map_info, argc, argv[1]);
+	game_start(&map_info);
 }

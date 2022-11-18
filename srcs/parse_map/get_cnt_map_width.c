@@ -6,11 +6,13 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 10:50:25 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/26 11:44:32 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/11/18 18:26:24 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "error.h"
 #include <stdlib.h>
+#include "parse_map.h"
 
 size_t	get_cnt_map_width(char **map)
 {
@@ -35,5 +37,7 @@ size_t	get_cnt_map_width(char **map)
 			max = cnt_width;
 		++i;
 	}
+	if (max > MAP_LIMIT_WIDTH)
+		print_error_str(MSG_ERR_MAP_IS_BIG);
 	return (max);
 }
