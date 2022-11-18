@@ -6,12 +6,14 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 10:58:52 by jayoon            #+#    #+#             */
-/*   Updated: 2022/11/18 18:23:41 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/11/18 20:54:12 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSE_MAP_H
 # define PARSE_MAP_H
+
+# include <stdlib.h>
 
 # define CNT_TEXTURE			4
 # define CNT_COLOR				3
@@ -32,8 +34,6 @@
 # define MSG_ERR_MAP_IS_BIG		"Map is too big!\n"
 
 # define INT_MAX				2147483647
-
-# include <stdlib.h>
 
 typedef enum e_identifier
 {
@@ -89,13 +89,8 @@ typedef struct s_substr_info
 typedef struct s_map_info
 {
 	char			*texture_path[4];
-	int				ceiling[3];
-	int				floor[3];
-
-// 4byte 의 색 정보를 가지고 있는 메모리 값
 	int				ceiling_info;
 	int				floor_info;
-
 	char			**map;
 	size_t			map_width;
 	size_t			map_height;
@@ -131,6 +126,8 @@ size_t			get_map(t_map_info *map_info, char **temp_map);
 void			get_cnt(char c, t_get_map_cnt *cnt);
 void			get_start_pos_info(char c, t_map_info *map_info, \
 					size_t i, size_t j);
+void			get_color(t_map_info *map_info, t_identifier num_iden, \
+					char *str);
 
 /* utils */
 int				cub3d_atoi(const char *str);
