@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 18:09:58 by kipark            #+#    #+#             */
-/*   Updated: 2022/11/18 16:56:58 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/11/18 17:57:30 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	draw_ray(t_game *game, t_ray_casting *rc, t_player *player)
 			continue ;
 		}
 		my_mlx_pixel_put(game->minimap, rc->ray_point_x, \
-											rc->ray_point_y, 0x00FF0000);
+									rc->ray_point_y, COLOR_RED | 0xA0000000);
 		++y;
 	}
 }

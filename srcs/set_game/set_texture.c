@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:07:24 by kipark            #+#    #+#             */
-/*   Updated: 2022/11/18 17:01:41 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/11/18 18:08:40 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,13 @@ void	set_texture(t_game *game, t_map_info *map_info)
 	t_texture	*tex;
 
 	tex = game->texture;
-	tex->east = mlx_xpm_file_to_image(game->mlx, \
+	tex->east = my_mlx_xpm_file_to_image(game->mlx, \
 							map_info->texture_path[0], &img_witdh, &img_height);
-	tex->west = mlx_xpm_file_to_image(game->mlx, \
+	tex->west = my_mlx_xpm_file_to_image(game->mlx, \
 							map_info->texture_path[1], &img_witdh, &img_height);
-	tex->south = mlx_xpm_file_to_image(game->mlx, \
+	tex->south = my_mlx_xpm_file_to_image(game->mlx, \
 							map_info->texture_path[2], &img_witdh, &img_height);
-	tex->north = mlx_xpm_file_to_image(game->mlx, \
+	tex->north = my_mlx_xpm_file_to_image(game->mlx, \
 							map_info->texture_path[3], &img_witdh, &img_height);
 	tex->east_img = ft_safe_malloc(sizeof(t_data));
 	tex->west_img = ft_safe_malloc(sizeof(t_data));

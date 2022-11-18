@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+         #
+#    By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/27 15:13:41 by kipark            #+#    #+#              #
-#    Updated: 2022/11/18 16:44:05 by jayoon           ###   ########.fr        #
+#    Updated: 2022/11/18 18:09:14 by kipark           ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,8 +84,9 @@ SRCS_GAME_VIEW				:=	game_view.c 			\
 								game_draw.c
 SRCS_GAME_VIEW				:=	$(addprefix $(DIR_GAME_VIEW)/, $(SRCS_GAME_VIEW))
 
-SRCS_SET_GAME				:=	set_mlx.c				\
-								set_texture.c
+SRCS_SET_GAME				:=	set_game.c				\
+								set_texture.c			\
+								set_mlx.c
 SRCS_SET_GAME				:=	$(addprefix $(DIR_SET_GAME)/, $(SRCS_SET_GAME))
 
 SRCS						:=	$(SRCS_MAIN)			\

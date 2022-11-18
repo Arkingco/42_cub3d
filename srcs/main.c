@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 15:01:26 by kipark            #+#    #+#             */
-/*   Updated: 2022/11/18 15:53:57 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/11/18 17:48:05 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,6 @@
 #include "parse_map.h"
 #include <unistd.h>
 #include <math.h>
-
-static void	free_all(t_map_info *map_info)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < CNT_TEXTURE)
-	{
-		ft_safe_free(map_info->texture_path[i]);
-		++i;
-	}
-	ft_safe_free_two_dimentions_arr(map_info->map);
-}
 
 static void	game_start(t_map_info *map_info)
 {
@@ -58,5 +45,4 @@ int	main(int argc, char **argv)
 
 	init_map_info(&map_info, argc, argv[1]);
 	game_start(&map_info);
-	free_all(&map_info);
 }

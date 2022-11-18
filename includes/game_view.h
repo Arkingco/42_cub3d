@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:48:32 by kipark            #+#    #+#             */
-/*   Updated: 2022/11/18 16:34:55 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/11/18 18:08:34 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # define TEX_HEIGHT	64
 # define TEX_COUNT 4
 
+void	*my_mlx_xpm_file_to_image(void *xvar, char *file, int *width, \
+																int *height);
 void	draw_minimap_player(t_game *game);
 void	draw_minimap_ray(t_game *game);
 void	set_dda(t_ray_casting *rc, t_player *player, t_game *game, int x);

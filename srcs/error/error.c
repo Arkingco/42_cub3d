@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:27:47 by kipark            #+#    #+#             */
-/*   Updated: 2022/11/16 16:34:37 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/11/18 18:14:26 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	print_error_str(char *str)
 {
 	ssize_t	ret;
 
-	write(WRITE_ERROR_FD, "ERROR\n", ft_strlen("ERROR\n"));
+	write(WRITE_ERROR_FD, "Error\n", ft_strlen("Error\n"));
 	if (str != NULL)
 	{	
 		ret = write(WRITE_ERROR_FD, str, ft_strlen(str));
