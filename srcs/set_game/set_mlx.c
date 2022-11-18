@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 18:30:30 by kipark            #+#    #+#             */
-/*   Updated: 2022/11/18 16:33:43 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/11/18 17:02:03 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	set_game(t_game *game, t_map_info *map_info)
 	game_view->addr = mlx_get_data_addr(game_view->img, \
 	&game_view->bits_per_pixel, &game_view->line_length, &game_view->endian);
 	game->texture = ft_safe_malloc(sizeof(t_texture));
-	set_texture(game);
+	set_texture(game, map_info);
 }
 
 static void	set_player_dir(t_game *game, t_map_info *map_info)

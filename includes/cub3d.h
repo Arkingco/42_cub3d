@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 14:57:19 by kipark            #+#    #+#             */
-/*   Updated: 2022/11/18 16:48:33 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/11/18 17:01:53 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@
 void	set_background(void *mlx, void *mlx_win);
 void	set_player(t_game *game, t_map_info *map_info);
 void	set_game(t_game *game, t_map_info *map_info);
-void	set_texture(t_game *game);
+void	set_texture(t_game *game, t_map_info *map_info);
 
 #endif

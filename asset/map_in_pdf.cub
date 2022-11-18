@@ -1,18 +1,18 @@
-NO      ./pafsd     
+NO      ./srcs/img/north.xpm 
 
 
 
-EA ./path_to_the_east_texture
+EA ./srcs/img/east.xpm
 
 
 
 
 F                  1,2,100
-SO ./path_to_the_south_texture
+SO ./srcs/img/south.xpm
 
 
 C 8,30,0
-WE ./path_to_the_west_texture
+WE ./srcs/img/west.xpm
 
 
 
