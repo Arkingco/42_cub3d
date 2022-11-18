@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 18:09:58 by kipark            #+#    #+#             */
-/*   Updated: 2022/11/18 18:57:18 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/11/18 21:47:08 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ int	is_ray(double ray_point_x, double ray_point_y, t_game *game)
 {
 	if (my_mlx_pixel_catch(game->minimap, ray_point_x, ray_point_y) \
 									== (COLOR_ORANGE | 0xA0000000) || \
-		my_mlx_pixel_catch(game->minimap, ray_point_x + 1, ray_point_y + 1) \
+		my_mlx_pixel_catch(game->minimap, ray_point_x + 1, ray_point_y) \
 									== (COLOR_ORANGE | 0xA0000000) || \
-		my_mlx_pixel_catch(game->minimap, ray_point_x - 1, ray_point_y - 1) \
+		my_mlx_pixel_catch(game->minimap, ray_point_x - 1, ray_point_y) \
 									== (COLOR_ORANGE | 0xA0000000))
 		return (1);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 17:23:00 by kipark            #+#    #+#             */
-/*   Updated: 2022/11/18 17:09:15 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/11/18 21:05:17 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ typedef struct s_game
 	int			height;
 	int			map_width;
 	int			map_height;
+	int			ceiling_info;
+	int			floor_info;
 	t_player	*player;
 	t_data		*minimap;
 	t_data		*game_view;

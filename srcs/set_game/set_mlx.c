@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 18:02:00 by kipark            #+#    #+#             */
-/*   Updated: 2022/11/18 18:17:30 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/11/18 21:36:57 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@ void	*my_mlx_xpm_file_to_image(void *xvar, char *file, int *width, \
 
 	img = mlx_xpm_file_to_image(xvar, file, width, height);
 	if (img == NULL)
-		print_error_str(NULL);
+		print_error_str(MSG_ERR_ELEMENT);
 	return (img);
 }

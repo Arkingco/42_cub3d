@@ -6,7 +6,7 @@
 #    By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/27 15:13:41 by kipark            #+#    #+#              #
-#    Updated: 2022/11/18 18:56:40 by kipark           ###   ########seoul.kr   #
+#    Updated: 2022/11/18 21:02:52 by kipark           ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,7 +65,8 @@ SRCS_PARSE_MAP				:=	init_map_info.c			\
 								is_valid_character.c	\
 								get_cnt.c				\
 								is_start_position.c		\
-								get_start_pos_info.c
+								get_start_pos_info.c	\
+								get_color.c
 SRCS_PARSE_MAP				:=	$(addprefix $(DIR_PARSE_MAP)/, $(SRCS_PARSE_MAP))
 
 SRCS_EVENT					:=	key.c

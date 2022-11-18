@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:47:34 by kipark            #+#    #+#             */
-/*   Updated: 2022/11/16 22:06:30 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/11/18 21:07:52 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	draw_game_view(t_game *game)
 	t_ray_casting	rc;
 	int				x;
 
-	draw_background(game, COLOR_PINK, COLOR_BLACK);
+	draw_background(game, game->ceiling_info, game->floor_info);
 	player = game->player;
 	x = 0;
 	while (x < game->width)

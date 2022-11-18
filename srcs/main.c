@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 15:01:26 by kipark            #+#    #+#             */
-/*   Updated: 2022/11/18 17:48:05 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/11/18 21:28:47 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ static void	game_start(t_map_info *map_info)
 
 	game = ft_safe_malloc(sizeof(t_game));
 	set_game(game, map_info);
-	set_player(game, map_info);
 	draw_game_view(game);
 	mlx_put_image_to_window(game->mlx, \
 									game->mlx_win, game->game_view->img, 0, 0);

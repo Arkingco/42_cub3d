@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_mlx.c                                          :+:      :+:    :+:   */
+/*   set_game.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 18:30:30 by kipark            #+#    #+#             */
-/*   Updated: 2022/11/18 17:53:16 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/11/18 21:28:41 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,9 @@
 #include <unistd.h>
 #include <math.h>
 
-void	set_game(t_game *game, t_map_info *map_info)
+static void	malloc_game(t_game *game, t_map_info *map_info, t_data *minimap, \
+															t_data *game_view)
 {
-	t_data	*minimap;
-	t_data	*game_view;
-
 	game->width = GAME_WIDTH;
 	game->height = GAME_HEIGHT;
 	game->map_width = map_info->map_width + 2;
@@ -47,7 +45,8 @@ void	set_game(t_game *game, t_map_info *map_info)
 	game_view->addr = mlx_get_data_addr(game_view->img, \
 	&game_view->bits_per_pixel, &game_view->line_length, &game_view->endian);
 	game->texture = ft_safe_malloc(sizeof(t_texture));
-	set_texture(game, map_info);
+	game->ceiling_info = map_info->ceiling_info;
+	game->floor_info = map_info->floor_info;
 }
 
 static void	set_player_dir(t_game *game, t_map_info *map_info)
@@ -61,6 +60,18 @@ static void	set_player_dir(t_game *game, t_map_info *map_info)
 	else if (map_info->view_direction & N)
 		rot_view(game->player, (PI / 2));
 	return ;
+}
+
+void	set_game(t_game *game, t_map_info *map_info)
+{
+	t_data	*minimap;
+	t_data	*game_view;
+
+	minimap = NULL;
+	game_view = NULL;
+	malloc_game(game, map_info, minimap, game_view);
+	set_texture(game, map_info);
+	set_player(game, map_info);
 }
 
 void	set_player(t_game *game, t_map_info *map_info)

@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 14:53:10 by kipark            #+#    #+#             */
-/*   Updated: 2022/11/18 16:36:42 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/11/18 20:57:44 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,13 +82,13 @@ int	key_press(int keycode, t_game *game)
 
 	player = game->player;
 	if (keycode == KEY_W)
-		move_key(game, 0.1, KEY_W);
+		move_key(game, PLAYER_SPEED, KEY_W);
 	else if (keycode == KEY_S)
-		move_key(game, -0.1, KEY_S);
+		move_key(game, -PLAYER_SPEED, KEY_S);
 	else if (keycode == KEY_A)
-		move_key(game, 0.1, KEY_A);
+		move_key(game, PLAYER_SPEED, KEY_A);
 	else if (keycode == KEY_D)
-		move_key(game, 0.1, KEY_D);
+		move_key(game, PLAYER_SPEED, KEY_D);
 	else if (keycode == LEFT_ARROR_KEY)
 		rot_view(player, PI / 6);
 	else if (keycode == RIGHT_ARROR_KEY)
