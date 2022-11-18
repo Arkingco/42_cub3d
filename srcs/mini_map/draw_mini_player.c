@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 18:10:00 by kipark            #+#    #+#             */
-/*   Updated: 2022/11/18 16:41:58 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/11/18 16:56:36 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ void	draw_minimap_player(t_game *game)
 		while (j < PLAYER_SIZE)
 		{
 			my_mlx_pixel_put(game->minimap, \
-			this_player->pos_x * MINIMAP_SIZE, \
-			this_player->pos_y * MINIMAP_SIZE, COLOR_RED);
+			this_player->pos_x * MINIMAP_SIZE + j - 2, \
+			this_player->pos_y * MINIMAP_SIZE + i - 2, COLOR_BLUE);
 			++j;
 		}
 		++i;

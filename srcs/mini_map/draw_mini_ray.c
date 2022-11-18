@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 18:09:58 by kipark            #+#    #+#             */
-/*   Updated: 2022/11/18 16:46:06 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/11/18 16:56:58 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ int	is_ray(double ray_point_x, double ray_point_y, t_game *game)
 {
 	if (my_mlx_pixel_catch(game->minimap, ray_point_x, ray_point_y) \
 									== (COLOR_ORANGE | 0xA0000000) || \
-		my_mlx_pixel_catch(game->minimap, ray_point_x + 0.5, ray_point_y + 0.5) \
+		my_mlx_pixel_catch(game->minimap, ray_point_x + 1, ray_point_y + 1) \
 									== (COLOR_ORANGE | 0xA0000000) || \
-		my_mlx_pixel_catch(game->minimap, ray_point_x - 0.5, ray_point_y - 0.5) \
+		my_mlx_pixel_catch(game->minimap, ray_point_x - 1, ray_point_y - 1) \
 									== (COLOR_ORANGE | 0xA0000000))
 		return (1);
 	return (0);
@@ -47,7 +47,7 @@ void	draw_ray(t_game *game, t_ray_casting *rc, t_player *player)
 	int	y;
 
 	y = 0;
-	while (y < (int)game->width)
+	while (y < (int)game->width * 2)
 	{
 		rc->raydir_x += player->dir_x + player->plane_x * rc->camera_x;
 		rc->raydir_y += player->dir_y + player->plane_y * rc->camera_x;
@@ -55,7 +55,7 @@ void	draw_ray(t_game *game, t_ray_casting *rc, t_player *player)
 		rc->ray_point_y = rc->raydir_y + (player->pos_y * MINIMAP_SIZE);
 		if (is_ray(rc->ray_point_x, rc->ray_point_y, game))
 		{
-			y = (int)game->width;
+			y = (int)game->width * 2;
 			continue ;
 		}
 		my_mlx_pixel_put(game->minimap, rc->ray_point_x, \

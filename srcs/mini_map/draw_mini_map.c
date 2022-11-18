@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:38:57 by kipark            #+#    #+#             */
-/*   Updated: 2022/11/18 16:44:45 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/11/18 16:56:29 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,6 @@ void	draw_mini_map(t_game *game)
 {
 	draw_map_background(game->minimap, game->map);
 	draw_map(game->minimap, game->map);
+	draw_minimap_player(game);
 	draw_minimap_ray(game);
 }
