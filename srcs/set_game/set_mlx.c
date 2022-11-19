@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 18:02:00 by kipark            #+#    #+#             */
-/*   Updated: 2022/11/19 14:39:59 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/11/19 15:07:19 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	*my_mlx_init(void)
 		print_error_str(MSG_ERR_MLX);
 	return (mlx);
 }
-
 
 void	*my_mlx_new_image(void *mlx_ptr, int width, int height)
 {
