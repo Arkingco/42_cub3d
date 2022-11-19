@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 14:53:10 by kipark            #+#    #+#             */
-/*   Updated: 2022/11/18 20:57:44 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/11/19 15:00:42 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,9 @@ static void	move_key(t_game *game, double speed, int key_type)
 
 	player = game->player;
 	set_move_dir(player, key_type, &move_x_dir, &move_y_dir);
-	map_x = (int)(player->pos_y + (move_y_dir * speed * WALL_DIST));
-	map_y = (int)(player->pos_x + (move_x_dir * speed * WALL_DIST));
-	if (game->map[map_x][map_y] != '0')
+	map_y = (int)(player->pos_y + (move_y_dir * speed * WALL_DIST));
+	map_x = (int)(player->pos_x + (move_x_dir * speed * WALL_DIST));
+	if (game->map[map_y][map_x] != '0')
 		return ;
 	player->pos_y += move_y_dir * speed;
 	player->pos_x += move_x_dir * speed;

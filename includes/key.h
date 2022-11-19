@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 14:53:28 by kipark            #+#    #+#             */
-/*   Updated: 2022/11/18 20:44:32 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/11/19 15:00:45 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define PX						64
 # define RIGHT_ARROR_KEY		123
 # define LEFT_ARROR_KEY			124
-# define WALL_DIST	 			3
+# define WALL_DIST	 			1.1
 # define PLAYER_SPEED			0.1
 
 int		key_press(int keycode, t_game *param);
